@@ -11,18 +11,28 @@ sudo pacman -R gnome-2048 aisleriot atomix gnome-chess five-or-more hitori iagno
 # To copy settings: dconf dump / > Desktop/dotfiles/gnome-settings/saved_settings.dconf
 cd ~
 dconf load / < Desktop/dotfiles/gnome-settings/saved_settings.dconf
+cp -r ~/Desktop/dotfiles/gnome-settings/extensions ~/.local/share/gnome-shell/ 
+cd Desktop/dotfiles/gnome-settings
+./gnome-look.sh
+
+
+# paru (AUR helper)
+sudo pacman -S --needed base-devel
+git clone https://aur.archlinux.org/paru.git
+cd paru
+makepkg -si
+cd ..
+rm -rf paru
 
 cd Desktop/dotfiles
 
 # Git
 cp git/.gitconfig ~/
 
-# Vscode: installation. Then enter username and password to restore your settings
-git clone https://AUR.archlinux.org/visual-studio-code-bin.git
-cd visual-studio-code-bin/
-makepkg -s
-sudo pacman -U visual-studio-code-bin-*.pkg.tar.zst
-cd ../ && sudo rm -rfv visual-studio-code-bin/
+# Installation of programs
+
+cd 
+paru -S visual-studio-code-bin vlc kdenlive jupyter-notebook sagemath qbittorrent gimp  	libreoffice-fresh
 
 # OneDrive sync
 # cp onedrive_sync/config ~/.config/onedrive/

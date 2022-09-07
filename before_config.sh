@@ -4,13 +4,12 @@ sudo pacman -Syyu
 # To copy settings: dconf dump / > Desktop/dotfiles/gnome-settings/saved_settings.dconf
 cd ~
 dconf load / < Desktop/dotfiles/gnome-settings/saved_settings.dconf
-cd Desktop/dotfiles/gnome-settings
-./gnome-look.sh
+cp -r ~/.local/share/gnome-shell/extensions ~/Desktop/dotfiles/gnome-settings
 
 cd Desktop/dotfiles
 
 # Git
-cp git/.gitconfig ~/
+cp ~/.gitconfig  git/
 
 # OneDrive sync
 # cp onedrive_sync/config ~/.config/onedrive/
