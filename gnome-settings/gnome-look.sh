@@ -1,3 +1,4 @@
+#!/bin/bash
 main_dir=$(pwd) # initial path working directory
 
 # cursors theme
@@ -24,3 +25,10 @@ cd kora
 cp -r kora/ kora-light/ kora-light-panel/ kora-pgrey/ ~/.local/share/icons/
 cd "main_dir"
 rm -rf kora
+
+
+# # grub-theme (not sure)
+# git clone --depth 1 https://gitlab.com/VandalByte/darkmatter-grub-theme.git && cd darkmatter-grub-theme
+# sudo python3 darkmatter-theme.py --install
+# cd ..
+# rm -rf darkmatter-grub-theme
