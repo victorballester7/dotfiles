@@ -1,2 +1,3 @@
+#!/bin/bash
 chmod +x -Rv scripts/
-sudo cp -avuT scripts/ ~/.local/bin/
+sudo cp -avuT scripts/ /usr/local/bin/

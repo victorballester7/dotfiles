@@ -1,0 +1,49 @@
+{
+  "developers": [
+    {
+      "name": "Stuart Hayhurst",
+      "contact": "stuart.a.hayhurst@gmail.com"
+    },
+    {
+      "name": "Philipp Kiemle",
+      "contact": "philipp.kiemle@gmail.com"
+    }
+  ],
+  "translators": [
+    {
+      "name": "Philipp Kiemle",
+      "contact": "philipp.kiemle@gmail.com",
+      "year": "2021-2022"
+    },
+    {
+      "name": "Heimen Stoffels",
+      "contact": "vistausss@fastmail.com",
+      "year": "2021-2022"
+    },
+    {
+      "name": "Óscar Fernández Díaz",
+      "contact": "oscfdezdz@tuta.io",
+      "year": "2022"
+    },
+    {
+      "name": "Albano Battistella",
+      "contact": "albano_battistella@hotmail.com",
+      "year": "2022"
+    },
+    {
+      "name": "Oliver Tzeng",
+      "contact": "olivertzengolivertzeng@gmail.com",
+      "year": "2022"
+    },
+    {
+      "name": "sngvy",
+      "contact": "",
+      "year": "2022"
+    },
+    {
+      "name": "Omar TS",
+      "contact": "",
+      "year": "2022"
+    }
+  ]
+}
