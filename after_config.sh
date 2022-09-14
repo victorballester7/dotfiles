@@ -1,20 +1,15 @@
 #!/bin/bash
+
+
+# Remember to previously install firefox and git and reboot at the end.
+
+
+
 # update & upgrade
 sudo pacman -Syyu
 
 # Remove Gnome-games
-sudo pacman -Rs gnome-2048 aisleriot atomix gnome-chess five-or-more hitori iagno gnome-klotski lightsoff gnome-mahjongg gnome-mines gnome-nibbles quadrapassel four-in-a-row gnome-robots gnome-sudoku swell-foop tali gnome-taquin gnome-tetravex gnome-books gnome-boxes gedit vim -y
-
-
-# Firefox: enter username and password
-
-# Gnome (and gnome-tweaks) settings
-# To copy settings: dconf dump / > Desktop/dotfiles/gnome-settings/saved_settings.dconf
-cd ~
-dconf load / < Desktop/dotfiles/gnome-settings/saved_settings.dconf
-cp -r ~/Desktop/dotfiles/gnome-settings/extensions ~/.local/share/gnome-shell/ 
-cd Desktop/dotfiles/gnome-settings
-./gnome-look.sh
+sudo pacman -Rsu gnome-books gnome-boxes gedit vim -y
 
 
 # Git + Github keys
@@ -27,6 +22,16 @@ ssh-add ~/.ssh/id_ed25519
 echo "Now copy the following key to your Github account in Settings/Access/Ssh keys..."
 cat ~/.ssh/id_ed25519.pub
 
+
+# Gnome (and gnome-tweaks) settings
+cd ~
+dconf load / < Desktop/dotfiles/gnome-settings/saved_settings.dconf
+cp -r ~/Desktop/dotfiles/gnome-settings/extensions ~/.local/share/gnome-shell/ 
+cd Desktop/dotfiles/gnome-settings
+chmod +x gnome-look.sh
+./gnome-look.sh
+
+
 # paru (AUR helper)
 sudo pacman -S --noconfirm --needed base-devel
 git clone https://aur.archlinux.org/paru.git
@@ -38,24 +43,34 @@ rm -rf paru
 # Installation of programs
 
 cd 
-paru -S --noconfirm --needed autorandr gimp jupyter-notebook kdenlive libreoffice-fresh neofetch qbittorrent sagemath rclone tlp teams-for-linux visual-studio-code-bin vlc zsh
+paru -S --noconfirm --needed autorandr gcc gimp jupyter-notebook kdenlive libreoffice-fresh neofetch ntfs-3g python qbittorrent rclone sagemath tlp teams-for-linux texlive-most visual-studio-code-bin vlc zsh 
 
 # autorandr: for automatically change monitor display configuration (https://github.com/phillipberndt/autorandr)
+
+# firefox
+sudo cp -r ~/Desktop/dotfiles/firefox/.mozilla ~/
 
 # grub
 sudo cp Desktop/dotfiles/grub/grub /etc/default/
 sudo grub-mkconfig -o /boot/grub/grub.cfg
 
+# neofetch
+sudo cp Desktop/dotfiles/neofetch/neofetch /usr/bin/
+
 # rclone (OneDrive sync: mount at startup)
-cp Desktop/dotfiles/onedrive_sync/rclone-onedrive.service ~/.config/systemd/user/
+rclone config
+mkdir -p ~/.config/systemd/user/
+mkdir -p ~/OneDrive
+sudo cp Desktop/dotfiles/onedrive_sync/rclone-onedrive.service ~/.config/systemd/user/
 systemctl --user daemon-reload
-systemctl --user enable --now rclone-dropbox
+systemctl --user enable --now rclone-onedrive
 
 # sagemath
-cp Desktop/dotfiles/sage/init.sage ~/.sage/
+mkdir -p ~/.sage
+sudo cp Desktop/dotfiles/sage/init.sage ~/.sage/
 
 # tlp (battery management)
-cp Desktop/dotfiles/tlp/tlp.conf /etc/
+sudo cp Desktop/dotfiles/tlp/tlp.conf /etc/
 
 # vscode (latexindent formatter configuration)
 cd ~/Desktop 
@@ -69,14 +84,14 @@ cd
 rm -rf Desktop/latexindent.pl
 
 # vlc
-cp Desktop/dotfiles/vlc/vlcrc ~/.config/vlc/
+mkdir ~/.config/vlc/
+sudo cp Desktop/dotfiles/vlc/vlcrc ~/.config/vlc/
 
 # zsh 
-chsh -s /bin/zsh
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
-cp Desktop/dotfiles/terminal/.zshrc ~/
-
+sudo cp Desktop/dotfiles/terminal/.zshrc ~/
+chsh -s /bin/zsh
 
 
 
