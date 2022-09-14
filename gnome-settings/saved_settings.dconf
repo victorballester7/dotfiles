@@ -37,7 +37,7 @@ panel-id='timer'
 size=(870, 690)
 
 [org/gnome/control-center]
-last-panel='region'
+last-panel='user-accounts'
 window-state=(980, 640, false)
 
 [org/gnome/desktop/app-folders]
@@ -67,7 +67,7 @@ automatic-timezone=true
 
 [org/gnome/desktop/input-sources]
 sources=[('xkb', 'es')]
-xkb-options=@as []
+xkb-options=['terminate:ctrl_alt_bksp']
 
 [org/gnome/desktop/interface]
 clock-show-seconds=true
@@ -85,7 +85,7 @@ show-battery-percentage=true
 disable-lock-screen=true
 
 [org/gnome/desktop/notifications]
-application-children=['gnome-power-panel', 'firefox-esr', 'brave-browser', 'org-gnome-software', 'org-gnome-chromegnomeshell', 'gnome-network-panel', 'code', 'org-gnome-shell-extensions-gsconnect', 'firefox', 'org-gnome-settings', 'org-gnome-nautilus', 'gnome-datetime-panel', 'shotwell', 'org-gnome-extensions-desktop', 'org-gnome-totem', 'libreoffice-calc', 'org-gnome-eog']
+application-children=['gnome-power-panel', 'firefox-esr', 'brave-browser', 'org-gnome-software', 'org-gnome-chromegnomeshell', 'gnome-network-panel', 'code', 'org-gnome-shell-extensions-gsconnect', 'firefox', 'org-gnome-settings', 'org-gnome-nautilus', 'gnome-datetime-panel', 'shotwell', 'org-gnome-extensions-desktop', 'org-gnome-totem', 'libreoffice-calc', 'org-gnome-eog', 'visual-studio-code']
 show-banners=false
 
 [org/gnome/desktop/notifications/application/brave-browser]
@@ -170,7 +170,7 @@ application-id='visual-studio-code.desktop'
 numlock-state=true
 
 [org/gnome/desktop/peripherals/touchpad]
-send-events='disabled'
+send-events='enabled'
 two-finger-scrolling-enabled=true
 
 [org/gnome/desktop/privacy]
@@ -368,7 +368,7 @@ window-position=[1904, -13]
 window-size=[992, 632]
 
 [org/gnome/settings-daemon/plugins/color]
-night-light-last-coordinates=(41.404998560115189, 2.1701000000000001)
+night-light-last-coordinates=(41.395999280057595, 2.1701000000000001)
 
 [org/gnome/settings-daemon/plugins/media-keys]
 custom-keybindings=['/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/']
@@ -604,7 +604,7 @@ selected-color=(true, 0.0, 0.0, 0.0, 1.0)
 [org/gtk/settings/file-chooser]
 date-format='regular'
 location-mode='path-bar'
-show-hidden=false
+show-hidden=true
 show-size-column=true
 show-type-column=true
 sidebar-width=211
@@ -612,7 +612,7 @@ sort-column='name'
 sort-directories-first=true
 sort-order='ascending'
 type-format='category'
-window-position=(358, 439)
+window-position=(0, 398)
 window-size=(1203, 902)
 
 [org/yorba/shotwell/preferences/ui]
