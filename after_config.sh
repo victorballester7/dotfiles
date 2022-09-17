@@ -24,6 +24,7 @@ cat ~/.ssh/id_ed25519.pub
 
 
 # Gnome (and gnome-tweaks) settings
+sudo pacman -S --needed gnome-browser-connector
 cd ~
 dconf load / < Desktop/dotfiles/gnome-settings/saved_settings.dconf
 cp -r ~/Desktop/dotfiles/gnome-settings/extensions ~/.local/share/gnome-shell/ 
@@ -57,6 +58,9 @@ sudo grub-mkconfig -o /boot/grub/grub.cfg
 # neofetch
 sudo cp Desktop/dotfiles/neofetch/neofetch /usr/bin/
 
+# nvidia-settings
+paru -S --noconfirm --needed nvidia nvidia-utils nvidia-settings xorg-server-devel opencl-nvidia
+
 # rclone (OneDrive sync: mount at startup)
 rclone config
 mkdir -p ~/.config/systemd/user/
@@ -70,6 +74,10 @@ mkdir -p ~/.sage
 sudo cp Desktop/dotfiles/sage/init.sage ~/.sage/
 
 # tlp (battery management)
+systemctl mask systemd-rfkill.service
+systemctl mask systemd-rfkill.socket
+systemctl enable tlp.service
+sudo tlp start
 sudo cp Desktop/dotfiles/tlp/tlp.conf /etc/
 
 # vscode (latexindent formatter configuration)
@@ -94,17 +102,5 @@ sudo cp Desktop/dotfiles/terminal/.zshrc ~/
 chsh -s /bin/zsh
 
 
-
-
-
-# graphics nvidia-intel
-# see 1) https://wiki.archlinux.org/title/NVIDIA_Optimus
-#     2) https://wiki.archlinux.org/title/PRIME#PRIME_render_offload
-#     3) https://github.com/Askannz/optimus-manager
-
-# # Once configured optimus-manager, add this to the grub menu if desired:
-# git clone https://github.com/hakasapl/optimus-manager-grub.git && cd optimus-manager-grub
-# sudo ./install.sh --uninstall
-# sudo grub-mkconfig -o /boot/grub/grub.cfg
-# cd ..
-# rm -rf optimus-manager-grub
+# to change between power modes (integrated, hybrid, nvidia)
+# paru -S envycontrol
