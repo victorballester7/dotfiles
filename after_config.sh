@@ -1,12 +1,15 @@
 #!/bin/bash
 
-
 # Remember to previously install firefox and git and reboot at the end.
-
 
 
 # update & upgrade
 sudo pacman -Syyu
+
+# scripts
+cd Desktop/dotfiles
+chmod +x move_scripts.sh
+./move_scripts 
 
 # Remove Gnome-games
 sudo pacman -Rsu gnome-books gnome-boxes gedit vim -y
@@ -54,6 +57,10 @@ sudo cp -r ~/Desktop/dotfiles/firefox/.mozilla ~/
 # grub
 sudo cp Desktop/dotfiles/grub/grub /etc/default/
 sudo grub-mkconfig -o /boot/grub/grub.cfg
+
+# kdenlive
+# add config files
+paru -S breeze # for colors
 
 # neofetch
 sudo cp Desktop/dotfiles/neofetch/neofetch /usr/bin/
