@@ -12,7 +12,7 @@ chmod +x move_scripts.sh
 ./move_scripts 
 
 # Remove Gnome-games
-sudo pacman -Rsu gnome-books gnome-boxes gedit vim -y
+sudo pacman -Rsu gedit gnome-books gnome-boxes  gnome-maps gnome-music gnome-weather vim -y
 
 
 # Git + Github keys
@@ -47,12 +47,24 @@ rm -rf paru
 # Installation of programs
 
 cd 
-paru -S --noconfirm --needed autorandr gcc gimp jupyter-notebook kdenlive libreoffice-fresh neofetch ntfs-3g python qbittorrent rclone sagemath tlp teams-for-linux texlive-most visual-studio-code-bin vlc zsh 
+paru -S --noconfirm --needed autorandr clang cronie ethtool gcc gdb gimp jdk-openjdk jupyter-notebook kdenlive libreoffice-fresh man-db man-pages neofetch ntfs-3g python qbittorrent rclone rsync sagemath tlp teams-for-linux texlive-most visual-studio-code-bin vlc zsh 
+
+# # auto-cpufreq (battery powersave) (use either this or tlp; NOT both)
+# systemctl start auto-cpufreq
+# systemctl enable auto-cpufreq
 
 # autorandr: for automatically change monitor display configuration (https://github.com/phillipberndt/autorandr)
 
+# cronie
+sudo systemctl enable cronie
+
+# ethtool
+# needed for disabling wake-on-lan (used by tlp)
+
 # firefox
 sudo cp -r ~/Desktop/dotfiles/firefox/.mozilla ~/
+
+# gdb = GNU debugger
 
 # grub
 sudo cp Desktop/dotfiles/grub/grub /etc/default/
@@ -75,6 +87,9 @@ mkdir -p ~/OneDrive
 sudo cp Desktop/dotfiles/onedrive_sync/rclone-onedrive.service ~/.config/systemd/user/
 systemctl --user daemon-reload
 systemctl --user enable --now rclone-onedrive
+
+# rsync (automated backup)
+cp /usr/local/bin/syncOneDrive.sh /etc/cron.daily
 
 # sagemath
 mkdir -p ~/.sage
