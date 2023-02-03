@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Remember to previously install firefox and git and reboot at the end.
+# Remember to previously install firefox and git and also reboot at the end of the execution of this file.
 
 
 # update & upgrade
@@ -12,7 +12,7 @@ chmod +x move_scripts.sh
 ./move_scripts 
 
 # Remove Gnome-games
-sudo pacman -Rsu gedit gnome-books gnome-boxes  gnome-maps gnome-music gnome-weather vim -y
+sudo pacman -Rsu gedit gnome-books gnome-boxes gnome-maps gnome-music gnome-weather vim -y
 
 
 # Git + Github keys
@@ -32,8 +32,8 @@ cd ~
 dconf load / < Desktop/dotfiles/gnome-settings/saved_settings.dconf
 cp -r ~/Desktop/dotfiles/gnome-settings/extensions ~/.local/share/gnome-shell/ 
 cd Desktop/dotfiles/gnome-settings
-chmod +x gnome-look.sh
-./gnome-look.sh
+# chmod +x gnome-look.sh
+# ./gnome-look.sh
 
 
 # paru (AUR helper)
@@ -47,16 +47,20 @@ rm -rf paru
 # Installation of programs
 
 cd 
-paru -S --noconfirm --needed autorandr clang cronie ethtool gcc gdb gimp jdk-openjdk jupyter-notebook kdenlive libreoffice-fresh man-db man-pages neofetch ntfs-3g python qbittorrent rclone rsync sagemath tlp teams-for-linux texlive-most visual-studio-code-bin vlc zsh 
+paru -S --noconfirm --needed autopep8 autorandr clang discord ethtool gcc gdb gimp jdk-openjdk jupyter-notebook libreoffice-fresh man-db man-pages neofetch python qbittorrent rclone tlp teams-for-linux texlive-most visual-studio-code-bin vlc zsh 
 
 # # auto-cpufreq (battery powersave) (use either this or tlp; NOT both)
 # systemctl start auto-cpufreq
 # systemctl enable auto-cpufreq
 
+# autopep8: to format documents in python
+
 # autorandr: for automatically change monitor display configuration (https://github.com/phillipberndt/autorandr)
 
-# cronie
-sudo systemctl enable cronie
+# breeze: it's the default KDE style (like Adwaita for GNOME)
+
+# # cronie
+# sudo systemctl enable cronie
 
 # ethtool
 # needed for disabling wake-on-lan (used by tlp)
@@ -71,11 +75,14 @@ sudo cp Desktop/dotfiles/grub/grub /etc/default/
 sudo grub-mkconfig -o /boot/grub/grub.cfg
 
 # kdenlive
-# add config files
-paru -S breeze # for colors
+# missing adding config files
+
+# man-db, man-pages: implement man pages on Arch
 
 # neofetch
 sudo cp Desktop/dotfiles/neofetch/neofetch /usr/bin/
+
+# ntfs-3g: for read/write acces to Microsoft NTFS partitions.
 
 # nvidia-settings
 paru -S --noconfirm --needed nvidia nvidia-utils nvidia-settings xorg-server-devel opencl-nvidia
@@ -88,12 +95,18 @@ sudo cp Desktop/dotfiles/onedrive_sync/rclone-onedrive.service ~/.config/systemd
 systemctl --user daemon-reload
 systemctl --user enable --now rclone-onedrive
 
+# rstudio-desktop
+
 # rsync (automated backup)
-cp /usr/local/bin/syncOneDrive.sh /etc/cron.daily
+# cp /usr/local/bin/syncOneDrive.sh /etc/cron.daily
 
 # sagemath
-mkdir -p ~/.sage
-sudo cp Desktop/dotfiles/sage/init.sage ~/.sage/
+# mkdir -p ~/.sage
+# sudo cp Desktop/dotfiles/sage/init.sage ~/.sage/
+
+# supergfxctl (for exchanging power mode: Hybrid and Integrated)
+# sudo systemctl enable supergfxd.service --now
+# sudo usermod -a -G users $USER
 
 # tlp (battery management)
 systemctl mask systemd-rfkill.service
@@ -122,7 +135,3 @@ sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/too
 git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
 sudo cp Desktop/dotfiles/terminal/.zshrc ~/
 chsh -s /bin/zsh
-
-
-# to change between power modes (integrated, hybrid, nvidia)
-# paru -S envycontrol

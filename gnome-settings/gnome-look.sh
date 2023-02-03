@@ -1,6 +1,8 @@
 #!/bin/bash
 main_dir=$(pwd) # initial path working directory
 
+## CHECK IF THEY ARE IN THE AUR REPOSITORY!!!!!
+
 # cursors theme
 sudo pacman -S xorg-xcursorgen python-cairosvg # required dependencies
 git clone git@github.com:vinceliuice/Vimix-cursors.git
