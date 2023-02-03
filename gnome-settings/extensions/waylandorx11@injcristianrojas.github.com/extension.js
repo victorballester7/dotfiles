@@ -14,7 +14,7 @@ let WaylandOrX11 = GObject.registerClass(
         _init() {
             super._init(0, 'WaylandOrX11', false);
             this._icon = new St.Icon({
-                style_class: 'system-status-icon',
+                style_class: 'system-status-icon windower-icon',
             });
             this.add_actor(this._icon);
             this.state = ERROR;
@@ -23,7 +23,7 @@ let WaylandOrX11 = GObject.registerClass(
 
         setWindowSystemIcon() {
             this.state = Meta.is_wayland_compositor() ? 'wayland' : 'x11';
-            this._icon.gicon = Gio.icon_new_for_string(`${Me.path}/icons/${this.state}.svg`);            
+            this._icon.gicon = Gio.icon_new_for_string(`${Me.path}/icons/${this.state}.svg`);
         }
 
         enable() {
@@ -35,7 +35,7 @@ let WaylandOrX11 = GObject.registerClass(
         }
 
         log_this(string) {
-            log(`[${Me.metadata.name} v${Me.metadata.version}] ${string}`);
+            log(`[${Me.metadata.name} - v${Me.metadata.version}] ${string}`);
         }
     }
 );
