@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Remember to previously install firefox and git and also reboot at the end of the execution of this file.
-
+# This is for Archlinux + KDE
 
 # update & upgrade
 sudo pacman -Syyu
@@ -10,9 +10,6 @@ sudo pacman -Syyu
 cd Desktop/dotfiles
 chmod +x move_scripts.sh
 ./move_scripts 
-
-# Remove Gnome-games
-sudo pacman -Rsu gedit gnome-books gnome-boxes gnome-maps gnome-music gnome-weather vim -y
 
 
 # Git + Github keys
@@ -25,17 +22,6 @@ ssh-add ~/.ssh/id_ed25519
 echo "Now copy the following key to your Github account in Settings/Access/Ssh keys..."
 cat ~/.ssh/id_ed25519.pub
 
-
-# Gnome (and gnome-tweaks) settings
-sudo pacman -S --needed gnome-browser-connector
-cd ~
-dconf load / < Desktop/dotfiles/gnome-settings/saved_settings.dconf
-cp -r ~/Desktop/dotfiles/gnome-settings/extensions ~/.local/share/gnome-shell/ 
-cd Desktop/dotfiles/gnome-settings
-# chmod +x gnome-look.sh
-# ./gnome-look.sh
-
-
 # paru (AUR helper)
 sudo pacman -S --noconfirm --needed base-devel
 git clone https://aur.archlinux.org/paru.git
@@ -44,10 +30,32 @@ makepkg -si
 cd ..
 rm -rf paru
 
+
+# PROBLEM - SOLVING
+# Audio drivers:
+cd
+paru -S sof-firmware alsa-ucm-conf
+
+# If it take too long to reboot and/or shutdown then is may be a problem of sddm
+# To solve this, install a newer version of sddm from AUR: sddm-git
+
+
+
+# MISSING FILES TO BE COPIED
+# .zshrc 
+# /etc/pacman.conf
+# latte-dock
+# all kde configs files
+
+
+# Modules necessary:
+# - qt5-xmlpatterns (for weather widget)
+
 # Installation of programs
 
 cd 
-paru -S --noconfirm --needed autopep8 autorandr clang discord ethtool gcc gdb gimp jdk-openjdk jupyter-notebook libreoffice-fresh man-db man-pages neofetch python qbittorrent rclone tlp teams-for-linux texlive-most visual-studio-code-bin vlc zsh 
+# Others: autorandr
+paru -S --noconfirm --needed autopep8 clang discord ethtool gcc gdb gimp gnome-screenshot gnome-terminal jdk-openjdk jupyter-notebook latte-dock libreoffice-fresh man-db man-pages neofetch python qbittorrent rclone teams-for-linux texlive-most tlp visual-studio-code-bin vlc zsh
 
 # # auto-cpufreq (battery powersave) (use either this or tlp; NOT both)
 # systemctl start auto-cpufreq
@@ -66,7 +74,7 @@ paru -S --noconfirm --needed autopep8 autorandr clang discord ethtool gcc gdb gi
 # needed for disabling wake-on-lan (used by tlp)
 
 # firefox
-sudo cp -r ~/Desktop/dotfiles/firefox/.mozilla ~/
+# sudo cp -r ~/Desktop/dotfiles/firefox/.mozilla ~/
 
 # gdb = GNU debugger
 
@@ -85,13 +93,16 @@ sudo cp Desktop/dotfiles/neofetch/neofetch /usr/bin/
 # ntfs-3g: for read/write acces to Microsoft NTFS partitions.
 
 # nvidia-settings
-paru -S --noconfirm --needed nvidia nvidia-utils nvidia-settings xorg-server-devel opencl-nvidia
+# paru -S --noconfirm --needed nvidia nvidia-utils nvidia-settings xorg-server-devel opencl-nvidia
 
 # rclone (OneDrive sync: mount at startup)
+# Notes: Name the remote as "OneDrive".
+#        Do not change the folder to /etc/systemd/system/ because otherwise it will compile as root and we don't want this (because we would have to change other things too).
+#        If an error about fusermount is prompt, install fuse2.
 rclone config
 mkdir -p ~/.config/systemd/user/
 mkdir -p ~/OneDrive
-sudo cp Desktop/dotfiles/onedrive_sync/rclone-onedrive.service ~/.config/systemd/user/
+sudo cp Desktop/dotfiles/onedrive_sync/rclone-onedrive.service /etc/systemd/system/
 systemctl --user daemon-reload
 systemctl --user enable --now rclone-onedrive
 
