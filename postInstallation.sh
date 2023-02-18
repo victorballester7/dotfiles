@@ -7,18 +7,14 @@
 # update & upgrade
 sudo pacman -Syyu
 
-cd Desktop 
-git clone https://github.com/victorballester7/dotfiles.git
-
 # scripts
-cd dotfiles
 chmod +x move_scripts.sh
-./move_scripts 
+./move_scripts.sh
 
 
 # Git + Github keys
 sudo pacman -S --needed git
-cp git/.gitconfig ~/
+cp others/.gitconfig ~/
 echo "Press enter when promted to 'Enter a file in which to save the key', and in 'add passphrase'"
 ssh-keygen -t ed25519 -C "victor.ballester.ribo@gmail.com"
 eval "$(ssh-agent -s)"
@@ -38,7 +34,7 @@ rm -rf paru
 # PROBLEM - SOLVING
 # Audio drivers:
 cd
-paru -S sof-firmware alsa-ucm-conf
+paru -S --noconfirm --needed sof-firmware alsa-ucm-conf
 
 # If it take too long to reboot and/or shutdown then is may be a problem of sddm
 # To solve this, install a newer version of sddm from AUR: sddm-git
@@ -66,10 +62,10 @@ paru -S --noconfirm --needed autopep8 cheese clang discord ethtool gcc gdb gimp 
 
 # Modules necessary:
 # for weather widget
-paru -S qt5-xmlpatterns qt5-xmlpatterns 
+paru -S --noconfirm --needed qt5-xmlpatterns qt5-xmlpatterns 
 
 # for kde-connect transfer protocol
-paru -S sshfs
+paru -S --noconfirm --needed sshfs
 
 
 # # auto-cpufreq (battery powersave) (use either this or tlp; NOT both)
@@ -126,10 +122,11 @@ sudo cp Desktop/dotfiles/others/pacman.conf /etc/
 # Notes: Name the remote as "OneDrive".
 #        Do not change the folder to /etc/systemd/system/ because otherwise it will compile as root and we don't want this (because we would have to change other things too).
 #        If an error about fusermount is prompt, install fuse2.
+paru -S --noconfirm --needed fuse2
 rclone config
 mkdir -p ~/.config/systemd/user/
 mkdir -p ~/OneDrive
-sudo cp Desktop/dotfiles/others/rclone-onedrive.service /etc/systemd/system/
+sudo cp Desktop/dotfiles/others/rclone-onedrive.service ~/.config/systemd/user/
 systemctl --user daemon-reload
 systemctl --user enable --now rclone-onedrive
 
