@@ -21,6 +21,8 @@ eval "$(ssh-agent -s)"
 ssh-add ~/.ssh/id_ed25519
 echo "Now copy the following key to your Github account in Settings/Access/Ssh keys..."
 cat ~/.ssh/id_ed25519.pub
+printf "%s " "Press enter to continue once copied the key to Github"
+read ans
 
 # paru (AUR helper)
 sudo pacman -S --noconfirm --needed base-devel
