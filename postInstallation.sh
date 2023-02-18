@@ -38,24 +38,29 @@ paru -S sof-firmware alsa-ucm-conf
 
 # If it take too long to reboot and/or shutdown then is may be a problem of sddm
 # To solve this, install a newer version of sddm from AUR: sddm-git
+paru -S sddm-git
+
+
+# Copy rules (that will be executed at the startup of the system):
+cd
+sudo cp Desktop/dotfiles/Rules/* /etc/udev/rules.d/
 
 
 
-# MISSING FILES TO BE COPIED
-# .zshrc 
-# /etc/pacman.conf
-# latte-dock
-# all kde configs files
+
+# Installation of programs
+cd 
+# Others: autorandr
+paru -S --noconfirm --needed autopep8 cheese clang discord ethtool gcc gdb gimp gnome-screenshot gnome-terminal howdy jdk-openjdk jupyter-notebook kdeconnect kde-graphics-meta latte-dock libreoffice-fresh man-db man-pages neofetch octave python qbittorrent rclone rsync teams-for-linux texlive-most tlp visual-studio-code-bin vlc zsh
 
 
 # Modules necessary:
-# - qt5-xmlpatterns (for weather widget)
+# for weather widget
+paru -S qt5-xmlpatterns qt5-xmlpatterns 
 
-# Installation of programs
+# for kde-connect transfer protocol
+paru -S sshfs
 
-cd 
-# Others: autorandr
-paru -S --noconfirm --needed autopep8 clang discord ethtool gcc gdb gimp gnome-screenshot gnome-terminal jdk-openjdk jupyter-notebook latte-dock libreoffice-fresh man-db man-pages neofetch python qbittorrent rclone teams-for-linux texlive-most tlp visual-studio-code-bin vlc zsh
 
 # # auto-cpufreq (battery powersave) (use either this or tlp; NOT both)
 # systemctl start auto-cpufreq
@@ -66,6 +71,8 @@ paru -S --noconfirm --needed autopep8 clang discord ethtool gcc gdb gimp gnome-s
 # autorandr: for automatically change monitor display configuration (https://github.com/phillipberndt/autorandr)
 
 # breeze: it's the default KDE style (like Adwaita for GNOME)
+
+# cheese0 (gnome camera app)
 
 # # cronie
 # sudo systemctl enable cronie
@@ -79,21 +86,31 @@ paru -S --noconfirm --needed autopep8 clang discord ethtool gcc gdb gimp gnome-s
 # gdb = GNU debugger
 
 # grub
-sudo cp Desktop/dotfiles/grub/grub /etc/default/
+sudo cp Desktop/dotfiles/others/grub /etc/default/
 sudo grub-mkconfig -o /boot/grub/grub.cfg
+
+# kdeconnect
+
+# kde-graphics-meta
+# some interesting programs for kde
 
 # kdenlive
 # missing adding config files
 
+# latte-dock (my dock for linux)
+
 # man-db, man-pages: implement man pages on Arch
 
 # neofetch
-sudo cp Desktop/dotfiles/neofetch/neofetch /usr/bin/
+sudo cp Desktop/dotfiles/others/neofetch /usr/bin/
 
 # ntfs-3g: for read/write acces to Microsoft NTFS partitions.
 
 # nvidia-settings
 # paru -S --noconfirm --needed nvidia nvidia-utils nvidia-settings xorg-server-devel opencl-nvidia
+
+# pacman config
+sudo cp Desktop/dotfiles/others/pacman.conf /etc/
 
 # rclone (OneDrive sync: mount at startup)
 # Notes: Name the remote as "OneDrive".
@@ -102,9 +119,11 @@ sudo cp Desktop/dotfiles/neofetch/neofetch /usr/bin/
 rclone config
 mkdir -p ~/.config/systemd/user/
 mkdir -p ~/OneDrive
-sudo cp Desktop/dotfiles/onedrive_sync/rclone-onedrive.service /etc/systemd/system/
+sudo cp Desktop/dotfiles/others/rclone-onedrive.service /etc/systemd/system/
 systemctl --user daemon-reload
 systemctl --user enable --now rclone-onedrive
+
+# rsync (necessary for the backup script: https://gitlab.com/cscs/transfuse)
 
 # rstudio-desktop
 
@@ -124,7 +143,7 @@ systemctl mask systemd-rfkill.service
 systemctl mask systemd-rfkill.socket
 systemctl enable tlp.service
 sudo tlp start
-sudo cp Desktop/dotfiles/tlp/tlp.conf /etc/
+sudo cp Desktop/dotfiles/others/tlp.conf /etc/
 
 # vscode (latexindent formatter configuration)
 cd ~/Desktop 
@@ -139,10 +158,10 @@ rm -rf Desktop/latexindent.pl
 
 # vlc
 mkdir ~/.config/vlc/
-sudo cp Desktop/dotfiles/vlc/vlcrc ~/.config/vlc/
+sudo cp Desktop/dotfiles/others/vlcrc ~/.config/vlc/
 
 # zsh 
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
-sudo cp Desktop/dotfiles/terminal/.zshrc ~/
+sudo cp Desktop/dotfiles/others/.zshrc ~/
 chsh -s /bin/zsh

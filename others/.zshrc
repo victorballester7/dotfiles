@@ -1,12 +1,8 @@
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
-# Automatic updates
-zstyle ':omz:update' mode auto
-
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
-export PATH="/home/victor/maple2015/bin:$PATH"
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
@@ -75,10 +71,10 @@ ZSH_THEME="kafeitu"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
-	git
-	history
-	sudo
-	zsh-autosuggestions
+  git
+  history
+  sudo
+  zsh-autosuggestions
 )
 
 source $ZSH/oh-my-zsh.sh
@@ -109,5 +105,4 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
-export P4_DIR="/usr/local/p4"
 neofetch
