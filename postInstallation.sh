@@ -94,6 +94,15 @@ paru -S --noconfirm --needed sshfs
 # gdb = GNU debugger
 
 # grub
+# Note the following: I changed the line 
+
+# # GRUB_CMDLINE_LINUX_DEFAULT="loglevel=3 quiet"
+
+# with the line
+
+# GRUB_CMDLINE_LINUX_DEFAULT="acpi_mask_gpe=0x6E loglevel=3 quiet"
+
+# in order to mask the interupt /sys/firmware/interupt/gpe6E because it was causing many interupts when the laptop was plugged in. Now it goes like a charm! :)
 sudo cp Desktop/dotfiles/others/grub /etc/default/
 sudo grub-mkconfig -o /boot/grub/grub.cfg
 
@@ -158,7 +167,7 @@ sudo cp Desktop/dotfiles/others/tlp.conf /etc/
 cd ~/Desktop 
 git clone git@github.com:cmhughes/latexindent.pl.git
 cd latexindent.pl
-sudo paru -S --needed perl cpanminus cmake make
+sudo paru -S --noconfirm --needed perl cpanminus cmake make
 sudo perl helper-scripts/latexindent-module-installer.pl
 cmake path-helper-files
 sudo make install
