@@ -3,11 +3,15 @@
 # Remember to previously install firefox and git and also reboot at the end of the execution of this file.
 # This is for Archlinux + KDE
 
+
 # update & upgrade
 sudo pacman -Syyu
 
+cd Desktop 
+git clone https://github.com/victorballester7/dotfiles.git
+
 # scripts
-cd Desktop/dotfiles
+cd dotfiles
 chmod +x move_scripts.sh
 ./move_scripts 
 
@@ -45,7 +49,13 @@ paru -S sddm-git
 cd
 sudo cp Desktop/dotfiles/Rules/* /etc/udev/rules.d/
 
-
+# Restore KDE backup
+cd Desktop
+git clone https://gitlab.com/cscs/transfuse.git
+cd transfuse
+chmod +x transfuse.sh
+cp ../dotfiles/config/*.tar.gz ./
+./transfuse.sh
 
 
 # Installation of programs
