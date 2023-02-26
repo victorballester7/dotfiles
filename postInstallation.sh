@@ -59,7 +59,7 @@ cp ../dotfiles/config/*.tar.gz ./
 # Installation of programs
 cd 
 # Others: autorandr
-paru -S --noconfirm --needed autopep8 cheese clang discord ethtool gcc gdb gimp gnome-screenshot gnome-terminal howdy jdk-openjdk jupyter-notebook kdeconnect kde-graphics-meta latte-dock libreoffice-fresh man-db man-pages neofetch octave python qbittorrent rclone rsync teams-for-linux texlive-most tlp visual-studio-code-bin vlc zsh
+paru -S --noconfirm --needed autopep8 cheese clang discord ethtool gcc gdb gimp gnome-screenshot gnome-terminal howdy jdk-openjdk jupyter-notebook kdeconnect kde-graphics-meta latte-dock libreoffice-fresh man-db man-pages neofetch octave partitionmanager python qbittorrent rclone rsync teams-for-linux texlive-most tlp visual-studio-code-bin vlc zsh
 
 
 # Modules necessary:
@@ -128,6 +128,8 @@ sudo cp Desktop/dotfiles/others/neofetch /usr/bin/
 
 # pacman config
 sudo cp Desktop/dotfiles/others/pacman.conf /etc/
+
+# partitionmanager (disk / partition manager for KDE)
 
 # rclone (OneDrive sync: mount at startup)
 # Notes: Name the remote as "OneDrive".
