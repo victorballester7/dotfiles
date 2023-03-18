@@ -1,6 +1,7 @@
 #!/bin/bash
 
 # .config folder (copy KDE configs files)
+rm ~/Desktop/dotfiles/config/*.tar.gz
 cd ~/Desktop
 git clone https://gitlab.com/cscs/transfuse.git
 cd transfuse
@@ -27,6 +28,8 @@ cp ~/.config/systemd/user/rclone-onedrive.service others/
 
 # Pacman conf
 sudo cp /etc/pacman.conf others/
+
+# qbittorrent 
 
 # Sagemath
 # cp ~/.sage/init.sage others/
