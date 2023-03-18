@@ -1,9 +1,11 @@
 # GRUB boot loader configuration
 
 GRUB_DEFAULT=0
-GRUB_TIMEOUT=5
+GRUB_TIMEOUT=0
 GRUB_DISTRIBUTOR="Arch"
 GRUB_CMDLINE_LINUX_DEFAULT="loglevel=3 quiet"
+# GRUB_CMDLINE_LINUX_DEFAULT="loglevel=3 quiet acpi_os_name=\"Microsoft Windows NT\""
+# GRUB_CMDLINE_LINUX_DEFAULT="acpi_mask_gpe=0x6E loglevel=3 quiet"
 GRUB_CMDLINE_LINUX="rootfstype=ext4"
 
 # Preload both GPT and MBR modules so that they are not missed
