@@ -59,7 +59,7 @@ cp ../dotfiles/config/*.tar.gz ./
 # Installation of programs
 cd 
 # Others: autorandr
-paru -S --noconfirm --needed autopep8 cheese clang discord ethtool gcc gdb gimp gnome-screenshot gnome-terminal howdy jdk-openjdk jupyter-notebook kdeconnect kde-graphics-meta latte-dock libreoffice-fresh man-db man-pages neofetch octave partitionmanager python qbittorrent rclone rsync teams-for-linux texlive-most tlp visual-studio-code-bin vlc zsh
+paru -S --noconfirm --needed autopep8 cheese chromium clang discord ethtool gcc gdb gimp gnome-screenshot gnome-terminal howdy inkscape jdk-openjdk jupyter-notebook kdeconnect kde-graphics-meta latte-dock libreoffice-fresh man-db man-pages neofetch ntfs-3g octave partitionmanager python qbittorrent rclone rsync teams-for-linux texlive-most tlp visual-studio-code-bin vlc zsh
 
 
 # Modules necessary:
@@ -81,6 +81,8 @@ paru -S --noconfirm --needed sshfs
 # breeze: it's the default KDE style (like Adwaita for GNOME)
 
 # cheese0 (gnome camera app)
+
+# chromium (open source alternative to google chrome)
 
 # # cronie
 # sudo systemctl enable cronie
@@ -105,6 +107,8 @@ paru -S --noconfirm --needed sshfs
 # in order to mask the interupt /sys/firmware/interupt/gpe6E because it was causing many interupts when the laptop was plugged in. Now it goes like a charm! :)
 sudo cp Desktop/dotfiles/others/grub /etc/default/
 sudo grub-mkconfig -o /boot/grub/grub.cfg
+
+# inskcape (vector graphics editor)
 
 # kdeconnect
 

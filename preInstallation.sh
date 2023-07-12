@@ -7,7 +7,9 @@ git clone https://gitlab.com/cscs/transfuse.git
 cd transfuse
 chmod +x transfuse.sh
 ./transfuse.sh -b victor
+./transfuse.sh -p
 cp *.tar.gz ../dotfiles/config
+cp *.txt ../dotfiles/config
 
 # Copy history
 cd ~/Desktop/dotfiles
@@ -42,3 +44,6 @@ cp ~/.config/vlc/vlcrc others/
 
 # zsh 
 cp ~/.zshrc others/
+
+## NOTES
+# 1. Consider backing up the file /etc/profile (where there are my curstom PATH variables)

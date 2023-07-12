@@ -1,9 +1,9 @@
 # GRUB boot loader configuration
 
 GRUB_DEFAULT=0
-GRUB_TIMEOUT=0
+GRUB_TIMEOUT=5
 GRUB_DISTRIBUTOR="Arch"
-GRUB_CMDLINE_LINUX_DEFAULT="loglevel=3 quiet"
+GRUB_CMDLINE_LINUX_DEFAULT="loglevel=3 quiet zswap.enabled=0 tpm_tis.interrupts=0"
 # GRUB_CMDLINE_LINUX_DEFAULT="loglevel=3 quiet acpi_os_name=\"Microsoft Windows NT\""
 # GRUB_CMDLINE_LINUX_DEFAULT="acpi_mask_gpe=0x6E loglevel=3 quiet"
 GRUB_CMDLINE_LINUX="rootfstype=ext4"
@@ -63,4 +63,4 @@ GRUB_DISABLE_RECOVERY=true
 # documentation on GRUB_DISABLE_OS_PROBER, if still want to enable this
 # functionality install os-prober and uncomment to detect and include other
 # operating systems.
-#GRUB_DISABLE_OS_PROBER=false
+GRUB_DISABLE_OS_PROBER=false
