@@ -59,7 +59,7 @@ cp ../dotfiles/config/*.tar.gz ./
 # Installation of programs
 cd 
 # Others: autorandr
-paru -S --noconfirm --needed autopep8 cheese chromium clang discord ethtool gcc gdb gimp gnome-screenshot gnome-terminal howdy inkscape jdk-openjdk jupyter-notebook kdeconnect kde-graphics-meta latte-dock libreoffice-fresh man-db man-pages neofetch ntfs-3g octave partitionmanager python qbittorrent rclone rsync teams-for-linux texlive-most tlp visual-studio-code-bin vlc zsh
+paru -S --noconfirm --needed autopep8 cheese chromium clang discord ethtool gcc gdb gimp gnome-screenshot gnome-terminal howdy inkscape jdk-openjdk jupyter-notebook kdeconnect kde-graphics-meta latte-dock libreoffice-fresh man-db man-pages neofetch ntfs-3g octave partitionmanager python qbittorrent rclone rsync teams-for-linux texlive tlp visual-studio-code-bin vlc zsh
 
 
 # Modules necessary:
