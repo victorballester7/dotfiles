@@ -144,7 +144,7 @@ fi
 cd 
 
 # List of programs to install
-programs="autopep8 cheese chromium clang cmake cpanminus discord ethtool firefox fuse2 gcc gdb gimp gnome-screenshot gnome-terminal inkscape jdk-openjdk jupyter-notebook kde-graphics-meta kdeconnect kdenlive latte-dock libreoffice-fresh make man-db man-pages neofetch ntfs-3g octave partitionmanager perl python qbittorrent qt5-xmlpatterns qt5-xmlpatterns rclone rsync sshfs teams-for-linux texlive tlp visual-studio-code-bin vlc zsh"
+programs="autopep8 cheese chromium clang cmake cpanminus discord ethtool firefox fuse2 gcc gdb gimp gnome-screenshot gnome-terminal inkscape jdk-openjdk jupyter-notebook kde-graphics-meta kdeconnect kdenlive latte-dock libreoffice-fresh linux-zen linux-zen-headers make man-db man-pages neofetch ntfs-3g octave partitionmanager perl python qbittorrent qt5-xmlpatterns qt5-xmlpatterns rclone rsync sshfs teams-for-linux texlive tlp visual-studio-code-bin vlc zsh"
 
 # Loop through each program and install it
 for program in $programs; do
