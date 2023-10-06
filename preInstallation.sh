@@ -28,6 +28,15 @@ else
     echo -e "${RED}Error copying KDE config files!${RESET}"
 fi
 
+# Copy current rules to rules/ folder
+cd ~/Desktop/dotfiles
+echo -e "${YELLOW}Copying udev rules...${RESET}"
+cp /etc/udev/rules.d/* rules/
+if [ $? -eq 0 ]; then
+    echo -e "${GREEN}Udev rules copied successfully!${RESET}"
+else
+    echo -e "${RED}Error copying Udev rules!${RESET}"
+fi 
 
 # Copy history
 cd ~/Desktop/dotfiles
