@@ -144,7 +144,7 @@ fi
 cd 
 
 # List of programs to install
-programs="autopep8 cheese chromium clang cmake cpanminus discord ethtool firefox fuse2 gcc gdb gimp gnome-screenshot gnome-terminal inkscape jdk-openjdk jupyter-notebook kde-graphics-meta kdeconnect kdenlive latte-dock libreoffice-fresh linux-zen linux-zen-headers make man-db man-pages neofetch ntfs-3g octave partitionmanager perl python qbittorrent qt5-xmlpatterns qt5-xmlpatterns rclone rsync sshfs teams-for-linux texlive tlp visual-studio-code-bin vlc zsh"
+programs="autopep8 cheese chromium clang cmake cpanminus discord docker docker-compose ethtool firefox freefem fuse2 gcc gdb gimp gnome-screenshot gnome-terminal inkscape jdk-openjdk jekyll julia jupyter-notebook kde-graphics-meta kdeconnect kdenlive latte-dock libreoffice-fresh linux-zen linux-zen-headers make man-db man-pages neofetch noto-fonts-emoji ntfs-3g octave parmetis-git partitionmanager perl python python-pandas python-matplotlib qbittorrent qt5-xmlpatterns qt5-xmlpatterns rclone rsync ruby sshfs teams-for-linux texlive tlp unzip unrar visual-studio-code-bin vlc zsh"
 
 # Loop through each program and install it
 for program in $programs; do
@@ -215,6 +215,8 @@ sudo grub-mkconfig -o /boot/grub/grub.cfg
 echo -e "${YELLOW}Configuring inkscape...${RESET}"
 mkdir -p ~/.config/inkscape/
 
+# jekyll (for my personal website)
+
 # kdeconnect
 
 # kde-graphics-meta
@@ -241,6 +243,8 @@ sudo cp Desktop/dotfiles/others/neofetch /usr/bin/
 
 # pacman config
 sudo cp Desktop/dotfiles/others/pacman.conf /etc/
+
+# parmetis-git (needed for FreeFem++)
 
 # partitionmanager (disk / partition manager for KDE)
 
@@ -270,6 +274,8 @@ fi
 
 # rsync (automated backup)
 # cp /usr/local/bin/syncOneDrive.sh /etc/cron.daily
+
+# ruby (necessary for jekyll and/or my personal website)
 
 # sagemath
 # mkdir -p ~/.sage
