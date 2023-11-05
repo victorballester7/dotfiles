@@ -84,7 +84,6 @@ else
     echo -e "${RED}Error copying OneDrive sync config file!${RESET}"
 fi
 
-
 # Pacman conf
 echo -e "${YELLOW}Copying Pacman config file...${RESET}"
 sudo cp /etc/pacman.conf others/
