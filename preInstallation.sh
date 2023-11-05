@@ -96,6 +96,17 @@ fi
 
 # qbittorrent 
 
+# reflector
+echo -e "${YELLOW}Copying Reflector config file...${RESET}"
+echo -e "${BLUE}Please, remember to check that the counries are the desired ones! Last time, I used: "France,Spain,", where the last comma means the WorldWide servers.${RESET}"
+sudo cp /etc/xdg/reflector/reflector.conf others/
+if [ $? -eq 0 ]; then
+    echo -e "${GREEN}Reflector config file copied successfully!${RESET}"
+else
+    echo -e "${RED}Error copying Reflector config file!${RESET}"
+fi
+
+
 # Sagemath
 # cp ~/.sage/init.sage others/
 

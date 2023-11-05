@@ -144,7 +144,7 @@ fi
 cd 
 
 # List of programs to install
-programs="autopep8 cheese chromium clang cmake cpanminus discord docker docker-compose ethtool firefox freefem fuse2 gcc gdb gimp gnome-screenshot gnome-terminal inkscape jdk-openjdk jekyll julia jupyter-notebook kde-graphics-meta kdeconnect kdenlive latte-dock libreoffice-fresh linux-zen linux-zen-headers make man-db man-pages neofetch noto-fonts-emoji ntfs-3g octave parmetis-git partitionmanager perl python python-pandas python-matplotlib qbittorrent qt5-xmlpatterns qt5-xmlpatterns rclone rsync ruby sshfs teams-for-linux texlive tlp unzip unrar visual-studio-code-bin vlc zsh"
+programs="autopep8 cheese chromium clang cmake cpanminus discord docker docker-compose ethtool firefox freefem fuse2 gcc gdb gimp gnome-screenshot gnome-terminal inkscape jdk-openjdk jekyll julia jupyter-notebook kde-graphics-meta kdeconnect kdenlive latte-dock libreoffice-fresh linux-zen linux-zen-headers make man-db man-pages neofetch noto-fonts-emoji ntfs-3g octave parmetis-git partitionmanager perl python python-pandas python-matplotlib qbittorrent qt5-xmlpatterns qt5-xmlpatterns rclone reflector rsync ruby sshfs teams-for-linux texlive tlp unzip unrar visual-studio-code-bin vlc zsh"
 
 # Loop through each program and install it
 for program in $programs; do
@@ -266,6 +266,21 @@ if [ $? -ne 0 ]; then
     notify-send "Error installing rclone" "There was a problem installing rclone. Please check the installation process." --urgency=critical
 else
     echo -e "${GREEN}Rclone installed successfully.${RESET}"
+fi
+
+# reflector (to update mirrors)
+cd
+echo -e "${YELLOW}Configuring reflector...${RESET}"
+cp Desktop/dotfiles/others/reflector.conf /etc/xdg/reflector/
+sudo systemctl enable reflector.timer
+sudo systemctl start reflector.timer
+sudo systemctl enable reflector.service
+sudo systemctl start reflector.service
+if [ $? -ne 0 ]; then
+    echo -e "${RED}Error configuring reflector.${RESET}"
+    notify-send "Error configuring reflector" "There was a problem configuring reflector. Please check the installation process." --urgency=critical
+else
+    echo -e "${GREEN}Reflector configured successfully.${RESET}"
 fi
 
 # rsync (necessary for the backup script: https://gitlab.com/cscs/transfuse)
