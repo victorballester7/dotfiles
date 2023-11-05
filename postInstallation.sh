@@ -272,7 +272,7 @@ fi
 cd
 echo -e "${YELLOW}Configuring reflector...${RESET}"
 cp Desktop/dotfiles/others/reflector.conf /etc/xdg/reflector/
-sudo systemctl enable reflector.timer
+sudo systemctl enable reflector.timer # in order to run reflector weekly instead of at each boot
 sudo systemctl start reflector.timer
 sudo systemctl enable reflector.service
 sudo systemctl start reflector.service
