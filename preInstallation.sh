@@ -19,7 +19,7 @@ RESET="\e[0m"
 # cp *.txt ../dotfiles/config
 
 echo -e "${YELLOW}Copying KDE config files...${RESET}"
-paru -S --noconfirm --needed --quiet konsave
+yay -S --noconfirm --needed --quiet konsave
 konsave -s victor-config
 konsave -e victor-config -d ~/Desktop/dotfiles/config
 if [ $? -eq 0 ]; then

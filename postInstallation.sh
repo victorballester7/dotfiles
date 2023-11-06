@@ -57,27 +57,27 @@ else
     echo -e "${GREEN}Git installed and configured successfully.${RESET}"
 fi
 
-# paru (AUR helper)
+# yay (AUR helper)
 cd
-echo -e "${YELLOW}Installing paru...${RESET}"
+echo -e "${YELLOW}Installing yay...${RESET}"
 sudo pacman -S --noconfirm --needed --quiet base-devel
-git clone https://aur.archlinux.org/paru.git
-cd paru
+git clone https://aur.archlinux.org/yay.git
+cd yay
 makepkg -si
 cd ..
-rm -rf paru
+rm -rf yay
 if [ $? -ne 0 ]; then
-    echo -e "${RED}Error installing paru.${RESET}"
-    notify-send "Error installing paru" "There was a problem installing paru. Please check the installation process." --urgency=critical
+    echo -e "${RED}Error installing yay.${RESET}"
+    notify-send "Error installing yay" "There was a problem installing yay. Please check the installation process." --urgency=critical
 else
-    echo -e "${GREEN}Paru installed successfully.${RESET}"
+    echo -e "${GREEN}Yay installed successfully.${RESET}"
 fi
 
 # PROBLEM - SOLVING
 # Audio drivers:
 cd
 echo -e "${YELLOW}Installing audio drivers...${RESET}"
-paru -S --noconfirm --needed --quiet sof-firmware alsa-ucm-conf
+yay -S --noconfirm --needed --quiet sof-firmware alsa-ucm-conf
 if [ $? -ne 0 ]; then
     echo -e "${RED}Error installing audio drivers.${RESET}"
     notify-send "Error installing audio drivers" "There was a problem installing audio drivers. Please check the installation process." --urgency=critical
@@ -87,7 +87,7 @@ fi
 
 # If it take too long to reboot and/or shutdown then is may be a problem of sddm
 # To solve this, install a newer version of sddm from AUR: sddm-git
-# paru -S sddm-git
+# yay -S sddm-git
 
 
 # Copy rules (that will be executed at the startup of the system):
@@ -114,7 +114,7 @@ fi
 cd 
 cd Desktop/dotfiles/config/
 echo -e "${YELLOW}Restoring KDE backup...${RESET}"
-paru -S --noconfirm --needed konsave
+yay -S --noconfirm --needed konsave
 if [ $? -ne 0 ]; then
     echo -e "${RED}Error installing konsave.${RESET}"
     notify-send "Error installing konsave" "There was a problem installing konsave. Please check the installation process." --urgency=critical
@@ -149,7 +149,7 @@ programs="autopep8 cheese chromium clang cmake cpanminus discord docker docker-c
 # Loop through each program and install it
 for program in $programs; do
     echo -e "${YELLOW}Installing $program...${RESET}"
-    paru -S --noconfirm --needed "$program"
+    yay -S --noconfirm --needed "$program"
 
     # Check the exit status of the previous command
     if [ $? -ne 0 ]; then
@@ -230,8 +230,8 @@ mkdir -p ~/.config/inkscape/
 # man-db, man-pages: implement man pages on Arch
 
 # mpv (it's missing to copy and update the scripts in .config/mpv)
-# paru -S --needed trash-cli # in order to use delete property
-# paru -S --needed mediainfo # in order to use all the properties of comand-palette (source: https://github.com/stax76/mpv-scripts/tree/main)
+# yay -S --needed trash-cli # in order to use delete property
+# yay -S --needed mediainfo # in order to use all the properties of comand-palette (source: https://github.com/stax76/mpv-scripts/tree/main)
 
 # neofetch
 sudo cp Desktop/dotfiles/others/neofetch /usr/bin/
@@ -239,7 +239,7 @@ sudo cp Desktop/dotfiles/others/neofetch /usr/bin/
 # ntfs-3g: for read/write acces to Microsoft NTFS partitions.
 
 # nvidia-settings
-# paru -S --noconfirm --needed nvidia nvidia-utils nvidia-settings xorg-server-devel opencl-nvidia
+# yay -S --noconfirm --needed nvidia nvidia-utils nvidia-settings xorg-server-devel opencl-nvidia
 
 # pacman config
 sudo cp Desktop/dotfiles/others/pacman.conf /etc/
