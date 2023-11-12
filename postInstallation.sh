@@ -144,7 +144,7 @@ fi
 cd 
 
 # List of programs to install
-programs="autopep8 cheese chromium clang cmake cpanminus discord docker docker-compose ethtool firefox freefem fuse2 gcc gdb gimp gnome-screenshot gnome-terminal inkscape jdk-openjdk jekyll julia jupyter-notebook kde-graphics-meta kdeconnect kdenlive latte-dock libreoffice-fresh linux-zen linux-zen-headers make man-db man-pages neofetch noto-fonts-emoji ntfs-3g octave parmetis-git partitionmanager perl python python-pandas python-matplotlib qbittorrent qt5-xmlpatterns qt5-xmlpatterns rclone reflector rsync ruby sshfs teams-for-linux texlive tlp unzip unrar visual-studio-code-bin vlc zsh"
+programs="autopep8 cheese chromium clang cmake cpanminus discord docker docker-compose ethtool firefox freefem fuse2 gcc gdb gimp gnome-screenshot gnome-terminal inkscape jdk-openjdk jekyll julia jupyter-notebook kde-graphics-meta kdeconnect kdenlive krunner-vscodeprojects kwalletmanager latte-dock libreoffice-fresh linux-zen linux-zen-headers make man-db man-pages mkinitcpio-firmware neofetch noto-fonts-emoji ntfs-3g octave parmetis-git partitionmanager perl python python-pandas python-matplotlib qbittorrent qt5-xmlpatterns qt5-xmlpatterns rclone reflector rsync ruby sshfs teams-for-linux texlive tlp unzip unrar visual-studio-code-bin vlc zsh"
 
 # Loop through each program and install it
 for program in $programs; do
@@ -225,9 +225,19 @@ mkdir -p ~/.config/inkscape/
 # kdenlive
 # missing adding config files
 
+# krunner-vscodeprojects (for searching vscode projects with krunner)
+# We need to have the extension "Project Manager" installed in vscode.
+
+# kwalletmanager (for managing passwords)
+# In order to disable the prompt for the password when logging in, go to KDE Wallet Manager -> Settings -> Configure Wallet -> uncheck "Prompt when an application accesses the wallet"
+
 # latte-dock (my dock for linux)
 
 # man-db, man-pages: implement man pages on Arch
+
+# mkinitcpio-firmware
+# needed for disabling warnings when compiling the kernel
+sudo cp Desktop/dotfiles/others/mkinitcpio.conf /etc/
 
 # mpv (it's missing to copy and update the scripts in .config/mpv)
 # yay -S --needed trash-cli # in order to use delete property

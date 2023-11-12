@@ -66,6 +66,16 @@ else
     echo -e "${RED}Error copying Grub config file!${RESET}"
 fi
 
+
+# mkinitcpio.conf
+echo -e "${YELLOW}Copying Mkinitcpio config file...${RESET}"
+sudo cp /etc/mkinitcpio.conf others/
+if [ $? -eq 0 ]; then
+    echo -e "${GREEN}Mkinitcpio config file copied successfully!${RESET}"
+else
+    echo -e "${RED}Error copying Mkinitcpio config file!${RESET}"
+fi
+
 # neofetch
 echo -e "${YELLOW}Copying Neofetch config file...${RESET}"
 sudo cp /usr/bin/neofetch others/ 
