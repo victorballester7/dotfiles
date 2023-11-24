@@ -129,6 +129,16 @@ else
     echo -e "${GREEN}KDE backup restored successfully.${RESET}"
 fi
 
+# To solve a problem with the google calendar widget:
+# source: https://github.com/Zren/plasma-applet-eventcalendar/issues/331
+cd 
+git clone https://github.com/gaganpreet/plasma-applet-eventcalendar.git eventcalendar
+cd eventcalendar
+git checkout google-calendar-fix
+sh ./install
+cd
+rm -rf eventcalendar
+
 
 
 # Necessary packages (already included in the list below):
@@ -144,7 +154,7 @@ fi
 cd 
 
 # List of programs to install
-programs="autopep8 cheese chromium clang cmake cpanminus discord docker docker-compose ethtool firefox freefem fuse2 gcc gdb gimp gnome-screenshot gnome-terminal inkscape jdk-openjdk jekyll julia jupyter-notebook kde-graphics-meta kdeconnect kdenlive krunner-vscodeprojects kwalletmanager latte-dock libreoffice-fresh linux-zen linux-zen-headers make man-db man-pages mkinitcpio-firmware neofetch noto-fonts-emoji ntfs-3g octave parmetis-git partitionmanager perl python python-pandas python-matplotlib qbittorrent qt5-xmlpatterns qt5-xmlpatterns rclone reflector rsync ruby sshfs teams-for-linux texlive tlp unzip unrar visual-studio-code-bin vlc zsh"
+programs="autopep8 cheese chromium clang cmake cpanminus discord docker docker-compose ethtool firefox freefem fuse2 gcc gdb gimp gnome-screenshot gnome-terminal inkscape jdk-openjdk jekyll julia jupyter-notebook kde-graphics-meta kdeconnect kdenlive krunner-vscodeprojects kwalletmanager latte-dock libreoffice-fresh linux-zen linux-zen-headers make man-db man-pages mkinitcpio-firmware neofetch noto-fonts-emoji ntfs-3g octave parmetis-git partitionmanager perl python python-pandas python-matplotlib qbittorrent qt5-xmlpatterns qt5-xmlpatterns rclone reflector rsync ruby sshfs teams-for-linux texlive tlp tlp-rdw unzip unrar visual-studio-code-bin vlc zsh"
 
 # Loop through each program and install it
 for program in $programs; do
