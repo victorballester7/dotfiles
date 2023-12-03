@@ -101,6 +101,17 @@ else
     echo -e "${GREEN}Rules copied successfully.${RESET}"
 fi
 
+# Copy wallpapers
+cd
+echo -e "${YELLOW}Copying wallpapers...${RESET}"
+cp -r Desktop/dotfiles/wallpapers ~/Pictures/
+if [ $? -ne 0 ]; then
+    echo -e "${RED}Error copying wallpapers.${RESET}"
+    notify-send "Error copying wallpapers" "There was a problem copying wallpapers. Please check the installation process." --urgency=critical
+else
+    echo -e "${GREEN}Wallpapers copied successfully.${RESET}"
+fi
+
 # Restore KDE backup
 # old version ------------------
 # cd Desktop
