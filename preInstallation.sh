@@ -48,6 +48,16 @@ else
     echo -e "${RED}Error copying History!${RESET}"
 fi
 
+# Copy wallpapers in Pictures folder
+cd ~/Desktop/dotfiles
+echo -e "${YELLOW}Copying wallpapers...${RESET}"
+cp -r ~/Pictures/Wallpapers wallpapers/
+if [ $? -eq 0 ]; then
+    echo -e "${GREEN}Wallpapers copied successfully!${RESET}"
+else
+    echo -e "${RED}Error copying Wallpapers!${RESET}"
+fi
+
 # Git
 cp ~/.gitconfig others/
 echo -e "${YELLOW}Copying Git config file...${RESET}"
