@@ -4,6 +4,8 @@
 # You can execute this file from anywhere.
 # This is for Archlinux + KDE with X11 ideally.
 
+# TODO
+# check in history if it's missing some packages that has to be installed manually
 
 # ANSI escape codes for color formatting
 RED="\e[31m"
@@ -166,7 +168,7 @@ rm -rf eventcalendar
 cd 
 
 # List of programs to install
-programs="autopep8 cheese chromium clang cmake cpanminus discord docker docker-compose ethtool firefox freefem fuse2 gcc gdb gimp gnome-screenshot gnome-terminal inkscape jdk-openjdk jekyll julia jupyter-notebook kde-graphics-meta kdeconnect kdenlive krunner-vscodeprojects kwalletmanager latte-dock libreoffice-fresh linux-zen linux-zen-headers make man-db man-pages mkinitcpio-firmware neofetch noto-fonts-emoji ntfs-3g octave parmetis-git partitionmanager perl python python-pandas python-matplotlib qbittorrent qt5-xmlpatterns qt5-xmlpatterns rclone reflector rsync ruby sshfs teams-for-linux texlive tlp tlp-rdw touchegg touche unzip unrar visual-studio-code-bin vlc zsh"
+programs="autopep8 cheese chromium clang cmake cpanminus discord docker docker-compose ethtool firefox freefem fuse2 gcc gdb gimp gnome-screenshot gnome-terminal inkscape jdk-openjdk jekyll julia jupyter-notebook kde-graphics-meta kdeconnect kdenlive krunner-vscodeprojects kwalletmanager kwin-bismuth latte-dock libreoffice-fresh linux-zen linux-zen-headers make man-db man-pages mkinitcpio-firmware neofetch noto-fonts-emoji ntfs-3g octave parmetis-git partitionmanager perl python python-pandas python-matplotlib qbittorrent qt5-xmlpatterns qt5-xmlpatterns rclone reflector rsync ruby sshfs teams-for-linux texlive tlp tlp-rdw touchegg touche unzip unrar visual-studio-code-bin vlc zsh"
 
 # Loop through each program and install it
 for program in $programs; do
@@ -252,6 +254,8 @@ mkdir -p ~/.config/inkscape/
 
 # kwalletmanager (for managing passwords)
 # In order to disable the prompt for the password when logging in, go to KDE Wallet Manager -> Settings -> Configure Wallet -> uncheck "Prompt when an application accesses the wallet"
+
+# kwin-bismuth (window tile manager for KDE)
 
 # latte-dock (my dock for linux)
 
