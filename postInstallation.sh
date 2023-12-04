@@ -2,7 +2,8 @@
 
 # Remember to previously install firefox and git and also reboot at the end of the execution of this file.
 # You can execute this file from anywhere.
-# This is for Archlinux + KDE
+# This is for Archlinux + KDE with X11 ideally.
+
 
 # ANSI escape codes for color formatting
 RED="\e[31m"
@@ -165,7 +166,7 @@ rm -rf eventcalendar
 cd 
 
 # List of programs to install
-programs="autopep8 cheese chromium clang cmake cpanminus discord docker docker-compose ethtool firefox freefem fuse2 gcc gdb gimp gnome-screenshot gnome-terminal inkscape jdk-openjdk jekyll julia jupyter-notebook kde-graphics-meta kdeconnect kdenlive krunner-vscodeprojects kwalletmanager latte-dock libreoffice-fresh linux-zen linux-zen-headers make man-db man-pages mkinitcpio-firmware neofetch noto-fonts-emoji ntfs-3g octave parmetis-git partitionmanager perl python python-pandas python-matplotlib qbittorrent qt5-xmlpatterns qt5-xmlpatterns rclone reflector rsync ruby sshfs teams-for-linux texlive tlp tlp-rdw unzip unrar visual-studio-code-bin vlc zsh"
+programs="autopep8 cheese chromium clang cmake cpanminus discord docker docker-compose ethtool firefox freefem fuse2 gcc gdb gimp gnome-screenshot gnome-terminal inkscape jdk-openjdk jekyll julia jupyter-notebook kde-graphics-meta kdeconnect kdenlive krunner-vscodeprojects kwalletmanager latte-dock libreoffice-fresh linux-zen linux-zen-headers make man-db man-pages mkinitcpio-firmware neofetch noto-fonts-emoji ntfs-3g octave parmetis-git partitionmanager perl python python-pandas python-matplotlib qbittorrent qt5-xmlpatterns qt5-xmlpatterns rclone reflector rsync ruby sshfs teams-for-linux texlive tlp tlp-rdw touchegg touche unzip unrar visual-studio-code-bin vlc zsh"
 
 # Loop through each program and install it
 for program in $programs; do
@@ -344,6 +345,19 @@ if [ $? -ne 0 ]; then
 else
     echo -e "${GREEN}Tlp configured successfully.${RESET}"
 fi
+
+# touchegg (for gestures)
+echo -e "${YELLOW}Configuring touchegg...${RESET}"
+sudo systemctl enable touchegg.service
+sudo systemctl start touchegg
+cp ~/Desktop/dotfiles/others/touchegg.conf ~/.config/touchegg/
+if [ $? -ne 0 ]; then
+    echo -e "${RED}Error configuring touchegg.${RESET}"
+    notify-send "Error configuring touchegg" "There was a problem configuring touchegg. Please check the installation process." --urgency=critical
+else
+    echo -e "${GREEN}Touchegg configured successfully.${RESET}"
+fi
+
 
 # vscode (latexindent formatter configuration)
 cd 

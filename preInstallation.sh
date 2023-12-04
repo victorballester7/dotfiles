@@ -38,6 +38,16 @@ else
     echo -e "${RED}Error copying Udev rules!${RESET}"
 fi 
 
+# copy touchegg config file
+cd ~/Desktop/dotfiles
+echo -e "${YELLOW}Copying Touchegg config file...${RESET}"
+cp ~/.config/touchegg/touchegg.conf others/
+if [ $? -eq 0 ]; then
+    echo -e "${GREEN}Touchegg config file copied successfully!${RESET}"
+else
+    echo -e "${RED}Error copying Touchegg config file!${RESET}"
+fi
+
 # Copy history
 cd ~/Desktop/dotfiles
 echo -e "${YELLOW}Copying history...${RESET}"
