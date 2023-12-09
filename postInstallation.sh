@@ -168,7 +168,7 @@ rm -rf eventcalendar
 cd 
 
 # List of programs to install
-programs="autopep8 cheese chromium clang cmake cpanminus discord docker docker-compose ethtool firefox freefem fuse2 fusuma gcc gdb gimp gnome-screenshot gnome-terminal inkscape jdk-openjdk jekyll julia jupyter-notebook kde-graphics-meta kdeconnect kdenlive krunner-vscodeprojects kwalletmanager kwin-bismuth latte-dock libreoffice-fresh linux-zen linux-zen-headers make man-db man-pages mkinitcpio-firmware neofetch noto-fonts-emoji ntfs-3g octave parmetis-git partitionmanager perl python python-pandas python-matplotlib qbittorrent qt5-xmlpatterns qt5-xmlpatterns rclone reflector rsync ruby sshfs teams-for-linux texlive tlp tlp-rdw unzip unrar visual-studio-code-bin vlc xdotool zsh"
+programs="autopep8 cheese chromium clang cmake cpanminus discord docker docker-compose ethtool firefox freefem fuse2 gcc gdb gimp gnome-screenshot gnome-terminal inkscape jdk-openjdk jekyll julia jupyter-notebook kde-graphics-meta kdeconnect kdenlive krunner-vscodeprojects kwalletmanager kwin-bismuth latte-dock libreoffice-fresh linux-zen linux-zen-headers make man-db man-pages mkinitcpio-firmware neofetch noto-fonts-emoji ntfs-3g octave parmetis-git partitionmanager perl python python-pandas python-matplotlib qbittorrent qt5-xmlpatterns qt5-xmlpatterns rclone reflector rsync ruby ruby-fusuma-plugin-keypress ruby-fusuma-plugin-wmctrl ruby-fusuma sshfs teams-for-linux texlive tlp tlp-rdw unzip unrar visual-studio-code-bin vlc xdotool zsh"
 
 # Loop through each program and install it
 for program in $programs; do
@@ -220,8 +220,6 @@ fi
 # firefox
 # sudo cp -r ~/Desktop/dotfiles/firefox/.mozilla ~/
 
-# fusuama (for gestures)
-sudo cp -r Desktop/dotfiles/others/fusuma/config.yml ~/.config/
 
 # gdb = GNU debugger
 
@@ -330,6 +328,11 @@ fi
 # cp /usr/local/bin/syncOneDrive.sh /etc/cron.daily
 
 # ruby (necessary for jekyll and/or my personal website)
+
+# ruby-fusuma (for gestures)
+sudo gpasswd -a $USER input
+newgrp input
+sudo cp -r Desktop/dotfiles/others/fusuma/config.yml ~/.config/
 
 # sagemath
 # mkdir -p ~/.sage
