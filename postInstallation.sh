@@ -168,7 +168,7 @@ rm -rf eventcalendar
 cd 
 
 # List of programs to install
-programs="autopep8 cheese chromium clang cmake cpanminus discord docker docker-compose ethtool firefox freefem fuse2 gcc gdb gimp gnome-screenshot gnome-terminal inkscape jdk-openjdk jekyll julia jupyter-notebook kde-graphics-meta kdeconnect kdenlive krunner-vscodeprojects kwalletmanager kwin-bismuth latte-dock libreoffice-fresh linux-zen linux-zen-headers make man-db man-pages mkinitcpio-firmware neofetch noto-fonts-emoji ntfs-3g octave parmetis-git partitionmanager perl python python-pandas python-matplotlib qbittorrent qt5-xmlpatterns qt5-xmlpatterns rclone reflector rsync ruby sshfs teams-for-linux texlive tlp tlp-rdw touchegg touche unzip unrar visual-studio-code-bin vlc zsh"
+programs="autopep8 cheese chromium clang cmake cpanminus discord docker docker-compose ethtool firefox freefem fuse2 fusuma gcc gdb gimp gnome-screenshot gnome-terminal inkscape jdk-openjdk jekyll julia jupyter-notebook kde-graphics-meta kdeconnect kdenlive krunner-vscodeprojects kwalletmanager kwin-bismuth latte-dock libreoffice-fresh linux-zen linux-zen-headers make man-db man-pages mkinitcpio-firmware neofetch noto-fonts-emoji ntfs-3g octave parmetis-git partitionmanager perl python python-pandas python-matplotlib qbittorrent qt5-xmlpatterns qt5-xmlpatterns rclone reflector rsync ruby sshfs teams-for-linux texlive tlp tlp-rdw unzip unrar visual-studio-code-bin vlc xdotool zsh"
 
 # Loop through each program and install it
 for program in $programs; do
@@ -219,6 +219,9 @@ fi
 
 # firefox
 # sudo cp -r ~/Desktop/dotfiles/firefox/.mozilla ~/
+
+# fusuama (for gestures)
+sudo cp -r Desktop/dotfiles/others/fusuma/config.yml ~/.config/
 
 # gdb = GNU debugger
 
@@ -391,6 +394,8 @@ if [ $? -ne 0 ]; then
 else
     echo -e "${GREEN}Vlc configured successfully.${RESET}"
 fi
+
+# xdotool (for gestures, required by fusuma)
 
 # zsh 
 echo -e "${YELLOW}Configuring zsh...${RESET}"
