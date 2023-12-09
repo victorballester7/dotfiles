@@ -38,15 +38,16 @@ else
     echo -e "${RED}Error copying Udev rules!${RESET}"
 fi 
 
-# copy touchegg config file
+# copy fusuma config file
 cd ~/Desktop/dotfiles
-echo -e "${YELLOW}Copying Touchegg config file...${RESET}"
-cp ~/.config/touchegg/touchegg.conf others/
+echo -e "${YELLOW}Copying Fusuma config file...${RESET}"
+cp -r ~/.config/fusuma config/
 if [ $? -eq 0 ]; then
-    echo -e "${GREEN}Touchegg config file copied successfully!${RESET}"
+    echo -e "${GREEN}Fusuma config file copied successfully!${RESET}"
 else
-    echo -e "${RED}Error copying Touchegg config file!${RESET}"
+    echo -e "${RED}Error copying Fusuma config file!${RESET}"
 fi
+
 
 # Copy history
 cd ~/Desktop/dotfiles
