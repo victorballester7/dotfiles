@@ -329,7 +329,7 @@ fi
 
 # ruby (necessary for jekyll and/or my personal website)
 
-# ruby-fusuma (for gestures)
+# ruby-fusuma (for gestures, KDE gestures are not working properly by default in X11)
 sudo gpasswd -a $USER input
 newgrp input
 sudo cp -r Desktop/dotfiles/others/fusuma/config.yml ~/.config/
