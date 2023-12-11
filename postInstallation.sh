@@ -168,7 +168,7 @@ rm -rf eventcalendar
 cd 
 
 # List of programs to install
-programs="autopep8 cheese chromium clang cmake cpanminus discord docker docker-compose ethtool firefox freefem fuse2 gcc gdb gimp gnome-screenshot gnome-terminal inkscape jdk-openjdk jekyll julia jupyter-notebook kde-graphics-meta kdeconnect kdenlive krunner-vscodeprojects kwalletmanager kwin-bismuth latte-dock libreoffice-fresh linux-zen linux-zen-headers make man-db man-pages mkinitcpio-firmware neofetch noto-fonts-emoji ntfs-3g octave parmetis-git partitionmanager perl python python-pandas python-matplotlib qbittorrent qt5-xmlpatterns qt5-xmlpatterns rclone reflector rsync ruby ruby-fusuma-plugin-keypress ruby-fusuma-plugin-wmctrl ruby-fusuma sshfs teams-for-linux texlive tlp tlp-rdw unzip unrar visual-studio-code-bin vlc xdotool zsh"
+programs="autopep8 cheese chromium clang cmake cpanminus discord docker docker-compose ethtool firefox freefem fuse2 gcc gdb gimp gnome-screenshot gnome-terminal inkscape jdk-openjdk jekyll julia jupyter-notebook kde-graphics-meta kdeconnect kdenlive krunner-vscodeprojects kwalletmanager kwin-bismuth latte-dock libreoffice-fresh linux-zen linux-zen-headers make man-db man-pages mkinitcpio-firmware neofetch noto-fonts-emoji ntfs-3g octave parmetis-git partitionmanager perl python python-pandas python-matplotlib qbittorrent qt5-xmlpatterns qt5-xmlpatterns rclone reflector rsync ruby ruby-fusuma-plugin-keypress ruby-fusuma-plugin-wmctrl ruby-fusuma spotify-adblock sshfs teams-for-linux texlive tlp tlp-rdw unzip unrar visual-studio-code-bin vlc xdotool zsh"
 
 # Loop through each program and install it
 for program in $programs; do
@@ -284,6 +284,9 @@ sudo cp Desktop/dotfiles/others/pacman.conf /etc/
 # parmetis-git (needed for FreeFem++)
 
 # partitionmanager (disk / partition manager for KDE)
+
+# spotify-adblock
+sudo cp Desktop/dotfiles/others/spotify-adblock.desktop ~/.local/share/applications/
 
 # rclone (OneDrive sync: mount at startup)
 # Notes: Name the remote as "OneDrive".

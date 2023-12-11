@@ -49,6 +49,15 @@ else
 fi
 
 
+# copy desktop application spotify-adblock.desktop
+cd ~/.local/share/applications
+cp spotify-adblock.desktop ~/Desktop/dotfiles/config
+if [ $? -eq 0 ]; then
+    echo -e "${GREEN}Spotify adblock config file copied successfully!${RESET}"
+else
+    echo -e "${RED}Error copying Spotify adblock config file!${RESET}"
+fi
+
 # Copy history
 cd ~/Desktop/dotfiles
 echo -e "${YELLOW}Copying history...${RESET}"
