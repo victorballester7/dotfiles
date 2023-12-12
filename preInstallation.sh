@@ -108,7 +108,7 @@ fi
 
 # neofetch
 echo -e "${YELLOW}Copying Neofetch config file...${RESET}"
-sudo cp /usr/bin/neofetch others/ 
+sudo cp -r ~/.config/neofetch others/
 if [ $? -eq 0 ]; then
     echo -e "${GREEN}Neofetch config file copied successfully!${RESET}"
 else

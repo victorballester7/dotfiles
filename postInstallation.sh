@@ -271,7 +271,7 @@ sudo cp Desktop/dotfiles/others/mkinitcpio.conf /etc/
 # yay -S --needed mediainfo # in order to use all the properties of comand-palette (source: https://github.com/stax76/mpv-scripts/tree/main)
 
 # neofetch
-sudo cp Desktop/dotfiles/others/neofetch /usr/bin/
+sudo cp -r Desktop/dotfiles/others/neofetch ~/.config/
 
 # ntfs-3g: for read/write acces to Microsoft NTFS partitions.
 
