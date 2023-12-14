@@ -6,6 +6,9 @@
 
 # TODO
 # check in history if it's missing some packages that has to be installed manually
+# check if all is backed up correctly from kde. Things to check: themes, icons, fonts, shortcuts, latte-dock,...
+
+
 
 # ANSI escape codes for color formatting
 RED="\e[31m"
