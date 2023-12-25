@@ -4,13 +4,10 @@
 # You can execute this file from anywhere.
 # This is for Archlinux + KDE with X11 ideally.
 
-<<<<<<< HEAD
-=======
 # Remember to insall the pipwire drivers for audio, not the pulseaudio ones (I had problems with the pulseaudio ones).
 # After the installation, import manually the profile for thunderbird: Tools > Import. It is in the others/ folder.
 
 
->>>>>>> ad31efd (updated new arch install)
 # TODO
 # check in history if it's missing some packages that has to be installed manually
 # check if all is backed up correctly from kde. Things to check: themes, icons, fonts, shortcuts, latte-dock,...
@@ -34,8 +31,6 @@ else
     echo -e "${GREEN}Updated and upgraded successfully.${RESET}"
 fi
 
-<<<<<<< HEAD
-=======
 # reflector (to update mirrors). I do it here to have good mirrors for the whole installation
 echo -e "${YELLOW}Installing reflector...${RESET}"
 sudo pacman -S --noconfirm --needed --quiet reflector
@@ -59,7 +54,6 @@ else
     echo -e "${GREEN}Reflector configured successfully.${RESET}"
 fi
 
->>>>>>> ad31efd (updated new arch install)
 # scripts
 cd
 echo -e "${YELLOW}Moving scripts...${RESET}"
@@ -142,16 +136,6 @@ fi
 
 # Copy wallpapers
 cd
-<<<<<<< HEAD
-echo -e "${YELLOW}Copying wallpapers...${RESET}"
-cp -r Desktop/dotfiles/wallpapers ~/Pictures/
-if [ $? -ne 0 ]; then
-    echo -e "${RED}Error copying wallpapers.${RESET}"
-    notify-send "Error copying wallpapers" "There was a problem copying wallpapers. Please check the installation process." --urgency=critical
-else
-    echo -e "${GREEN}Wallpapers copied successfully.${RESET}"
-fi
-=======
 # echo -e "${YELLOW}Copying wallpapers...${RESET}"
 # cp -r Desktop/dotfiles/wallpapers ~/Pictures/
 # if [ $? -ne 0 ]; then
@@ -164,15 +148,14 @@ fi
 
 # To solve a problem with the google calendar widget:
 # source: https://github.com/Zren/plasma-applet-eventcalendar/issues/331
-cd 
-git clone https://github.com/gaganpreet/plasma-applet-eventcalendar.git eventcalendar
-cd eventcalendar
-git checkout google-calendar-fix
-sh ./install
-cd
-rm -rf eventcalendar
+# cd 
+# git clone https://github.com/gaganpreet/plasma-applet-eventcalendar.git eventcalendar
+# cd eventcalendar
+# git checkout google-calendar-fix
+# sh ./install
+# cd
+# rm -rf eventcalendar
 
->>>>>>> ad31efd (updated new arch install)
 
 # Restore KDE backup
 # old version ------------------
@@ -201,7 +184,7 @@ if [ $? -ne 0 ]; then
 else
     echo -e "${GREEN}KDE backup restored successfully.${RESET}"
 fi
-<<<<<<< HEAD
+konsave -a victor-config
 
 # To solve a problem with the google calendar widget:
 # source: https://github.com/Zren/plasma-applet-eventcalendar/issues/331
@@ -220,8 +203,6 @@ rm -rf eventcalendar
 # for kde-connect transfer protocol: sshfs
 # for rclone: fuse2
 # for vscode: perl cpanminus cmake make
-=======
-konsave -a victor-config
 
 # Necessary packages (already included in the list below):
 # for freefem: parmetis-git
@@ -235,7 +216,6 @@ konsave -a victor-config
 
 # Packages removed from the list:
 # gnome-screenshot, gnome-terminal, julia
->>>>>>> ad31efd (updated new arch install)
 
 # Other interesting but not included packages:
 # howdy (face recognition)
@@ -244,25 +224,6 @@ konsave -a victor-config
 cd 
 
 # List of programs to install
-<<<<<<< HEAD
-programs="autopep8 cheese chromium clang cmake cpanminus discord docker docker-compose ethtool firefox freefem fuse2 gcc gdb gimp gnome-screenshot gnome-terminal inkscape jdk-openjdk jekyll julia jupyter-notebook kde-graphics-meta kdeconnect kdenlive krunner-vscodeprojects kwalletmanager kwin-bismuth latte-dock libreoffice-fresh linux-zen linux-zen-headers make man-db man-pages mkinitcpio-firmware neofetch noto-fonts-emoji ntfs-3g octave parmetis-git partitionmanager perl python python-pandas python-matplotlib qbittorrent qt5-xmlpatterns qt5-xmlpatterns rclone reflector rsync ruby ruby-fusuma-plugin-keypress ruby-fusuma-plugin-wmctrl ruby-fusuma spotify-adblock sshfs teams-for-linux texlive tlp tlp-rdw unzip unrar visual-studio-code-bin vlc xdotool zsh"
-
-# Loop through each program and install it
-for program in $programs; do
-    echo -e "${YELLOW}Installing $program...${RESET}"
-    yay -S --noconfirm --needed "$program"
-
-    # Check the exit status of the previous command
-    if [ $? -ne 0 ]; then
-        # If an error occurred, display an alert in red
-        echo -e "${RED}Error installing $program${RESET}"
-        notify-send "Error installing $program" "There was a problem installing $program. Please check the installation process." --urgency=critical
-    else
-        # If successful, display a success message in green
-        echo -e "${GREEN}$program installed successfully.${RESET}"
-    fi
-done
-=======
 programs="autopep8 kwin-bismuth cheese chromium clang cmake cpanminus discord docker docker-compose ethtool evince firefox freefem fuse2 gcc gdb gimp inkscape jdk-openjdk jekyll jupyter-notebook kde-graphics-meta kdeconnect kdenlive krunner-vscodeprojects kwalletmanager kwin-bismuth latte-dock libreoffice-fresh linux-zen linux-zen-headers make man-db man-pages mkinitcpio-firmware neofetch noto-fonts-emoji ntfs-3g octave parmetis-git partitionmanager perl python python-pandas python-matplotlib qbittorrent qt5-xmlpatterns rclone rsync ruby spotify spotify-adblock sshfs teams-for-linux texlive-full thunderbird tlp tlp-rdw touchegg unzip unrar visual-studio-code-bin vlc xdotool xorg-xrandr zsh"
 
 # All packages at once
@@ -290,7 +251,6 @@ fi
 #         echo -e "${GREEN}$program installed successfully.${RESET}"
 #     fi
 # done
->>>>>>> ad31efd (updated new arch install)
 
 # Copy my custom PATH variables
 cd
@@ -320,12 +280,6 @@ fi
 # # cronie
 # sudo systemctl enable cronie
 
-<<<<<<< HEAD
-# ethtool
-# needed for disabling wake-on-lan (used by tlp)
-
-=======
->>>>>>> ad31efd (updated new arch install)
 # firefox
 # sudo cp -r ~/Desktop/dotfiles/firefox/.mozilla ~/
 
@@ -395,11 +349,7 @@ sudo cp Desktop/dotfiles/others/pacman.conf /etc/
 # partitionmanager (disk / partition manager for KDE)
 
 # spotify-adblock
-<<<<<<< HEAD
-sudo cp Desktop/dotfiles/others/spotify-adblock.desktop ~/.local/share/applications/
-=======
 # sudo cp Desktop/dotfiles/others/spotify-adblock.desktop ~/.local/share/applications/
->>>>>>> ad31efd (updated new arch install)
 
 # rclone (OneDrive sync: mount at startup)
 # Notes: Name the remote as "OneDrive".
@@ -421,24 +371,6 @@ else
     echo -e "${GREEN}Rclone installed successfully.${RESET}"
 fi
 
-<<<<<<< HEAD
-# reflector (to update mirrors)
-cd
-echo -e "${YELLOW}Configuring reflector...${RESET}"
-cp Desktop/dotfiles/others/reflector.conf /etc/xdg/reflector/
-sudo systemctl enable reflector.timer # in order to run reflector weekly instead of at each boot
-sudo systemctl start reflector.timer
-sudo systemctl enable reflector.service
-sudo systemctl start reflector.service
-if [ $? -ne 0 ]; then
-    echo -e "${RED}Error configuring reflector.${RESET}"
-    notify-send "Error configuring reflector" "There was a problem configuring reflector. Please check the installation process." --urgency=critical
-else
-    echo -e "${GREEN}Reflector configured successfully.${RESET}"
-fi
-
-=======
->>>>>>> ad31efd (updated new arch install)
 # rsync (necessary for the backup script: https://gitlab.com/cscs/transfuse)
 
 # rstudio-desktop
@@ -449,22 +381,14 @@ fi
 # ruby (necessary for jekyll and/or my personal website)
 
 # ruby-fusuma (for gestures, KDE gestures are not working properly by default in X11)
-<<<<<<< HEAD
-sudo gpasswd -a $USER input
-newgrp input
-sudo cp -r Desktop/dotfiles/others/fusuma/config.yml ~/.config/
-=======
 # sudo gpasswd -a $USER input
 # newgrp input
 # sudo cp -r Desktop/dotfiles/others/fusuma/config.yml ~/.config/
->>>>>>> ad31efd (updated new arch install)
 
 # sagemath
 # mkdir -p ~/.sage
 # sudo cp Desktop/dotfiles/sage/init.sage ~/.sage/
 
-<<<<<<< HEAD
-=======
 # copy spotify.desktop file
 cd 
 echo -e "${YELLOW}Configuring spotify...${RESET}"
@@ -477,7 +401,6 @@ else
     echo -e "${GREEN}Spotify configured successfully.${RESET}"
 fi
 
->>>>>>> ad31efd (updated new arch install)
 # supergfxctl (for exchanging power mode: Hybrid and Integrated)
 # sudo systemctl enable supergfxd.service --now
 # sudo usermod -a -G users $USER
@@ -500,11 +423,7 @@ fi
 echo -e "${YELLOW}Configuring touchegg...${RESET}"
 sudo systemctl enable touchegg.service
 sudo systemctl start touchegg
-<<<<<<< HEAD
-cp ~/Desktop/dotfiles/others/touchegg.conf ~/.config/touchegg/
-=======
 cp -r ~/Desktop/dotfiles/others/touchegg ~/.config/
->>>>>>> ad31efd (updated new arch install)
 if [ $? -ne 0 ]; then
     echo -e "${RED}Error configuring touchegg.${RESET}"
     notify-send "Error configuring touchegg" "There was a problem configuring touchegg. Please check the installation process." --urgency=critical
@@ -520,12 +439,9 @@ git clone git@github.com:cmhughes/latexindent.pl.git
 cd latexindent.pl
 sudo perl helper-scripts/latexindent-module-installer.pl
 cmake path-helper-files
-<<<<<<< HEAD
-=======
 # TODO
 # check in history if it's missing some packages that has to be installed manually
 # check if all is backed up correctly from kde. Things to check: 
->>>>>>> ad31efd (updated new arch install)
 sudo make install
 cd 
 rm -rf latexindent.pl
@@ -548,9 +464,6 @@ else
     echo -e "${GREEN}Vlc configured successfully.${RESET}"
 fi
 
-<<<<<<< HEAD
-# xdotool (for gestures, required by fusuma)
-=======
 # xrandr (for changing display configuration)
 cd 
 echo -e "${YELLOW}Configuring xrandr...${RESET}"
@@ -561,7 +474,6 @@ if [ $? -ne 0 ]; then
 else
     echo -e "${GREEN}Xrandr configured successfully.${RESET}"
 fi
->>>>>>> ad31efd (updated new arch install)
 
 # zsh 
 echo -e "${YELLOW}Configuring zsh...${RESET}"
@@ -581,8 +493,4 @@ sleep 5
 # reboot
 echo -e "${YELLOW}Rebooting...${RESET}"
 sleep 1
-<<<<<<< HEAD
 reboot
-=======
-reboot
->>>>>>> ad31efd (updated new arch install)
