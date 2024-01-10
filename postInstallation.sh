@@ -220,11 +220,28 @@ rm -rf eventcalendar
 # Other interesting but not included packages:
 # howdy (face recognition)
 
+
+
+# Packages to delete that are installed by default:
+delete_programs="kate vim"
+
+# Delete programs
+cd
+echo -e "${YELLOW}Deleting programs...${RESET}"
+yay -Rsn --noconfirm --quiet $delete_programs
+if [ $? -ne 0 ]; then
+    echo -e "${RED}Error deleting programs.${RESET}"
+    notify-send "Error deleting programs" "There was a problem deleting programs. Please check the installation process." --urgency=critical
+else
+    echo -e "${GREEN}Programs deleted successfully.${RESET}"
+fi
+
+
 # Installation of programs
 cd 
 
 # List of programs to install
-programs="autopep8 kwin-bismuth cheese chromium clang cmake cpanminus discord docker docker-compose ethtool evince firefox freefem fuse2 gcc gdb gimp inkscape jdk-openjdk jekyll jupyter-notebook kde-graphics-meta kdeconnect kdenlive krunner-vscodeprojects kwalletmanager kwin-bismuth latte-dock libreoffice-fresh linux-zen linux-zen-headers make man-db man-pages mkinitcpio-firmware neofetch noto-fonts-emoji ntfs-3g octave parmetis-git partitionmanager perl python python-pandas python-matplotlib qbittorrent qt5-xmlpatterns rclone rsync ruby spotify spotify-adblock sshfs teams-for-linux texlive-full thunderbird tlp tlp-rdw touchegg unzip unrar visual-studio-code-bin vlc xdotool xorg-xrandr zsh"
+programs="autopep8 kwin-bismuth cheese chromium clang cmake cpanminus dbus-python discord docker docker-compose ethtool evince firefox freefem fuse2 gcc gdb gimp inkscape jdk-openjdk jekyll jupyter-notebook kde-graphics-meta kdeconnect kdenlive krunner-vscodeprojects kwalletmanager kwin-bismuth latte-dock libreoffice-fresh linux-zen linux-zen-headers make man-db man-pages mkinitcpio-firmware neofetch noto-fonts-emoji ntfs-3g octave parmetis-git partitionmanager perl python python-pandas python-matplotlib qbittorrent qt5-xmlpatterns rclone rsync ruby spotify spotify-adblock sshfs teams-for-linux texlive-full thunderbird tlp tlp-rdw touchegg unzip unrar visual-studio-code-bin vlc xdotool xorg-xrandr zsh"
 
 # All packages at once
 echo -e "${YELLOW}Installing all programs...${RESET}"
@@ -279,6 +296,8 @@ fi
 
 # # cronie
 # sudo systemctl enable cronie
+
+# dbus-python (for configuring eduroam wifi)
 
 # firefox
 # sudo cp -r ~/Desktop/dotfiles/firefox/.mozilla ~/
