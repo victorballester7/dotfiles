@@ -241,7 +241,7 @@ fi
 cd 
 
 # List of programs to install
-programs="autopep8 biber cheese chromium clang cmake cpanminus dbus-python discord docker docker-compose ethtool evince firefox freefem fuse2 gcc gdb gimp inkscape jdk-openjdk jekyll jupyter-notebook kde-graphics-meta kdeconnect kdenlive krunner-vscodeprojects kwalletmanager kwin-bismuth latte-dock libreoffice-fresh linux-zen linux-zen-headers make man-db man-pages mkinitcpio-firmware neofetch noto-fonts-emoji ntfs-3g octave parmetis-git partitionmanager perl python python-pandas python-matplotlib qbittorrent qt5-xmlpatterns rclone rsync ruby spotify spotify-adblock sshfs teams-for-linux texlive-full thunderbird tlp tlp-rdw touchegg unzip unrar visual-studio-code-bin vlc xdotool xorg-xrandr zsh"
+programs="android-sdk-platform-tools autopep8 biber cheese chromium clang cmake cpanminus dbus-python discord docker docker-compose ethtool evince firefox freefem fuse2 gcc gdb gimp inkscape jdk-openjdk jekyll jupyter-notebook kde-graphics-meta kdeconnect kdenlive krunner-vscodeprojects kwalletmanager kwin-bismuth latte-dock libreoffice-fresh linux-zen linux-zen-headers make man-db man-pages mkinitcpio-firmware neofetch noto-fonts-emoji ntfs-3g octave parmetis-git partitionmanager perl python python-pandas python-matplotlib qbittorrent qt5-xmlpatterns rclone rsync ruby spotify spotify-adblock sshfs teams-for-linux texlive-full thunderbird tlp tlp-rdw touchegg unzip unrar visual-studio-code-bin vlc xdotool xorg-xrandr zsh"
 
 # All packages at once
 echo -e "${YELLOW}Installing all programs...${RESET}"
@@ -283,6 +283,8 @@ fi
 # # auto-cpufreq (battery powersave) (use either this or tlp; NOT both)
 # systemctl start auto-cpufreq
 # systemctl enable auto-cpufreq
+
+# android-sdk-platform-tools (for adb and platform-tools for android)
 
 # autopep8: to format documents in python
 
