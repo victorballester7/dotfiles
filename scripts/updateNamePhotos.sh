@@ -23,6 +23,9 @@ rename_files() {
     # acces all files of the form: *.t
     ext=$(ls --file-type | grep -o '\w*$' | sort | uniq)
     for t in $ext; do
+      if [ $t == 'sh' ]; then
+          continue
+      fi
       for f in *.$t; do
           # count number of underscores in the file name
           n=$(echo $f | grep -o "_" | wc -l)
@@ -41,6 +44,7 @@ rename_files() {
               new_name=$new_name'_'$prefix'.'$t
               mv $f $new_name
           else
+              echo $f
               echo -e "${RED}Error: $f${RESET}"
           fi
       done
