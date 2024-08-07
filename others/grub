@@ -1,19 +1,11 @@
 # GRUB boot loader configuration
 
 GRUB_DEFAULT=0
-<<<<<<< HEAD
-GRUB_TIMEOUT=5
-GRUB_DISTRIBUTOR="Arch"
-GRUB_CMDLINE_LINUX_DEFAULT="loglevel=3 quiet zswap.enabled=0 tpm_tis.interrupts=0"
-# GRUB_CMDLINE_LINUX_DEFAULT="loglevel=3 quiet acpi_os_name=\"Microsoft Windows NT\""
-# GRUB_CMDLINE_LINUX_DEFAULT="acpi_mask_gpe=0x6E loglevel=3 quiet"
-=======
 GRUB_TIMEOUT=0
 GRUB_DISTRIBUTOR="Arch"
-# GRUB_CMDLINE_LINUX_DEFAULT="loglevel=3 quiet acpi_os_name=\"Microsoft Windows NT\""
-GRUB_CMDLINE_LINUX_DEFAULT="acpi_mask_gpe=0x6E random.trust_cpu=on loglevel=3"
-# GRUB_CMDLINE_LINUX_DEFAULT="random.trust_cpu=on loglevel=3"
->>>>>>> ad31efd (updated new arch install)
+GRUB_CMDLINE_LINUX_DEFAULT="splash acpi_osi=Linux"
+#GRUB_CMDLINE_LINUX_DEFAULT="loglevel=3 acpi_mask_gpe=0x6E"
+#GRUB_CMDLINE_LINUX_DEFAULT="random.trust_cpu=on loglevel=3"
 GRUB_CMDLINE_LINUX="rootfstype=ext4"
 
 # Preload both GPT and MBR modules so that they are not missed

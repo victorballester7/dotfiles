@@ -5,11 +5,13 @@
 export ZSH="$HOME/.oh-my-zsh"
 export LC_ALL=en_US.UTF-8
 
+
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-ZSH_THEME="kafeitu"
+ZSH_THEME="victorballester7"
+# ZSH_THEME="agnoster"
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
@@ -26,11 +28,11 @@ ZSH_THEME="kafeitu"
 
 # Uncomment one of the following lines to change the auto-update behavior
 # zstyle ':omz:update' mode disabled  # disable automatic updates
-zstyle ':omz:update' mode auto      # update automatically without asking
+zstyle ':omz:update' mode auto # update automatically without asking
 # zstyle ':omz:update' mode reminder  # just remind me to update when it's time
 
 # Uncomment the following line to change how often to auto-update (in days).
-# zstyle ':omz:update' frequency 15
+zstyle ':omz:update' frequency 5
 
 # Uncomment the following line if pasting URLs and other text is messed up.
 # DISABLE_MAGIC_FUNCTIONS="true"
@@ -72,8 +74,8 @@ zstyle ':omz:update' mode auto      # update automatically without asking
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
+  fzf
   git
-  history
   sudo
   zsh-autosuggestions
 )
@@ -82,7 +84,24 @@ source $ZSH/oh-my-zsh.sh
 
 # User configuration
 
-# export MANPATH="/usr/local/man:$MANPATH"
+# Created by `pipx` on 2023-10-25 08:05:49
+export PATH="$PATH:/home/victor/.local/bin"
+
+# Use nvim for man pages
+export MANPAGER='nvim +Man!'
+
+# For fzf (fuzzy finding)
+export FZF_DEFAULT_OPTS_FILE="/home/victor/.config/fzf/config"
+
+# for tray sway
+# export XDG_CURRENT_DESKTOP="Unity sway"
+
+# My custom keymaps
+bindkey "^[[1;3C" forward-word
+bindkey "^[[1;3D" backward-word
+
+alias icat="kitten icat"
+alias kssh="kitten ssh"
 
 # You may need to manually set your language environment
 # export LANG=en_US.UTF-8
@@ -106,7 +125,7 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
-neofetch
+# Set up fzf key bindings and fuzzy completion
+eval "$(fzf --zsh)"
 
-# Created by `pipx` on 2023-10-25 08:05:49
-export PATH="$PATH:/home/victor/.local/bin"
+neofetch

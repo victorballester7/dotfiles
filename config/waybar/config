@@ -1,0 +1,40 @@
+{
+    // General Settings
+
+    // Position TOP
+    "layer": "top",
+    "margin-top": 2,
+    "margin-bottom": 0,
+    "margin-left": 2,
+    "margin-right": 2,    
+    "spacing": 0,
+    "height": 40,
+
+    // Load Modules
+    "include": ["~/.config/waybar/modules.json"],
+
+    // Modules Left
+    "modules-left": [
+        "custom/appmenu",
+        "hyprland/workspaces",
+    ],
+
+    // Modules Center
+    "modules-center": [
+      "clock",
+      "custom/weather",
+    ],
+
+    // Modules Right    
+    "modules-right": [
+        "tray",
+        "idle_inhibitor",
+        "group/hardware",
+        "pulseaudio",
+        "backlight",
+        "bluetooth",
+        "network",
+        "battery", 
+        "custom/exit",
+    ]
+}
