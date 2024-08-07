@@ -1,0 +1,24 @@
+@import "theme"
+
+/*****----- Configuration -----*****/
+configuration {
+	modes:                       "combi,calc,drun";
+  combi-modes: [drun, recursivebrowser];
+  show-icons:                 true;
+  display-drun:               " ";
+  display-run:                " ";
+  display-filebrowser:        " ";
+  display-recursivebrowser:   " ";
+  display-window:             " ";
+  display-calc:               "󰪚 ";
+  display-combi:             " ";
+	font: "JetBrainsMono NF Extra-Bold 12";
+	drun-display-format:        "{name}";
+	window-format:              "{w}  ·  {c}  ·  {t}";
+  combi-display-format: "{text}";
+  kb-ellipsize: "Alt+e";
+  sort: false;
+  scroll-method: 1;
+  me-select-entry: "MousePrimary";
+  me-accept-entry: "!MousePrimary";
+}

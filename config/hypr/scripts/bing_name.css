@@ -1,0 +1,18 @@
+@import url("/home/victor/.cache/wal/colors-waybar.css");
+
+window {
+  background-color: rgba (0, 0, 0, 0);
+}
+
+#box-inner {
+  background-color: rgba (56, 60, 74, 0.6);
+  border-radius: 5px;
+  border-style: solid;
+  border-width: 2px;
+  border-color: @mycolor;
+  color: rgba (255, 255, 255, 0.8);
+  padding: 10px;
+  font-family: Liberation Sans;
+  font-size: 14;
+  font-weight: Bold;
+}

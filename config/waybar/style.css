@@ -1,0 +1,275 @@
+/*
+ * __        __          _                  ____  _         _       
+ * \ \      / /_ _ _   _| |__   __ _ _ __  / ___|| |_ _   _| | ___  
+ *  \ \ /\ / / _` | | | | '_ \ / _` | '__| \___ \| __| | | | |/ _ \ 
+ *   \ V  V / (_| | |_| | |_) | (_| | |     ___) | |_| |_| | |  __/ 
+ *    \_/\_/ \__,_|\__, |_.__/ \__,_|_|    |____/ \__|\__, |_|\___| 
+ *                 |___/                              |___/         
+ *  
+ * by Stephan Raabe (2023) 
+ * ----------------------------------------------------- 
+*/
+
+/* -----------------------------------------------------
+ * Import Pywal colors 
+ * ----------------------------------------------------- */
+@import url("/home/victor/.config/waybar/colors-waybar.css");
+
+@define-color fore @foreground;
+@define-color back @background;
+@define-color highlightcolor @mycolor;
+@define-color warningcolor #ffbe61;
+@define-color criticalcolor #eb4d4b;
+
+/* -----------------------------------------------------
+ * General 
+ * ----------------------------------------------------- */
+
+* {
+  font-family: "Fira Sans Semibold", FontAwesome, Roboto, Helvetica, Arial,
+    sans-serif;
+}
+
+window#waybar {
+  background-color: @back;
+  opacity: 0.8;
+  border-radius: 20px;
+  border-bottom: 0px;
+  transition-property: background-color;
+  transition-duration: 0.5s;
+}
+
+/* ************************************************ */
+/* set default properties for all buttons (no hover)*/
+/* ************************************************ */
+
+#idle_inhibitor,
+#custom-system,
+#disk,
+#memory,
+#cpu,
+#temperature,
+#pulseaudio,
+#backlight {
+  color: @highlightcolor;
+  margin: 4px 0px 4px 0px;
+}
+
+#battery {
+  color: @highlightcolor;
+  margin: 4px 0px 4px 0px;
+  background-color: @back;
+  opacity: 0.8;
+}
+
+#bluetooth,
+#bluetooth.on,
+#bluetooth.connected,
+#bluetooth.off {
+  color: @highlightcolor;
+  margin: 4px 0px 4px 1px;
+}
+
+#custom-weather,
+#idle_inhibitor,
+#custom-system,
+#bluetooth,
+#bluetooth.on,
+#bluetooth.connected,
+#bluetooth.off {
+  padding: 0px 9px 0px 9px;
+  font-size: 20px;
+}
+
+#network,
+#network.ethernet,
+#network.wifi {
+  color: @highlightcolor;
+  margin: 4px 0px 4px 0px;
+  padding: 0px 15px 0px 7px;
+  font-size: 20px;
+}
+
+#custom-appmenu {
+  color: @highlightcolor;
+  margin: 4px 0px 4px 8px;
+  padding: 0px 0px 0px 7px;
+  font-size: 20px;
+}
+
+#custom-exit {
+  color: @highlightcolor;
+  margin: 4px 8px 4px 0px;
+  padding: 0px 13px 0px 7px;
+  font-size: 20px;
+}
+
+#backlight {
+  padding: 0px 9px 0px 3px;
+  font-size: 20px;
+}
+
+#pulseaudio {
+  padding: 0px 15px 0px 9px;
+  font-size: 20px;
+}
+
+#disk,
+#memory,
+#cpu,
+#temperature {
+  padding: 0px 5px 0px 5px;
+  font-size: 16px;
+}
+
+#battery {
+  padding: 0px 9px 0px 6px;
+  font-size: 20px;
+}
+
+#workspaces {
+  font-weight: bold;
+  font-style: normal;
+  font-size: 16px;
+}
+
+#workspaces button {
+  padding: 4px 4px 0px 4px;
+  margin: 8px 4px 8px 4px;
+  border: 0px;
+  color: @fore;
+  transition: all 0.3s ease-in-out;
+}
+
+#workspaces button.active {
+  min-width: 40px;
+  transition: all 0.3s ease-in-out;
+}
+
+#custom-weather,
+#clock {
+  font-size: 16px;
+  font-weight: 500; /* 400 is normal, 700 is bold, from steps of 100 */
+  color: @fore;
+  border-radius: 15px;
+  padding: 3px 10px 0px 10px;
+  margin: 6px 0px 6px 0px;
+}
+
+/* ************************************* */
+/* Different colors for different states */
+/* ************************************* */
+
+#memory.warning,
+#cpu.warning {
+  color: @warningcolor;
+  background-color: @back;
+  opacity: 0.8;
+}
+
+#memory.critical,
+#cpu.critical,
+#temperature.critical,
+#idle_inhibitor.activated {
+  color: @criticalcolor;
+}
+
+#battery.charging {
+  color: #26a65b;
+}
+
+@keyframes blink {
+  to {
+    color: @back;
+  }
+}
+
+#battery.critical:not(.charging) {
+  color: #eb4d4b;
+  animation-name: blink;
+  animation-duration: 0.5s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+}
+
+/* ******************************************** */
+/* set hover properties for all buttons (hover) */
+/* ******************************************** */
+
+#workspaces button:hover,
+#workspaces button.active,
+#clock:hover,
+/* #custom-weather:hover, */
+#custom-appmenu:hover,
+#idle_inhibitor:hover,
+#pulseaudio:hover,
+#disk:hover,
+#memory:hover,
+#cpu:hover,
+#network:hover,
+#bluetooth:hover,
+#battery:hover,
+#custom-exit:hover {
+  color: @back;
+  background: @highlightcolor;
+  border-radius: 15px;
+}
+
+#memory.warning:hover,
+#cput.warning:hover {
+  color: @back;
+  background: @warningcolor;
+  border-radius: 15px;
+}
+
+#memory.critical:hover,
+#cpu.critical:hover,
+#idle_inhibitor.activated:hover {
+  color: @back;
+  background: @criticalcolor;
+  border-radius: 15px;
+}
+
+/* ******* */
+/* Tooltip */
+/* ******* */
+
+tooltip {
+  border-radius: 20px;
+  background: @back;
+  opacity: 0.9;
+  border: 0px;
+  padding: 5px;
+}
+
+tooltip label {
+  color: @fore;
+}
+
+/* -----------------------------------------------------
+ * Tray
+ * ----------------------------------------------------- */
+#tray {
+  margin: 4px 2px 4px 0px;
+  padding: 0px 0px 0px 0px;
+}
+
+#tray * {
+  margin: 4px 0px 4px 0px;
+  padding: 0px 6px 0px 6px;
+}
+
+#tray > *:hover {
+  background-color: @highlightcolor;
+  border-radius: 15px;
+}
+
+#tray > .passive {
+  -gtk-icon-effect: dim;
+}
+
+#tray > .needs-attention {
+  -gtk-icon-effect: highlight;
+  background-color: #eb4d4b;
+}
