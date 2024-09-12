@@ -37,8 +37,8 @@ CURRENT_BG='NONE'
 
 case ${SOLARIZED_THEME:-dark} in
     light) CURRENT_FG='white';;
-    # *)     CURRENT_FG='black';;
-    *)     CURRENT_FG=${myfore};;
+    *)     CURRENT_FG='black';;
+    # *)     CURRENT_FG=${myfore};;
 esac
 
 # Special Powerline characters
@@ -221,7 +221,7 @@ prompt_hg() {
 
 # Dir: current working directory
 prompt_dir() {
-  prompt_segment $myback $CURRENT_FG '%~'
+  prompt_segment $myback $myfore '%~'
 }
 
 # Virtualenv: current working virtualenv
