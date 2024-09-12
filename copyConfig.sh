@@ -7,14 +7,19 @@ YELLOW="\e[33m"
 BLUE="\e[34m"
 RESET="\e[0m"
 
-cd config
 
 CONFIG_DIR=$HOME/.config
-FILES_DIR=$HOME/Desktop/dotfiles/others
+FILES_DIR=$(pwd)/others
 
-cp -r * $CONFIG_DIR
+cd config
 
-cp -r $FILES_DIR/.zshrc $FILES_DIR/.oh-my-zsh $HOME
+for f in *; do
+  rm -r $CONFIG_DIR/$f
+  cp -r $f $CONFIG_DIR
+done
+
+cp $FILES_DIR/.zshrc $HOME
+sudo mkdir -p $HOME/.oh-my-zsh/custom/ && sudo cp -r $FILES_DIR/oh-my-zsh/custom/* $HOME/.oh-my-zsh/custom/
 
 sudo cp $FILES_DIR/pacman.conf /etc/
 
@@ -25,7 +30,7 @@ sudo grub-mkconfig -o /boot/grub/grub.cfg
 cd
 echo -e "${YELLOW}Configuring spotify...${RESET}"
 sudo cp $FILES_DIR/spotify-adblock.desktop /usr/share/applications/
-sudo rm /usr/share/applications/spotify.desktop
+sudo rm -f /usr/share/applications/spotify.desktop
 if [ $? -ne 0 ]; then
     echo -e "${RED}Error configuring spotify.${RESET}"
     notify-send "Error configuring spotify" "There was a problem configuring spotify. Please check the installation process." --urgency=critical
@@ -47,7 +52,7 @@ fi
 # Copy rules (that will be executed at the startup of the system):
 cd
 echo -e "${YELLOW}Copying rules...${RESET}"
-sudo cp Desktop/dotfiles/rules/* /etc/udev/rules.d/
+sudo cp $FILES_DIR/../rules/* /etc/udev/rules.d/
 if [ $? -ne 0 ]; then
     echo -e "${RED}Error copying rules.${RESET}"
     notify-send "Error copying rules" "There was a problem copying rules. Please check the installation process." --urgency=critical
@@ -69,4 +74,7 @@ fi
 #     echo -e "${GREEN}Tlp configured successfully.${RESET}"
 # fi
 
+${CONFIG_DIR}/hypr/scripts/get_bing_image.sh
+
 echo 'Done!'
+
