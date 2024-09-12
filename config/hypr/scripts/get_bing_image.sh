@@ -46,7 +46,7 @@ fi
 # set locale for type of image (slightly different for each region)
 # Available regions: "de-DE", "en-CA", "en-US", "en-GB", "es-ES"
 # "fr-CA", "fr-FR", "it-IT", "ja-JP", "zh-CN"
-REGION="fr-FR"
+REGION="en-GB"
 
 # Check if the directory exists, if not create it.
 if [ ! -d "$DIR" ]; then

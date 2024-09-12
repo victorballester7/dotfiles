@@ -17,6 +17,7 @@
 
 @define-color fore @foreground;
 @define-color back @background;
+/* @define-color back @background; */
 @define-color highlightcolor @mycolor;
 @define-color warningcolor #ffbe61;
 @define-color criticalcolor #eb4d4b;
