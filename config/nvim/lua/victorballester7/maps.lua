@@ -67,7 +67,8 @@ map("n", "<Leader>vd", "<Cmd>Gvdiffsplit!<CR>", silent)
 -- telescope
 map("n", "<Leader>ff", "<Cmd>Telescope find_files<CR>", silent)
 map("n", "<Leader>fg", "<Cmd>Telescope git_files<CR>", silent)
-map("n", "<Leader>fs", '<Cmd>Telescope grep_string search=""<CR>', silent)
+-- map("n", "<Leader>fs", '<Cmd>Telescope grep_string search=""<CR>', silent)
+map("n", "<Leader>fs", "<Cmd>Telescope live_grep<CR>", silent)
 map("n", "<Leader>fh", "<Cmd>Telescope help_tags<CR>", silent)
 map("n", "<Leader>fb", "<Cmd>Telescope buffers<CR>", silent)
 

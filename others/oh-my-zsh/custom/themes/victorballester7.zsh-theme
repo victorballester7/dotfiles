@@ -31,8 +31,9 @@
 
 ### Segment drawing
 # A few utility functions to make it easy and re-usable to draw segmented prompts
+myback=77
 myfore=88
-myback=99
+mycolor=99
 CURRENT_BG='NONE'
 
 case ${SOLARIZED_THEME:-dark} in
@@ -221,7 +222,7 @@ prompt_hg() {
 
 # Dir: current working directory
 prompt_dir() {
-  prompt_segment $myback $myfore '%~'
+  prompt_segment $mycolor $myback '%~'
 }
 
 # Virtualenv: current working virtualenv
