@@ -81,6 +81,8 @@ typeset -a hypr_req=(
 )
 
 typeset -a other_packages=(
+  acestream-engine
+  acestream-launcher
   android-sdk-platform-tools
   bibclean
   biber
@@ -96,6 +98,7 @@ typeset -a other_packages=(
   make
   man-db
   man-pages
+  mpv
   neofetch
   python-pandas
   python-matplotlib
