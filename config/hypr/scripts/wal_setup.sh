@@ -4,9 +4,11 @@ wal -c
 # get the colors
 wal -s -t -i "$HOME/.config/hypr/wallpapers/wallpaper.jpg"
 
-
 WALDIR=$HOME/.cache/wal
 CONFIGDIR=$HOME/.config
+
+# copy wallpaper to sddm folder
+# sudo cp $CONFIGDIR/hypr/wallpapers/wallpaper.jpg /usr/share/sddm/themes/sugar-dark/
 
 # copy the colors to apps that use them
 cp $WALDIR/10_colors.conf $CONFIGDIR/hypr/hypr.d/

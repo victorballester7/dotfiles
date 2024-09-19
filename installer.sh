@@ -107,6 +107,7 @@ typeset -a other_packages=(
   spotify
   spotify-adblock
   thunderbird
+  trash-cli
   unrar
   unzip
   vimix-cursors

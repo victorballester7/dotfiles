@@ -17,6 +17,9 @@ map("n", "j", "gj", silent)
 map("n", "<Up>", "gk", silent)
 map("n", "<Down>", "gj", silent)
 
+-- select all
+map("n", "<C-a>", "ggVG", silent)
+
 -- delete words
 map("i", "<C-BS>", "<C-w>", silent)
 map("i", "<C-Del>", "<C-o>dw", silent)
