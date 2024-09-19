@@ -18,13 +18,19 @@ for f in *; do
   cp -r $f $CONFIG_DIR
 done
 
-cp $FILES_DIR/.zshrc $HOME
 sudo mkdir -p $HOME/.oh-my-zsh/custom/ && sudo cp -r $FILES_DIR/oh-my-zsh/custom/* $HOME/.oh-my-zsh/custom/
 
-sudo cp $FILES_DIR/pacman.conf /etc/
+cp $FILES_DIR/.zshrc $HOME
 
 sudo cp $FILES_DIR/grub /etc/default/
 sudo grub-mkconfig -o /boot/grub/grub.cfg
+
+sudo cp $FILES_DIR/pacman.conf /etc/
+
+sudo cp $FILES_DIR/reflector.conf /etc/xdg/reflector/
+
+sudo cp $FILES_DIR/sudoers /etc/
+
 
 # copy spotify.desktop file
 cd

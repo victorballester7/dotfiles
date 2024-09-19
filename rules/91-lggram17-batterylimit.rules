@@ -1,1 +1,1 @@
-SUBSYSTEM=="platform", DRIVER=="lg-laptop", ATTR{battery_care_limit}="80"
+SUBSYSTEM=="platform", DRIVER=="lg-laptop", ATTR{battery_care_limit}="90"
