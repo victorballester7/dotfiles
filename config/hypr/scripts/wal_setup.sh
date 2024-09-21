@@ -6,7 +6,7 @@ wal -s -t -i "$HOME/.config/hypr/wallpapers/wallpaper.jpg"
 
 WALDIR=$HOME/.cache/wal
 CONFIGDIR=$HOME/.config
-
+THEMESDIR=$HOME/.themes/victorballester7
 # copy wallpaper to sddm folder
 # sudo cp $CONFIGDIR/hypr/wallpapers/wallpaper.jpg /usr/share/sddm/themes/sugar-dark/
 
@@ -14,8 +14,7 @@ CONFIGDIR=$HOME/.config
 cp $WALDIR/10_colors.conf $CONFIGDIR/hypr/hypr.d/
 cp $WALDIR/colors-rofi-custom.rasi $CONFIGDIR/rofi/
 cp $WALDIR/colors-waybar.css $CONFIGDIR/waybar/
-cp $WALDIR/colors-gtk.css $CONFIGDIR/gtk-3.0/colors.css
-cp $WALDIR/colors-gtk.css $CONFIGDIR/gtk-4.0/colors.css
+cp $WALDIR/mycolors-gtk.css $THEMESDIR/
 cp $WALDIR/mycolors-kitty.conf $CONFIGDIR/kitty/
 
 mycolor=$(sed -n '18{p;q}' $HOME/.cache/wal/colors)

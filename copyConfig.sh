@@ -10,13 +10,23 @@ RESET="\e[0m"
 
 CONFIG_DIR=$HOME/.config
 FILES_DIR=$(pwd)/others
+THEME_DIR=$HOME/.themes
 
-cd config
+# I put themes before config just in case.
+cd themes
+
+for f in *; do
+    rm -r $THEME_DIR/$f
+    cp -r $f $THEME_DIR
+done
+
+cd ../config
 
 for f in *; do
   rm -r $CONFIG_DIR/$f
   cp -r $f $CONFIG_DIR
 done
+
 
 sudo mkdir -p $HOME/.oh-my-zsh/custom/ && sudo cp -r $FILES_DIR/oh-my-zsh/custom/* $HOME/.oh-my-zsh/custom/
 

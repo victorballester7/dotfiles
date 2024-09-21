@@ -1,5 +1,9 @@
 #!/bin/zsh
 
+###############################################
+# EXECUTE THIS SCRIPT FROM THE home DIRECTORY #
+###############################################
+
 RED='\033[0;31m'
 GREEN='\033[0;32m'
 YELLOW='\033[0;33m'
@@ -78,6 +82,7 @@ typeset -a hypr_req=(
   wl-clipboard
   wlr-randr
   wlogout
+  xarchiver
 )
 
 typeset -a other_packages=(
@@ -98,7 +103,7 @@ typeset -a other_packages=(
   make
   man-db
   man-pages
-  mpv
+  mpv-git
   neofetch
   python-pandas
   python-matplotlib
@@ -213,6 +218,19 @@ if [ $? -ne 0 ]; then
 else
     echo -e "${GREEN}Reflector configured successfully.${RESET}"
 fi
+
+# copy thunderbird profile
+# echo -e "${YELLOW}Copying Thunderbird profile...${RESET}"
+# cp -r 
+# mkdir -p .thunderbird
+# sudo cp -r dotfiles/others/*.default-release .thunderbird/
+# if [ $? -ne 0 ]; then
+#     echo -e "${RED}Error copying Thunderbird profile.${RESET}"
+#     notify-send "Error copying Thunderbird profile" "There was a problem copying Thunderbird profile. Please check the installation process." --urgency=critical
+# else
+#     echo -e "${GREEN}Thunderbird profile copied successfully.${RESET}"
+# fi
+
 
 echo "Copying config files..."
 ./copyConfig.sh
