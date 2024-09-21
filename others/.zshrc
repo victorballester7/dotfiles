@@ -93,6 +93,9 @@ export MANPAGER='nvim +Man!'
 # For fzf (fuzzy finding)
 export FZF_DEFAULT_OPTS_FILE="/home/victor/.config/fzf/config"
 
+# for gnome applications to work
+export GSK_RENDERER='ngl'
+
 # for tray sway
 # export XDG_CURRENT_DESKTOP="Unity sway"
 
