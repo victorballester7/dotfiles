@@ -177,6 +177,8 @@ yay -S --noconfirm --needed "${nvim_req[@]}"
 yarn global add neovim
 
 # hyprland requirements
+# remove directories aquamarine, otherwise it will fail to install all the packages "hyprSomething-git"
+sudo rm -rf /usr/include/aquamarine/ /usr/lib/libaquamarine.so* /usr/lib/pkgconfig/aquamarine.pc /usr/share/licenses/aquamarine/
 yay -S --needed "${hypr_conf[@]}"
 yay -S --noconfirm --needed "${hypr_req[@]}"
 
@@ -190,22 +192,7 @@ echo "Installation completed!"
 
 # systemctl enable sddm.service
 
-# configure zsh
-echo -e "${YELLOW}Configuring zsh...${RESET}"
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
-sudo cp dotfiles/others/.zshrc ~/
-# change to zsh default shell
-if [[ ! $SHELL =~ zsh$ ]]; then
-  echo "Changing default shell"
-  chsh -s /bin/zsh
-fi
-if [ $? -ne 0 ]; then
-    echo -e "${RED}Error configuring zsh.${RESET}"
-    notify-send "Error configuring zsh" "There was a problem configuring zsh. Please check the installation process." --urgency=critical
-else
-    echo -e "${GREEN}Zsh configured successfully.${RESET}"
-fi
+
 
 cd
 echo -e "${YELLOW}Configuring reflector...${RESET}"
@@ -259,6 +246,23 @@ if [ $? -ne 0 ]; then
     notify-send "Error installing rclone" "There was a problem installing rclone. Please check the installation process." --urgency=critical
 else
     echo -e "${GREEN}Rclone installed successfully.${RESET}"
+fi
+
+# configure zsh
+echo -e "${YELLOW}Configuring zsh...${RESET}"
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
+sudo cp dotfiles/others/.zshrc ~/
+# change to zsh default shell
+if [[ ! $SHELL =~ zsh$ ]]; then
+  echo "Changing default shell"
+  chsh -s /bin/zsh
+fi
+if [ $? -ne 0 ]; then
+    echo -e "${RED}Error configuring zsh.${RESET}"
+    notify-send "Error configuring zsh" "There was a problem configuring zsh. Please check the installation process." --urgency=critical
+else
+    echo -e "${GREEN}Zsh configured successfully.${RESET}"
 fi
 
 echo "Copying config files..."
