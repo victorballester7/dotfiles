@@ -60,6 +60,7 @@ typeset -a hypr_conf=(
 )
 
 typeset -a hypr_req=(
+  blueman
   brightnessctl
   gammastep
   gnome-power-manager
@@ -108,6 +109,7 @@ typeset -a other_packages=(
   python-pandas
   python-matplotlib
   python-pyquery
+  rclone
   reflector
   spotify
   spotify-adblock
@@ -231,6 +233,33 @@ fi
 #     echo -e "${GREEN}Thunderbird profile copied successfully.${RESET}"
 # fi
 
+# configure blueman
+echo -e "${YELLOW}Configuring blueman...${RESET}"
+sudo systemctl enable bluetooth.service
+sudo systemctl start bluetooth.service
+if [ $? -ne 0 ]; then
+    echo -e "${RED}Error configuring blueman.${RESET}"
+    notify-send "Error configuring blueman" "There was
+    a problem configuring blueman. Please check the installation process." --urgency=critical
+else
+    echo -e "${GREEN}Blueman configured successfully.${RESET}"
+fi
+
+cd
+echo -e "${YELLOW}Installing rclone...${RESET}"
+echo -e "${BLUE}Name the remote as 'OneDrive'${RESET}"
+rclone config
+mkdir -p ~/.config/systemd/user/
+mkdir -p ~/OneDrive
+sudo cp Desktop/dotfiles/others/rclone-onedrive.service ~/.config/systemd/user/
+systemctl --user daemon-reload
+systemctl --user enable --now rclone-onedrive
+if [ $? -ne 0 ]; then
+    echo -e "${RED}Error installing rclone.${RESET}"
+    notify-send "Error installing rclone" "There was a problem installing rclone. Please check the installation process." --urgency=critical
+else
+    echo -e "${GREEN}Rclone installed successfully.${RESET}"
+fi
 
 echo "Copying config files..."
 ./copyConfig.sh
