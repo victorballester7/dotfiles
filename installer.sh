@@ -79,6 +79,7 @@ typeset -a hypr_req=(
   thunar
   thunar-archive-plugin
   thunar-volman
+  tzupdate
   waybar
   wl-clipboard
   wlr-randr
