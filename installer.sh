@@ -95,6 +95,7 @@ typeset -a other_packages=(
   biber
   chromium
   clang
+  dbus-python
   firefox
   fzf
   gcc
@@ -114,6 +115,8 @@ typeset -a other_packages=(
   reflector
   spotify
   spotify-adblock
+  teams-for-linux
+  teams-for-linux-wayland-hook
   thunderbird
   trash-cli
   unrar
