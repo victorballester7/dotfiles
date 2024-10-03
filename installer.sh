@@ -143,6 +143,10 @@ else
     echo -e "${GREEN}Git installed and configured successfully.${RESET}"
 fi
 
+# Git config
+git config --global user.name "Victor Ballester Ribo"
+git config --global user.email "victor.ballester.ribo@gmail.com"
+
 # yay (AUR helper)
 cd
 echo -e "${YELLOW}Installing yay...${RESET}"
