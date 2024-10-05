@@ -201,7 +201,8 @@
     "tooltip-format-wifi": "{icon}  {essid} ({signalStrength}%)",
     "tooltip-format-ethernet": "  {ifname} ({ipaddr}/{cidr})",
     "tooltip-format-disconnected": "Disconnected",
-    "on-click": "kitty -e nmtui"
+    // "on-click": "kitty -e nmtui"
+    "on-click": "nm-connection-editor"
   },
 
   // Battery

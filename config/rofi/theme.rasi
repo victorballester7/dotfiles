@@ -1,4 +1,4 @@
-@import "colors-rofi-custom"
+@import "colors"
 
 
 /*****----- Main Window -----*****/
