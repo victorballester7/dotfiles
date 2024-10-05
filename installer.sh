@@ -48,6 +48,7 @@ typeset -a nvim_req=(
 )
 
 typeset -a hypr_conf=(
+  ags-hyprpanel-git
   hyprcursor-git
   hypridle-git
   hyprland-git
@@ -60,6 +61,7 @@ typeset -a hypr_conf=(
 )
 
 typeset -a hypr_req=(
+  baobab
   blueman
   brightnessctl
   gammastep
@@ -70,6 +72,7 @@ typeset -a hypr_req=(
   mako
   nwg-wrapper
   pavucontrol
+  power-profiles-daemon
   python
   python-pywal
   python-pywalfox

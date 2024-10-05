@@ -1,0 +1,32 @@
+* {
+  mycolor: {{colors.primary.default.hex}};
+
+  active-background: #c5c2a9;
+  active-foreground: #c5c2a9;
+  normal-background: #191b12;
+  normal-foreground: #c5c2a9;
+  urgent-background: #a29145;
+  urgent-foreground: #c5c2a9;
+
+  alternate-active-background: #191b12;
+  alternate-active-foreground: #c5c2a9;
+  alternate-normal-background: #191b12;
+  alternate-normal-foreground: #c5c2a9;
+  alternate-urgent-background: #191b12;
+  alternate-urgent-foreground: #c5c2a9;
+
+  selected-active-background: @mycolor;
+  selected-active-foreground: #191b12;
+  selected-normal-background: @mycolor;
+  selected-normal-foreground: #191b12;
+  selected-urgent-background: @mycolor;
+  selected-urgent-foreground: #191b12;
+
+  background-color: #191b12;
+  background: #191b12;
+  foreground-color: #c5c2a9;
+  foreground: #c5c2a9;
+  border-color: @mycolor;
+  handle-color: @mycolor;
+  spacing: 2;
+}

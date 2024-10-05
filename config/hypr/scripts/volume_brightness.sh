@@ -126,31 +126,31 @@ case $1 in
     else
         pactl set-sink-volume @DEFAULT_SINK@ +$volume_step%
     fi
-    show_volume_notif
+    # show_volume_notif
     ;;
 
     volume_down)
     # Raises volume and displays the notification
     pactl set-sink-volume @DEFAULT_SINK@ -$volume_step%
-    show_volume_notif
+    # show_volume_notif
     ;;
 
     volume_mute)
     # Toggles mute and displays the notification
     pactl set-sink-mute @DEFAULT_SINK@ toggle
-    show_volume_notif
+    # show_volume_notif
     ;;
 
     brightness_up)
     # Increases brightness and displays the notification
     brightnessctl set ${brightness_step}%+
-    show_brightness_notif
+    # show_brightness_notif
     ;;
 
     brightness_down)
     # Decreases brightness and displays the notification
     brightnessctl set ${brightness_step}%-
-    show_brightness_notif
+    # show_brightness_notif
     ;;
 
     next_track)
@@ -167,7 +167,7 @@ case $1 in
 
     play_pause)
     playerctl --player=spotify play-pause
-    show_music_notif
+    # show_music_notif
     # Pauses/resumes playback and displays the notification
     ;;
 esac

@@ -25,6 +25,14 @@ function execute_waybar {
   waybar &
 }
 
+function execute_hyprpanel {
+  # Ensure no instances of hyprpanel are already running
+  killall ags || true
+
+  # Execute hyprpanel
+  ags &
+}
+
 DIR="$HOME/.config/hypr/wallpapers"
 
 # Wallpaper path
@@ -37,7 +45,8 @@ baseurl="https://www.bing.com/"
 # check the modification date of the wallpaper, if it is today, exit
 if [ -f $wlpath ]; then
   execute_hyprpaper
-  execute_waybar
+  # execute_waybar
+  execute_hyprpanel
   if [ "$(date -r $wlpath +%Y-%m-%d)" = "$(date +%Y-%m-%d)" ]; then
     exit
   fi
@@ -80,5 +89,6 @@ magick $wlpath -filter Gaussian -blur 0x8 $lswlpath
 # Execute hyprpaper
 execute_hyprpaper
 
-# Execute waybar
-execute_waybar
+# Execute waybar/hyprpanel
+# execute_waybar
+execute_hyprpanel
