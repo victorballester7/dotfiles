@@ -90,7 +90,9 @@ fi
 #     echo -e "${GREEN}Tlp configured successfully.${RESET}"
 # fi
 
-${CONFIG_DIR}/hypr/scripts/get_bing_image.sh
+# reload hyprctl
+hyprctl reload
+# ${CONFIG_DIR}/hypr/scripts/get_bing_image.sh
 
 echo 'Done!'
 
