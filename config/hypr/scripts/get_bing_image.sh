@@ -31,6 +31,10 @@ function execute_hyprpanel {
 
   # Execute hyprpanel
   ags &
+
+  # Ensure we reset gnome themes:
+  exec-once = gsettings set org.gnome.desktop.interface gtk-theme victorballester7
+  exec-once = gsettings set org.gnome.desktop.interface icon-theme Papirus-Dark
 }
 
 DIR="$HOME/.config/hypr/wallpapers"
