@@ -33,10 +33,6 @@ function execute_hyprpanel {
   ags &
 }
 
-function set_themes {
-  gsettings set org.gnome.desktop.interface gtk-theme victorballester7
-  gsettings set org.gnome.desktop.interface icon-theme Papirus-Dark
-}
 
 DIR="$HOME/.config/hypr/wallpapers"
 
@@ -53,7 +49,6 @@ if [ -f $wlpath ]; then
   # execute_waybar
   execute_hyprpanel
 
-  set_themes
   if [ "$(date -r $wlpath +%Y-%m-%d)" = "$(date +%Y-%m-%d)" ]; then
     exit
   fi
@@ -99,6 +94,3 @@ execute_hyprpaper
 # Execute waybar/hyprpanel
 # execute_waybar
 execute_hyprpanel
-
-# Set themes
-set_themes

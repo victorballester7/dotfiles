@@ -90,9 +90,13 @@ fi
 #     echo -e "${GREEN}Tlp configured successfully.${RESET}"
 # fi
 
-# reload hyprctl
 ${CONFIG_DIR}/hypr/scripts/get_bing_image.sh
-sleep 1 && hyprctl reload
+
+sleep 1
+# reload hyprctl and gtk configs
+gsettings set org.gnome.desktop.interface gtk-theme victorballester7
+gsettings set org.gnome.desktop.interface icon-theme Papirus-Dark
+hyprctl reload
 
 echo 'Done!'
 
