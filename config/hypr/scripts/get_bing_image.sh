@@ -31,11 +31,10 @@ function execute_hyprpanel {
 
   # Execute hyprpanel
   ags &
+}
 
-  # Ensure we reset gnome themes:
+function set_themes {
   gsettings set org.gnome.desktop.interface gtk-theme victorballester7
-
-  # I put them here because (in the future I will have to update the colour of the folders)
   gsettings set org.gnome.desktop.interface icon-theme Papirus-Dark
 }
 
@@ -53,6 +52,8 @@ if [ -f $wlpath ]; then
   execute_hyprpaper
   # execute_waybar
   execute_hyprpanel
+
+  set_themes
   if [ "$(date -r $wlpath +%Y-%m-%d)" = "$(date +%Y-%m-%d)" ]; then
     exit
   fi
@@ -98,3 +99,6 @@ execute_hyprpaper
 # Execute waybar/hyprpanel
 # execute_waybar
 execute_hyprpanel
+
+# Set themes
+set_themes

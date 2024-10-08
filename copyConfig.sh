@@ -91,8 +91,8 @@ fi
 # fi
 
 # reload hyprctl
-hyprctl reload
-# ${CONFIG_DIR}/hypr/scripts/get_bing_image.sh
+${CONFIG_DIR}/hypr/scripts/get_bing_image.sh
+sleep 1 && hyprctl reload
 
 echo 'Done!'
 
