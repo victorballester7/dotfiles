@@ -103,6 +103,7 @@ typeset -a other_packages=(
   fzf
   gcc
   gdb
+  gnuplot
   libreoffice-fresh
   linux-zen
   linux-zen-headers
