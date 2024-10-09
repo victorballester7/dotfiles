@@ -105,6 +105,11 @@ bindkey "^[[1;3D" backward-word
 
 alias icat="kitten icat"
 alias kssh="kitten ssh"
+alias ls='lsd'
+alias l='lsd -l'
+alias la='lsd -a'
+alias lla='lsd -la'
+alias lt='lsd --tree'
 
 # You may need to manually set your language environment
 # export LANG=en_US.UTF-8
