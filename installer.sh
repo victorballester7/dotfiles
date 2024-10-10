@@ -107,6 +107,7 @@ typeset -a other_packages=(
   libreoffice-fresh
   linux-zen
   linux-zen-headers
+  lsd
   make
   man-db
   man-pages
