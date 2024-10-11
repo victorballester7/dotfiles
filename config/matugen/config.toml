@@ -25,3 +25,7 @@ output_path = "~/.config/kitty/colors.conf"
 [templates.gtk3]
 input_path = "~/.config/matugen/templates/gtk-colors.css"
 output_path = "~/.themes/victorballester7/colors.css"
+
+[templates.bing]
+input_path = "~/.config/matugen/templates/bingname-colors.css"
+output_path = "~/.config/hypr/style/colors.css"

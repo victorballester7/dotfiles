@@ -3,13 +3,6 @@
 # source: https://github.com/lgaboury/Sway-Waybar-Install-Script/blob/master/.config/sway/scripts/get_bing_image.sh
 
 function execute_hyprpaper {
-  killall nwg-wrapper || true
-
-
-  # Display image name on bottom right of the wallpaper
-  nwg-wrapper -t $DIR/bing_name.txt -c $HOME/.config/hypr/scripts/bing_name.css -p right -a end -mb 10 -mr 10 &
-  nwg-wrapper -t $DIR/bing_name.txt -c $HOME/.config/hypr/scripts/bing_name.css -p right -a end -mb 10 -mr 10 -o HDMI-A-1 &
-
   # Ensure no instances of hyprpaper are already running
   killall hyprpaper || true
 
@@ -31,6 +24,14 @@ function execute_hyprpanel {
 
   # Execute hyprpanel
   ags &
+}
+
+function execute_bingtext {
+  killall nwg-wrapper || true
+  # we wait for 1 sec, otherwise it loads this before the colors.css
+  sleep 1
+  nwg-wrapper -t $DIR/bing_name.txt -c $HOME/.config/hypr/style/bing_name.css -p right -a end -mb 10 -mr 10 &
+  nwg-wrapper -t $DIR/bing_name.txt -c $HOME/.config/hypr/style/bing_name.css -p right -a end -mb 10 -mr 10 -o HDMI-A-1 &
 }
 
 
@@ -82,15 +83,17 @@ echo $imageName > $DIR/bing_name.txt
 # Download and save Bing Image of the Day
 curl "$baseurl$wlurl" -s > $wlpath
 
-# set colors
-$HOME/.config/hypr/scripts/wal_setup.sh
-
 # Blur existing wallpaper to user later as a lock screen
 magick $wlpath -filter Gaussian -blur 0x8 $lswlpath
-
-# Execute hyprpaper
-execute_hyprpaper
 
 # Execute waybar/hyprpanel
 # execute_waybar
 execute_hyprpanel
+
+# Execute hyprpaper
+execute_hyprpaper
+
+# update theme for firefox and thunderbird
+exec-once = pywalfox update
+
+execute_bingtext
