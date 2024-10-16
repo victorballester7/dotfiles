@@ -94,6 +94,6 @@ execute_hyprpanel
 execute_hyprpaper
 
 # update theme for firefox and thunderbird
-exec-once = pywalfox update
+pywalfox update
 
 execute_bingtext
