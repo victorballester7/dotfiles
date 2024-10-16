@@ -8,6 +8,14 @@ return {
 			require("formatter").setup({
 				log_level = vim.log.levels.INFO,
 				filetype = {
+					bib = {
+						function()
+							return {
+								exe = "bibclean",
+								stdin = true,
+							}
+						end,
+					},
 					c = { require("formatter.filetypes.c").clangformat },
 					cpp = { require("formatter.filetypes.cpp").clangformat },
 					css = { require("formatter.filetypes.css").prettier },
@@ -19,17 +27,6 @@ return {
 					python = { require("formatter.filetypes.python").ruff },
 					rust = { require("formatter.filetypes.rust").rustfmt },
 					-- sh = { require("formatter.filetypes.sh").shfmt },
-					toml = { require("formatter.filetypes.toml").taplo },
-					yaml = { require("formatter.filetypes.yaml").prettier },
-					-- zsh = { require("formatter.filetypes.sh").shfmt },
-					bib = {
-						function()
-							return {
-								exe = "bibclean",
-								stdin = true,
-							}
-						end,
-					},
 					tex = {
 						function()
 							return {
@@ -39,6 +36,26 @@ return {
 							}
 						end,
 					},
+					toml = { require("formatter.filetypes.toml").taplo },
+					xml = {
+						function()
+							return {
+								exe = "tidy",
+								args = {
+									"-quiet",
+									"-xml",
+									"--indent auto",
+									"--indent-spaces 2",
+									"--vertical-space yes",
+									"--tidy-mark no",
+								},
+								stdin = true,
+								try_node_exe = true,
+							}
+						end,
+					},
+					yaml = { require("formatter.filetypes.yaml").prettier },
+					-- zsh = { require("formatter.filetypes.sh").shfmt },
 				},
 			})
 			-- format on save
