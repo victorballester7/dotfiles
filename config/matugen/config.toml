@@ -10,22 +10,26 @@ swww_options = ["--transition-type", "center"]
 # gtk_theme = true
 # dunst = true
 
-[templates.hyprland]
-input_path = "~/.config/matugen/templates/hyprland-colors.conf"
-output_path = "~/.config/hypr/hypr.d/10_colors.conf"
-
-[templates.rofi]
-input_path = "~/.config/matugen/templates/rofi-colors.rasi"
-output_path = "~/.config/rofi/colors.rasi"
-
-[templates.kitty]
-input_path = "~/.config/matugen/templates/kitty-colors.conf"
-output_path = "~/.config/kitty/colors.conf"
+[templates.bing]
+input_path = "~/.config/matugen/templates/bingname-colors.css"
+output_path = "~/.config/hypr/style/colors.css"
 
 [templates.gtk3]
 input_path = "~/.config/matugen/templates/gtk-colors.css"
 output_path = "~/.themes/victorballester7/colors.css"
 
-[templates.bing]
-input_path = "~/.config/matugen/templates/bingname-colors.css"
-output_path = "~/.config/hypr/style/colors.css"
+[templates.hyprland]
+input_path = "~/.config/matugen/templates/hyprland-colors.conf"
+output_path = "~/.config/hypr/hypr.d/10_colors.conf"
+
+[templates.kitty]
+input_path = "~/.config/matugen/templates/kitty-colors.conf"
+output_path = "~/.config/kitty/colors.conf"
+
+[templates.rofi]
+input_path = "~/.config/matugen/templates/rofi-colors.rasi"
+output_path = "~/.config/rofi/colors.rasi"
+
+[templates.wlogout]
+input_path = "~/.config/matugen/templates/gtk-colors.css"
+output_path = "~/.config/wlogout/colors.css"
