@@ -74,8 +74,6 @@ typeset -a hypr_req=(
   pavucontrol
   power-profiles-daemon
   python
-  python-pywal
-  python-pywalfox
   rofi-calc-git
   rofi-wayland
   sway-audio-idle-inhibit-git
@@ -104,6 +102,7 @@ typeset -a other_packages=(
   gcc
   gdb
   gnuplot
+  imagemagick
   libreoffice-fresh
   linux-zen
   linux-zen-headers
