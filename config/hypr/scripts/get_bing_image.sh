@@ -99,7 +99,6 @@ execute_hyprpanel
 # Execute hyprpaper
 execute_hyprpaper
 
-# update theme for firefox and thunderbird
-pywalfox update
-
 execute_bingtext
+
+gsettings set org.gnome.desktop.interface gtk-theme victorballester7

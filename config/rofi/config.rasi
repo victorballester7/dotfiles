@@ -21,4 +21,8 @@ configuration {
   scroll-method: 1;
   me-select-entry: "MousePrimary";
   me-accept-entry: "!MousePrimary";
+  recursivebrowser {
+    directory: "/home/victor/";
+    filter-regex: "^(?!/home/victor/matlab/)(?!/home/victor/OneDrive/Photos/).*";
+  }
 }
