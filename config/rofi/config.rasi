@@ -2,7 +2,7 @@
 
 /*****----- Configuration -----*****/
 configuration {
-	modes:                       "combi,calc,drun";
+	modes:                       "combi,calc,drun,recursivebrowser";
   combi-modes: [drun, recursivebrowser];
   show-icons:                 true;
   display-drun:               " ";
