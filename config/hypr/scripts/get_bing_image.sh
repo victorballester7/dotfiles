@@ -50,6 +50,8 @@ if [ -f $wlpath ]; then
   # execute_waybar
   execute_hyprpanel
 
+  execute_bingtext
+
   # configure colors on other apps
   ./colors_config.sh
 
