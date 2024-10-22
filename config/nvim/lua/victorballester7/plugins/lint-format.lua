@@ -59,12 +59,12 @@ return {
 				},
 			})
 			-- format on save
-			vim.api.nvim_create_autocmd({ "BufWritePost" }, {
-				callback = function()
-					vim.cmd("FormatWrite")
-				end,
-				group = vim.api.nvim_create_augroup("victorballester7-formatOnSave", { clear = true }),
-			})
+			-- vim.api.nvim_create_autocmd({ "BufWritePost" }, {
+			-- 	callback = function()
+			-- 		vim.cmd("FormatWrite")
+			-- 	end,
+			-- 	group = vim.api.nvim_create_augroup("victorballester7-formatOnSave", { clear = true }),
+			-- })
 		end,
 	},
 	{

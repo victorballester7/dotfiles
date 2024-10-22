@@ -59,12 +59,14 @@ return {
 					lualine_y = { "filetype" },
 				},
 				inactive_sections = {
-					lualine_c = { {
-						"filename",
-						file_status = true,
-						path = 4,
-						symbols = require("victorballester7.icons").file_status,
-					} },
+					lualine_c = {
+						{
+							"filename",
+							file_status = true,
+							path = 4,
+							symbols = require("victorballester7.icons").file_status,
+						},
+					},
 				},
 			})
 		end,
