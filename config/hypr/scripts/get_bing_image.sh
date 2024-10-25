@@ -53,7 +53,7 @@ if [ -f $wlpath ]; then
   execute_bingtext
 
   # configure colors on other apps
-  ./colors_config.sh
+  $HOME/.config/hypr/scripts/colors_config.sh
 
   if [ "$(date -r $wlpath +%Y-%m-%d)" = "$(date +%Y-%m-%d)" ]; then
     exit
@@ -92,7 +92,7 @@ curl "$baseurl$wlurl" -s > $wlpath
 magick $wlpath -filter Gaussian -blur 0x8 $lswlpath
 
 # configure colors on other apps
-./colors_config.sh
+$HOME/.config/hypr/scripts/colors_config.sh
 
 # Execute waybar/hyprpanel
 # execute_waybar
