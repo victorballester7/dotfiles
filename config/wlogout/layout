@@ -5,16 +5,16 @@
     "keybind" : "l"
 }
 {
+    "label" : "lock",
+    "action" : "hyprlock",
+    "text" : "Lock",
+    "keybind" : "p"
+}
+{
     "label" : "shutdown",
     "action" : "systemctl poweroff",
     "text" : "Shutdown",
     "keybind" : "s"
-}
-{
-    "label" : "suspend",
-    "action" : "systemctl suspend",
-    "text" : "Suspend",
-    "keybind" : "u"
 }
 {
     "label" : "reboot",
