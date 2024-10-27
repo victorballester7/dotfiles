@@ -52,6 +52,7 @@ typeset -a hypr_conf=(
   hyprcursor-git
   hypridle-git
   hyprland-git
+  hyprlock-git
   hyprpaper-git
   hyprshot-git
   hyprutils-git
