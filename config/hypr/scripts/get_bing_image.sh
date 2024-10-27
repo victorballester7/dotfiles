@@ -52,6 +52,8 @@ if [ -f $wlpath ]; then
 
   execute_bingtext
 
+  gsettings set org.gnome.desktop.interface gtk-theme victorballester7
+
   # configure colors on other apps
   $HOME/.config/hypr/scripts/colors_config.sh
 
