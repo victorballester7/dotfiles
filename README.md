@@ -1,6 +1,14 @@
 # dotfiles
 
-My dotfiles
+These are my dotfiles for my [Hyprland](https://hyprland.org) setup. To install them, run the following commands:
 
-To change the login screen from one monitor to another: updates monitor settings from configuration and then do:
-sudo cp ~/.config/monitors.xml /var/lib/gdm3/.config
+```
+./installer.sh
+```
+
+And to copy the configuration files to the correct location, run:
+
+```
+./copyConfig.sh
+```
+
