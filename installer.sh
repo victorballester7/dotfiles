@@ -51,12 +51,12 @@ typeset -a hypr_conf=(
   ags-hyprpanel-git
   hyprcursor-git
   hypridle-git
-  hyprland-git
+  hyprland
   hyprlock-git
   hyprpaper-git
   hyprshot-git
   hyprutils-git
-  xdg-desktop-portal-hyprland-git
+  xdg-desktop-portal-hyprland
   sddm-git
   texlive-full
 )
