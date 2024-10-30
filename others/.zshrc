@@ -87,6 +87,9 @@ source $ZSH/oh-my-zsh.sh
 # Created by `pipx` on 2023-10-25 08:05:49
 export PATH="$PATH:/home/victor/.local/bin"
 
+# added nektar++ installation to the path
+export PATH="$PATH:/home/victor/Desktop/PhD/nektar-v5.6.0/build/dist/bin"
+
 # Use nvim for man pages
 export MANPAGER='nvim +Man!'
 
