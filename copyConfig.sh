@@ -41,6 +41,7 @@ sudo cp $FILES_DIR/reflector.conf /etc/xdg/reflector/
 
 sudo cp $FILES_DIR/sudoers /etc/
 
+sudo cp $FILES_DIR/tlp.conf /etc/
 
 # copy spotify.desktop file
 cd
