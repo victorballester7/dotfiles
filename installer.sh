@@ -73,7 +73,6 @@ typeset -a hypr_req=(
   mako
   nwg-wrapper
   pavucontrol
-  power-profiles-daemon
   python
   rofi-calc-git
   rofi-wayland
@@ -81,6 +80,7 @@ typeset -a hypr_req=(
   thunar
   thunar-archive-plugin
   thunar-volman
+  tlp
   tzupdate
   waybar
   wl-clipboard
@@ -205,7 +205,8 @@ echo "Installation completed!"
 
 # systemctl enable sddm.service
 
-
+systemctl enable tlp.service
+systemctl start tlp.service
 
 cd
 echo -e "${YELLOW}Configuring reflector...${RESET}"
