@@ -104,6 +104,7 @@ return {
 			lsp.clangd.setup(config())
 			lsp.eslint.setup(config())
 			lsp.lua_ls.setup(config())
+			lsp.matlab_ls.setup(config())
 			lsp.r_language_server.setup(config())
 			lsp.vimls.setup(config())
 			lsp.jsonls.setup(config({
