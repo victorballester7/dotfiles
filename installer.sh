@@ -120,6 +120,7 @@ typeset -a other_packages=(
   reflector
   spotify
   spotify-adblock
+  sshfs
   teams-for-linux
   teams-for-linux-wayland-hook
   thunderbird
