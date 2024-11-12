@@ -11,10 +11,21 @@ return {
 		},
 		config = function()
 			local telescope = require("telescope")
+			local actions = require("telescope.actions")
+			local custom_pickers = require("victorballester7.telescope_custom_pickers")
 			telescope.setup({
 				pickers = {
 					find_files = { hidden = true },
 					grep_string = { disable_coordinates = true },
+          live_grep = { 
+						path_display = { "shorten" },
+						mappings = {
+							i = {
+								["<c-f>"] = custom_pickers.actions.set_extension,
+								["<c-l>"] = custom_pickers.actions.set_folders,
+							},
+						},
+					},
 				},
 				extensions = { ["ui-select"] = { require("telescope.themes").get_dropdown() } },
 			})
