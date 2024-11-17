@@ -20,10 +20,10 @@ function execute_waybar {
 
 function execute_hyprpanel {
   # Ensure no instances of hyprpanel are already running
-  killall ags || true
+  killall agsv1 || true
 
   # Execute hyprpanel
-  ags &
+  agsv1 &
 }
 
 function execute_bingtext {
@@ -93,8 +93,9 @@ curl "$baseurl$wlurl" -s > $wlpath
 # Blur existing wallpaper to user later as a lock screen
 magick $wlpath -filter Gaussian -blur 0x8 $lswlpath
 
-# configure colors on other apps
+# # configure colors on other apps
 $HOME/.config/hypr/scripts/colors_config.sh
+# $HOME/Desktop/dotfiles/config/hypr/scripts/colors_config.sh
 
 # Execute waybar/hyprpanel
 # execute_waybar
