@@ -113,7 +113,7 @@ typeset -a other_packages=(
   make
   man-db
   man-pages
-  mpv-git
+  mpv
   neofetch
   python-pandas
   python-matplotlib
