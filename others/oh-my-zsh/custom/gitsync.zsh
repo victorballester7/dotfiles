@@ -9,8 +9,8 @@ gitsync() {
   local commit_message="$1"
 
   # Add all changes, commit, and push
-  git add . &&
-  git commit -m "$commit_message" &&
+  git add . 
+  git commit -m "$commit_message"
   git push
 
   # Check if the commands were successful

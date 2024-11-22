@@ -50,6 +50,8 @@ export GSK_RENDERER='ngl'
 # My custom keymaps
 bindkey '^[[A' history-substring-search-up
 bindkey '^[[B' history-substring-search-down
+bindkey "^[[1;3C" forward-word
+bindkey "^[[1;3D" backward-word
 
 # My custom aliases
 alias icat="kitten icat"
