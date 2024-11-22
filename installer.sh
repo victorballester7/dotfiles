@@ -72,7 +72,6 @@ typeset -a hypr_req=(
   gnome-system-monitor
   gvfs
   light
-  mako
   nwg-wrapper
   pavucontrol
   python
@@ -269,6 +268,7 @@ fi
 echo -e "${YELLOW}Configuring zsh...${RESET}"
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
+git clone https://github.com/zsh-users/zsh-history-substring-search ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-history-substring-search
 sudo cp dotfiles/others/.zshrc ~/
 # change to zsh default shell
 if [[ ! $SHELL =~ zsh$ ]]; then
