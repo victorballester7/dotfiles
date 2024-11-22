@@ -1,6 +1,6 @@
 # Description: A simple function to add, commit, and push changes to a git repository
 
-git_sync() {
+gitsync() {
   if [[ $# -eq 0 ]]; then
     echo "Usage: git_sync 'commit message'"
     return 1
