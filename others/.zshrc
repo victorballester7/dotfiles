@@ -3,7 +3,7 @@ export ZSH="$HOME/.oh-my-zsh"
 export LC_ALL=en_US.UTF-8
 
 ZSH_THEME="victorballester7"
-# ZSH_THEME="agnoster"
+# ZSH_THEME="victorballester7_ssh"
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
