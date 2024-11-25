@@ -49,10 +49,14 @@ map({ "n", "v" }, "<Leader>d", '"_d', silent)
 map("v", "<Leader>p", '"_dP', silent)
 
 -- window resizing
-map("n", "<C-S-Up>", "<Cmd>resize +2<CR>", silent)
-map("n", "<C-S-Down>", "<Cmd>resize -2<CR>", silent)
-map("n", "<C-S-Left>", "<Cmd>vertical resize +2<CR>", silent)
-map("n", "<C-S-Right>", "<Cmd>vertical resize -2<CR>", silent)
+map("n", "<C-A-Up>", "<Cmd>resize +5<CR>", silent)
+map("n", "<C-A-Down>", "<Cmd>resize -5<CR>", silent)
+map("n", "<C-A-Left>", "<Cmd>vertical resize -5<CR>", silent)
+map("n", "<C-A-Right>", "<Cmd>vertical resize +5<CR>", silent)
+map("n", "<C-A-k>", "<Cmd>resize +5<CR>", silent)
+map("n", "<C-A-j>", "<Cmd>resize -5<CR>", silent)
+map("n", "<C-A-h>", "<Cmd>vertical resize -5<CR>", silent)
+map("n", "<C-A-l>", "<Cmd>vertical resize +5<CR>", silent)
 
 -- diagnostic
 map("n", "<Leader>e", vim.diagnostic.open_float, silent)

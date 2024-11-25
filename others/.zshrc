@@ -36,7 +36,7 @@ source $ZSH/oh-my-zsh.sh
 export PATH="$PATH:/home/victor/.local/bin"
 
 # added nektar++ installation to the path
-export PATH="$PATH:/home/victor/Desktop/PhD/nektar-v5.6.0/build/dist/bin"
+export PATH="$PATH:/home/victor/Desktop/PhD/nektar++/build/dist/bin"
 
 # Use nvim for man pages
 export MANPAGER='nvim +Man!'
