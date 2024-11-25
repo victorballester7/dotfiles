@@ -17,8 +17,18 @@ return {
 				pickers = {
 					find_files = { hidden = true },
 					grep_string = { disable_coordinates = true },
-          live_grep = { 
-						path_display = { "shorten" },
+					live_grep = {
+						path_display = { "smart" },
+						vimgrep_arguments = {
+							"rg",
+							"--no-ignore",
+							"--color=never",
+							"--no-heading",
+							"--with-filename",
+							"--line-number",
+							"--column",
+							"--smart-case",
+						},
 						mappings = {
 							i = {
 								["<c-f>"] = custom_pickers.actions.set_extension,
