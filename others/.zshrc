@@ -30,6 +30,7 @@ plugins=(
   zsh-history-substring-search
 )
 
+
 source $ZSH/oh-my-zsh.sh
 
 # Created by `pipx` on 2023-10-25 08:05:49

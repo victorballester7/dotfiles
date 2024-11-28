@@ -46,6 +46,12 @@ return {
 						"branch",
 						{ "diff", source = _diff_source, symbols = require("victorballester7.icons").git },
 						{ "diagnostics", symbols = diagSymbols },
+						{
+							function()
+								return vim.g.remote_neovim_host and ("Remote: %s"):format(vim.uv.os_gethostname()) or ""
+							end,
+							padding = { right = 1, left = 1 },
+						},
 					},
 					lualine_c = {
 						{
