@@ -42,6 +42,7 @@ map("n", "n", "nzz")
 map("n", "N", "Nzz")
 
 map({ "n", "v" }, "<Leader>y", '"+y', silent)
+map({ "n", "v" }, "<Leader>p", '"+p', silent)
 map("n", "x", '"_x', silent)
 map("v", "<Leader>x", '"_x', silent)
 map({ "n", "v" }, "<Leader>c", '"_c', silent)
