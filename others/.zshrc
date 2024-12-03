@@ -39,6 +39,9 @@ export PATH="$PATH:/home/victor/.local/bin"
 # added nektar++ installation to the path
 export PATH="$PATH:/home/victor/Desktop/PhD/nektar++/build/dist/bin"
 
+# scripts PhD
+export PATH="$PATH:/home/victor/Desktop/PhD/scripts"
+
 # Use nvim for man pages
 export MANPAGER='nvim +Man!'
 
