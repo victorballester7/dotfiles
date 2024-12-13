@@ -38,8 +38,7 @@ map("n", "<Leader>ss", "<C-w>v", silent)
 map("n", "<Leader>sv", "<C-w>s", silent)
 map({ "n", "v" }, "<M-j>", "<C-d>zz", silent)
 map({ "n", "v" }, "<M-k>", "<C-u>zz", silent)
-map("n", "n", "nzz")
-map("n", "N", "Nzz")
+
 
 map({ "n", "v" }, "<Leader>y", '"+y', silent)
 map({ "n", "v" }, "<Leader>p", '"+p', silent)

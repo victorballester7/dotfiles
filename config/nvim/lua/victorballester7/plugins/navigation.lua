@@ -15,7 +15,7 @@ return {
 			local custom_pickers = require("victorballester7.telescope_custom_pickers")
 			telescope.setup({
 				pickers = {
-					find_files = { hidden = true },
+					find_files = { hidden = true, no_ignore = true},
 					grep_string = { disable_coordinates = true },
 					live_grep = {
 						path_display = { "smart" },
