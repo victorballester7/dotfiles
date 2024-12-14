@@ -15,7 +15,7 @@ return {
 			local custom_pickers = require("victorballester7.telescope_custom_pickers")
 			telescope.setup({
 				pickers = {
-					find_files = { hidden = true, no_ignore = true},
+					find_files = { hidden = true, no_ignore = true },
 					grep_string = { disable_coordinates = true },
 					live_grep = {
 						path_display = { "smart" },
@@ -60,10 +60,15 @@ return {
 
 				-- custom mappings
 				map("n", "<C-CR>", api.node.run.system, opts("Help"))
+				-- invert functionality of d and D
+				map("n", "d", api.fs.trash, opts("Trash")) 
+				map("n", "D", api.fs.remove, opts("Delete"))
 			end
 
 			require("nvim-tree").setup({
-				actions = { open_file = { quit_on_open = false } },
+				actions = {
+					open_file = { quit_on_open = false },
+				},
 				git = { ignore = false },
 				modified = {
 					enable = true,

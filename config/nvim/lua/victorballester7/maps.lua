@@ -79,6 +79,10 @@ map("n", "<Leader>fs", "<Cmd>Telescope live_grep<CR>", silent)
 map("n", "<Leader>fh", "<Cmd>Telescope help_tags<CR>", silent)
 map("n", "<Leader>fb", "<Cmd>Telescope buffers<CR>", silent)
 
+-- nvim-tree
+-- trash instead of delete, by default
+-- map("n", "d", "<Cmd>NvimTreeTrash<CR>", silent)
+
 -- latex
 map("n", "<localleader>lc", "VimtexClean!", silent)
 map("n", "<localleader>le", "VimtexErrors", silent)
