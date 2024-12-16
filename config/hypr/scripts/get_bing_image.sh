@@ -32,6 +32,7 @@ function execute_bingtext {
   sleep 1
   nwg-wrapper -t $DIR/bing_name.txt -c $HOME/.config/hypr/style/bing_name.css -p right -a end -mb 10 -mr 10 &
   nwg-wrapper -t $DIR/bing_name.txt -c $HOME/.config/hypr/style/bing_name.css -p right -a end -mb 10 -mr 10 -o HDMI-A-1 &
+  nwg-wrapper -t $DIR/bing_name.txt -c $HOME/.config/hypr/style/bing_name.css -p right -a end -mb 10 -mr 10 -o DP-1 &
 }
 
 

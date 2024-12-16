@@ -65,7 +65,7 @@ map("n", "]d", vim.diagnostic.goto_next, silent)
 
 -- plugins
 map("n", "<Leader>n", "<Cmd>NvimTreeFindFileToggle<CR>", silent)
-map({ "n", "v" }, "<Leader>b", ":Format<CR>", silent)
+map({ "n", "v" }, "<Leader>b", "<Cmd>Format<CR>", silent)
 map("n", "<Leader>o", "<Cmd>NoiceDismiss<CR>", silent)
 
 -- git
@@ -84,8 +84,8 @@ map("n", "<Leader>fb", "<Cmd>Telescope buffers<CR>", silent)
 -- map("n", "d", "<Cmd>NvimTreeTrash<CR>", silent)
 
 -- latex
-map("n", "<localleader>lc", "VimtexClean!", silent)
-map("n", "<localleader>le", "VimtexErrors", silent)
+map("n", "<LocalLeader>lc", "<Cmd>VimtexClean!<CR>", silent)
+map("n", "<LocalLeader>le", "<Cmd>VimtexErrors<CR>", silent)
 
 -- spell
 map("n", "<Leader>s", "1z=", silent)
