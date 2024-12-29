@@ -73,13 +73,12 @@ if [ ! -d "$DIR" ]; then
   mkdir -p $DIR
 fi
 
-# Get URL for Bing Image Of The Day for Canada
-while [ -z $wlurl ]; do
-  wlurl=$(curl $baseurl"HPImageArchive.aspx?format=js&idx=0&n=1&mkt="$REGION -s | jq '.images[].url' --raw-output)
+# Get URL and image name for Bing Image Of The Day for Canada
+while [ -z "$wlurl" ]; do
+  response=$(curl -s "${baseurl}HPImageArchive.aspx?format=js&idx=0&n=1&mkt=${REGION}")
+  imageName=$(echo "$response" | jq -r '.images[].copyright')
+  wlurl=$(echo "$response" | jq -r '.images[].url')
 done
-
-# Get name for Bing Image of the Day
-imageName=$(curl $baseurl"HPImageArchive.aspx?format=js&idx=0&n=1&mkt="$REGION -s | jq '.images[].copyright' --raw-output)
 
 # image name is of the form "xxx, yyy, zzz (© aaaa)"
 # we want to keep only "xxx, yyy, zzz"
