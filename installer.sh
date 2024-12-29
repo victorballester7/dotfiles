@@ -71,6 +71,8 @@ typeset -a hypr_req=(
   gnome-power-manager
   gnome-system-monitor
   gvfs
+  gvfs-mtp
+  gvfs-gphoto2
   light
   nwg-wrapper
   pavucontrol
