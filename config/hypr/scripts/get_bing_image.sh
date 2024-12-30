@@ -20,10 +20,10 @@ function execute_waybar {
 
 function execute_hyprpanel {
   # Ensure no instances of hyprpanel are already running
-  killall agsv1 || true
+  killall hyprpanel || true
 
   # Execute hyprpanel
-  agsv1 &
+  hyprpanel &
 }
 
 function execute_bingtext {
