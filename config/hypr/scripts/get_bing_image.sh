@@ -36,6 +36,15 @@ function execute_bingtext {
 }
 
 
+function start_config {
+  $HOME/.config/hypr/scripts/colors_config.sh
+  execute_hyprpaper
+  execute_hyprpanel
+  execute_bingtext
+  sleep 5 & gsettings set org.gnome.desktop.interface gtk-theme victorballester7
+}
+
+
 DIR="$HOME/.config/hypr/wallpapers"
 
 # Wallpaper path
@@ -47,16 +56,7 @@ baseurl="https://www.bing.com/"
 
 # check the modification date of the wallpaper, if it is today, exit
 if [ -f $wlpath ]; then
-  execute_hyprpaper
-  # execute_waybar
-  execute_hyprpanel
-
-  execute_bingtext
-
-  gsettings set org.gnome.desktop.interface gtk-theme victorballester7
-
-  # configure colors on other apps
-  # $HOME/.config/hypr/scripts/colors_config.sh
+  start_config
 
   if [ "$(date -r $wlpath +%Y-%m-%d)" = "$(date +%Y-%m-%d)" ]; then
     exit
@@ -93,16 +93,4 @@ curl "$baseurl$wlurl" -s > $wlpath
 # Blur existing wallpaper to user later as a lock screen
 magick $wlpath -filter Gaussian -blur 0x8 $lswlpath
 
-# # configure colors on other apps
-# $HOME/.config/hypr/scripts/colors_config.sh
-
-# Execute waybar/hyprpanel
-# execute_waybar
-execute_hyprpanel
-
-# Execute hyprpaper
-execute_hyprpaper
-
-execute_bingtext
-
-sleep 5 & gsettings set org.gnome.desktop.interface gtk-theme victorballester7
+start_config
