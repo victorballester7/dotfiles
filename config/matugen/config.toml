@@ -21,6 +21,7 @@ output_path = "~/.themes/victorballester7/colors.css"
 [templates.hyprland]
 input_path = "~/.config/matugen/templates/hyprland-colors.conf"
 output_path = "~/.config/hypr/hypr.d/10_colors.conf"
+post_hook = "hyprctl reload"
 
 [templates.hyprlock]
 input_path = "~/.config/matugen/templates/hyprlock-colors.conf"
