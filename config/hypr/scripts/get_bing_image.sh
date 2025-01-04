@@ -41,7 +41,7 @@ function start_config {
   execute_hyprpaper
   execute_hyprpanel
   execute_bingtext
-  sleep 5 & gsettings set org.gnome.desktop.interface gtk-theme victorballester7
+  sleep 5 & gsettings set org.gnome.desktop.interface gtk-theme victorballester7 & hyprpanel restart
 }
 
 
