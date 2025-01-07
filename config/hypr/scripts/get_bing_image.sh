@@ -39,9 +39,9 @@ function execute_bingtext {
 function start_config {
   $HOME/.config/hypr/scripts/colors_config.sh
   execute_hyprpaper
-  execute_hyprpanel
   execute_bingtext
-  sleep 5 & gsettings set org.gnome.desktop.interface gtk-theme victorballester7 & hyprpanel restart
+  execute_hyprpanel
+  sleep 5 & gsettings set org.gnome.desktop.interface gtk-theme victorballester7
 }
 
 
