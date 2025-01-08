@@ -23,6 +23,9 @@ configuration {
   me-accept-entry: "!MousePrimary";
   recursivebrowser {
     directory: "/home/victor/";
-    filter-regex: "^(?!/home/victor/matlab/)(?!/home/victor/OneDrive/Photos/).*";
+    /* filter out the following directories */
+    filter-regex: "(.*OneDrive.*)";
+    show-hidden: false;
+    command: "xdg-open";
   }
 }
