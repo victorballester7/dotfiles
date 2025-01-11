@@ -30,9 +30,9 @@ function execute_bingtext {
   killall nwg-wrapper || true
   # we wait for 1 sec, otherwise it loads this before the colors.css
   sleep 1
-  nwg-wrapper -t $DIR/bing_name.txt -c $HOME/.config/hypr/style/bing_name.css -p right -a end -mb 10 -mr 10 &
-  nwg-wrapper -t $DIR/bing_name.txt -c $HOME/.config/hypr/style/bing_name.css -p right -a end -mb 10 -mr 10 -o HDMI-A-1 &
-  nwg-wrapper -t $DIR/bing_name.txt -c $HOME/.config/hypr/style/bing_name.css -p right -a end -mb 10 -mr 10 -o DP-1 &
+  for monitor in $MONITORS; do
+    nwg-wrapper -t $DIR/bing_name.txt -c $HOME/.config/hypr/style/bing_name.css -p right -a end -mb 10 -mr 10 -o $monitor &
+  done
 }
 
 
@@ -46,6 +46,7 @@ function start_config {
 
 
 DIR="$HOME/.config/hypr/wallpapers"
+MONITORS=$(hyprctl monitors | grep "Monitor" | awk '{print $2}')
 
 # Wallpaper path
 wlpath="$DIR/wallpaper.jpg"
