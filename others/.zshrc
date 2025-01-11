@@ -36,6 +36,9 @@ source $ZSH/oh-my-zsh.sh
 # Created by `pipx` on 2023-10-25 08:05:49
 export PATH="$PATH:/home/victor/.local/bin"
 
+# My custom scripts
+export PATH="$PATH:/home/victor/Desktop/dotfiles/scripts"
+
 # added nektar++ installation to the path
 export PATH="$PATH:/home/victor/Desktop/PhD/nektar++/build/dist/bin"
 
