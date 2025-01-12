@@ -57,6 +57,7 @@ typeset -a hypr_conf=(
   hyprpaper-git
   hyprshot-git
   hyprsunset
+  hyprswitch
   hyprutils-git
   xdg-desktop-portal-hyprland
   sddm-git

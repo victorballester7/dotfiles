@@ -12,43 +12,40 @@ CONFIG_DIR=$HOME/.config
 FILES_DIR=$(pwd)/others
 THEME_DIR=$HOME/.themes
 
+# BETTER NOT TO USE rsync (it changes premissions)
+
 # I put themes before config just in case.
 cd themes
 
 for f in *; do
-    # rm -r $THEME_DIR/$f
-    # cp -r $f $THEME_DIR
-  rsync $f $THEME_DIR
+    rm -r $THEME_DIR/$f
+    cp -r $f $THEME_DIR
+  # rsync -az $f $THEME_DIR
 done
 
 cd ../config
 
 for f in *; do
-    # rm -r $CONFIG_DIR/$f
-    # cp -r $f $CONFIG_DIR
-  rsync $f $CONFIG_DIR
+    rm -r $CONFIG_DIR/$f
+    cp -r $f $CONFIG_DIR
+  # rsync -az $f $CONFIG_DIR
 done
 
 
-sudo mkdir -p $HOME/.oh-my-zsh/custom/ && sudo rsync $FILES_DIR/oh-my-zsh/custom/* $HOME/.oh-my-zsh/custom/
+sudo mkdir -p $HOME/.oh-my-zsh/custom/ && sudo rsync -az $FILES_DIR/oh-my-zsh/custom/* $HOME/.oh-my-zsh/custom/
 
-rsync $FILES_DIR/.zshrc $HOME
-
-sudo rsync $FILES_DIR/grub /etc/default/
+rsync -az $FILES_DIR/.zshrc $HOME
+sudo cp $FILES_DIR/grub /etc/default/
 sudo grub-mkconfig -o /boot/grub/grub.cfg
-
-sudo rsync $FILES_DIR/pacman.conf /etc/
-
-sudo rsync $FILES_DIR/reflector.conf /etc/xdg/reflector/
-
-sudo rsync $FILES_DIR/sudoers /etc/
-
-sudo rsync $FILES_DIR/tlp.conf /etc/
+sudo cp $FILES_DIR/pacman.conf /etc/
+sudo cp $FILES_DIR/reflector.conf /etc/xdg/reflector/
+sudo cp $FILES_DIR/sudoers /etc/
+sudo cp $FILES_DIR/tlp.conf /etc/
 
 # copy spotify.desktop file
 cd
 echo -e "${YELLOW}Configuring spotify...${RESET}"
-sudo rsync $FILES_DIR/spotify-adblock.desktop /usr/share/applications/
+sudo cp $FILES_DIR/spotify-adblock.desktop /usr/share/applications/
 sudo rm -f /usr/share/applications/spotify.desktop
 if [ $? -ne 0 ]; then
     echo -e "${RED}Error configuring spotify.${RESET}"
@@ -60,7 +57,7 @@ fi
 # Copy my custom PATH variables
 cd
 echo -e "${YELLOW}Copying profile...${RESET}"
-sudo rsync $FILES_DIR/profile /etc/
+sudo cp $FILES_DIR/profile /etc/
 if [ $? -ne 0 ]; then
     echo -e "${RED}Error copying profile.${RESET}"
     notify-send "Error copying profile" "There was a problem copying profile. Please check the installation process." --urgency=critical
@@ -71,7 +68,7 @@ fi
 # Copy rules (that will be executed at the startup of the system):
 cd
 echo -e "${YELLOW}Copying rules...${RESET}"
-sudo rsync $FILES_DIR/../rules/* /etc/udev/rules.d/
+sudo cp $FILES_DIR/../rules/* /etc/udev/rules.d/
 if [ $? -ne 0 ]; then
     echo -e "${RED}Error copying rules.${RESET}"
     notify-send "Error copying rules" "There was a problem copying rules. Please check the installation process." --urgency=critical
@@ -82,7 +79,7 @@ fi
 # now copy hyprpanel config form .config directory to my dotfiles just as a backup (when editing the settings from the GUI it will be saved in the .config directory)
 cd
 echo -e "${YELLOW}Copying hyprpanel config...${RESET}"
-rsync -r $CONFIG_DIR/hyprpanel $FILES_DIR/
+cp -r $CONFIG_DIR/hyprpanel $FILES_DIR/
 if [ $? -ne 0 ]; then
     echo -e "${RED}Error copying hyprpanel config.${RESET}"
     notify-send "Error copying hyprpanel config" "There was a problem copying hyprpanel config. Please check the installation process." --urgency=critical

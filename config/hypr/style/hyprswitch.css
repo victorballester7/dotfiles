@@ -1,0 +1,13 @@
+@import url("/home/victor/.config/hypr/style/colors.css");
+
+.workspace_active {
+    border: var(--border-size) solid @primary_accent;
+}
+
+.client_active {
+    border: var(--border-size) solid @primary_accent;
+}
+
+.index {
+    border: var(--border-size) solid @primary_accent;
+}
