@@ -72,5 +72,10 @@ alias lt='lsd --tree'
 # Set up fzf key bindings and fuzzy completion
 eval "$(fzf --zsh)"
 
-neofetch
-# fastfetch
+# add exported colors to the shell
+source $HOME/.config/hypr/wallpapers/colors.sh
+
+colorASCII="38;2;$r;$g;$b"
+
+# neofetch
+fastfetch --logo-color-1 $colorASCII --logo-color-2 $colorASCII --color-keys $colorASCII --color-title $colorASCII
