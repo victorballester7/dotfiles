@@ -116,7 +116,7 @@ typeset -a other_packages=(
   man-db
   man-pages
   mpv
-  neofetch
+  fastfetch
   python-pandas
   python-matplotlib
   python-pyquery
