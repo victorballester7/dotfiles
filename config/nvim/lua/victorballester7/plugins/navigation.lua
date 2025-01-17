@@ -28,6 +28,8 @@ return {
 							"--line-number",
 							"--column",
 							"--smart-case",
+							"--hidden",
+							"--glob=!**/.git/**",
 						},
 						mappings = {
 							i = {
@@ -35,6 +37,13 @@ return {
 								["<c-l>"] = custom_pickers.actions.set_folders,
 							},
 						},
+						-- do not show anything if the string is less than 3 characters in live grep
+						on_input_filter_cb = function(prompt)
+							if #prompt < 3 then
+								return { prompt = "" } -- Clear the prompt to disable the search
+							end
+							return { prompt = prompt } -- Continue with the input
+						end,
 					},
 				},
 				extensions = { ["ui-select"] = { require("telescope.themes").get_dropdown() } },
@@ -61,7 +70,7 @@ return {
 				-- custom mappings
 				map("n", "<C-CR>", api.node.run.system, opts("Help"))
 				-- invert functionality of d and D
-				map("n", "d", api.fs.trash, opts("Trash")) 
+				map("n", "d", api.fs.trash, opts("Trash"))
 				map("n", "D", api.fs.remove, opts("Delete"))
 			end
 

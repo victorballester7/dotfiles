@@ -10,9 +10,22 @@ RESET="\e[0m"
 
 CONFIG_DIR=$HOME/.config
 FILES_DIR=$(pwd)/others
+MYCONFIG_DIR=$(pwd)/config
 THEME_DIR=$HOME/.themes
 
 # BETTER NOT TO USE rsync (it changes premissions)
+
+# first copy hyprpanel config form .config directory to my dotfiles just as a backup (when editing the settings from the GUI it will be saved in the .config directory)
+echo -e "${YELLOW}Copying hyprpanel config...${RESET}"
+rm -r $MYCONFIG_DIR/hyprpanel
+cp -r $CONFIG_DIR/hyprpanel $MYCONFIG_DIR
+if [ $? -ne 0 ]; then
+    echo -e "${RED}Error copying hyprpanel config.${RESET}"
+    notify-send "Error copying hyprpanel config" "There was a problem copying hyprpanel config. Please check the installation process." --urgency=critical
+else
+    echo -e "${GREEN}Hyprpanel config copied successfully.${RESET}"
+fi
+
 
 # I put themes before config just in case.
 cd themes
@@ -74,17 +87,6 @@ if [ $? -ne 0 ]; then
     notify-send "Error copying rules" "There was a problem copying rules. Please check the installation process." --urgency=critical
 else
     echo -e "${GREEN}Rules copied successfully.${RESET}"
-fi
-
-# now copy hyprpanel config form .config directory to my dotfiles just as a backup (when editing the settings from the GUI it will be saved in the .config directory)
-cd
-echo -e "${YELLOW}Copying hyprpanel config...${RESET}"
-cp -r $CONFIG_DIR/hyprpanel $FILES_DIR/
-if [ $? -ne 0 ]; then
-    echo -e "${RED}Error copying hyprpanel config.${RESET}"
-    notify-send "Error copying hyprpanel config" "There was a problem copying hyprpanel config. Please check the installation process." --urgency=critical
-else
-    echo -e "${GREEN}Hyprpanel config copied successfully.${RESET}"
 fi
 
 
