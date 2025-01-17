@@ -73,3 +73,4 @@ alias lt='lsd --tree'
 eval "$(fzf --zsh)"
 
 neofetch
+# fastfetch
