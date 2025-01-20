@@ -33,7 +33,6 @@ cd themes
 for f in *; do
     rm -r $THEME_DIR/$f
     cp -r $f $THEME_DIR
-  # rsync -az $f $THEME_DIR
 done
 
 cd ../config
@@ -41,13 +40,14 @@ cd ../config
 for f in *; do
     rm -r $CONFIG_DIR/$f
     cp -r $f $CONFIG_DIR
-  # rsync -az $f $CONFIG_DIR
 done
 
 
-sudo mkdir -p $HOME/.oh-my-zsh/custom/ && sudo rsync -az $FILES_DIR/oh-my-zsh/custom/* $HOME/.oh-my-zsh/custom/
+sudo mkdir -p $HOME/.oh-my-zsh/custom/ && sudo cp -r $FILES_DIR/oh-my-zsh/custom/* $HOME/.oh-my-zsh/custom/
 
-rsync -az $FILES_DIR/.zshrc $HOME
+cp $FILES_DIR/.zshrc $HOME
+cp $FILES_DIR/.aliases $HOME
+cp $FILES_DIR/.path $HOME
 sudo cp $FILES_DIR/grub /etc/default/
 sudo grub-mkconfig -o /boot/grub/grub.cfg
 sudo cp $FILES_DIR/pacman.conf /etc/

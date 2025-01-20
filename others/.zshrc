@@ -30,20 +30,7 @@ plugins=(
   fzf
 )
 
-
 source $ZSH/oh-my-zsh.sh
-
-# Created by `pipx` on 2023-10-25 08:05:49
-export PATH="$PATH:/home/victor/.local/bin"
-
-# My custom scripts
-export PATH="$PATH:/home/victor/Desktop/dotfiles/scripts"
-
-# added nektar++ installation to the path
-export PATH="$PATH:/home/victor/Desktop/PhD/nektar++/build/dist/bin"
-
-# scripts PhD
-export PATH="$PATH:/home/victor/Desktop/PhD/scripts"
 
 # Use nvim for man pages
 export MANPAGER='nvim +Man!'
@@ -60,14 +47,11 @@ bindkey '^[[B' history-substring-search-down
 bindkey "^[[1;3C" forward-word
 bindkey "^[[1;3D" backward-word
 
-# My custom aliases
-alias icat="kitten icat"
-alias kssh="kitten ssh"
-alias ls='lsd'
-alias l='lsd -l'
-alias la='lsd -a'
-alias lla='lsd -la'
-alias lt='lsd --tree'
+# My custom PATH
+source $HOME/.path
+
+# My custom aliases taken from a file
+source $HOME/.aliases
 
 # Set up fzf key bindings and fuzzy completion
 eval "$(fzf --zsh)"
