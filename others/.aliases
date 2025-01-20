@@ -1,0 +1,13 @@
+# kitty
+alias icat="kitten ict"
+alias kssh="kitten ssh"
+
+# nvim
+alias nv="nvim"
+
+# browsing directories
+alias ls="lsd"
+alias l="lsd -l"
+alias la="lsd -a"
+alias lla="lsd -la"
+alias lt="lsd --tree"

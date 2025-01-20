@@ -1,0 +1,10 @@
+# My custom scripts
+export PATH="$PATH:/home/victor/Desktop/dotfiles/scripts"
+
+# added nektar++ installation to the path
+export PATH="$PATH:/home/victor/Desktop/nektar++/build/dist/bin"
+
+# scripts PhD
+export PATH="$PATH:/home/victor/Desktop/PhD/scripts"
+
+
