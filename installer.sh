@@ -98,6 +98,7 @@ typeset -a other_packages=(
   acestream-engine
   acestream-launcher
   android-sdk-platform-tools
+  bc
   bibclean
   biber
   chromium
