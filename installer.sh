@@ -50,19 +50,18 @@ typeset -a nvim_req=(
 typeset -a hypr_conf=(
   ags-hyprpanel-git
   hyprcursor-git
-  hypridle-git
-  hyprland-git
+  hypridle
+  hyprland
   hyprland-monitor-attached
   hyprland-protocols
-  hyprlock-git
-  hyprpaper-git
-  hyprshot-git
-  hyprsunset
+  hyprlock
+  hyprpaper
+  hyprshot
+  hyprsunset-git
   hyprswitch
   hyprutils-git
   xdg-desktop-portal-hyprland
   sddm-git
-  texlive-full
 )
 
 typeset -a hypr_req=(
@@ -108,6 +107,7 @@ typeset -a other_packages=(
   fzf
   gcc
   gdb
+  gimp
   gnuplot
   imagemagick
   libreoffice-fresh
@@ -129,6 +129,7 @@ typeset -a other_packages=(
   sshfs
   teams-for-linux
   teams-for-linux-wayland-hook
+  texlive-full
   thunderbird
   trash-cli
   unrar
