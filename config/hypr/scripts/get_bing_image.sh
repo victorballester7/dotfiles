@@ -1,21 +1,11 @@
 #!/bin/sh
 
-# source: https://github.com/lgaboury/Sway-Waybar-Install-Script/blob/master/.config/sway/scripts/get_bing_image.sh
-
 function execute_hyprpaper {
   # Ensure no instances of hyprpaper are already running
   killall hyprpaper || true
 
   # Execute hyprpaper
   hyprpaper &
-}
-
-function execute_waybar {
-  # Ensure no instances of waybar are already running
-  killall waybar || true
-
-  # Execute waybar
-  waybar &
 }
 
 function execute_hyprpanel {
@@ -35,23 +25,30 @@ function execute_bingtext {
   done
 }
 
-
-function start_config {
-  echo "Setting COLORS CONFIG"
-  $HOME/.config/hypr/scripts/colors_config.sh
-  echo "Setting HYPRPAPER CONFIG"
-  execute_hyprpaper
-  echo "Setting BINGTEXT CONFIG"
-  execute_bingtext
-
-  echo "executing HYPRPANEL"
-  sleep 2 && execute_hyprpanel
-
-  echo "setting gnome theme"
-  sleep 2 && gsettings set org.gnome.desktop.interface gtk-theme victorballester7
+# fucntion to plot log info, which takes 1 argument
+function plotInfo {
+  echo "$(date +"%H:%M:%S.%N" | cut -c1-13) - $1"
 }
 
 
+function start_config {
+  plotInfo "Setting COLORS CONFIG"
+  $HOME/.config/hypr/scripts/colors_config.sh
+
+  plotInfo "Setting HYPRPAPER CONFIG"
+  execute_hyprpaper
+
+  plotInfo "Setting BINGTEXT CONFIG"
+  execute_bingtext
+
+  plotInfo "Setting HYPRPANEL CONFIG"
+  execute_hyprpanel
+
+  plotInfo "Setting GNOME THEME"
+  gsettings set org.gnome.desktop.interface gtk-theme victorballester7
+}
+
+plotInfo "Setting variables"
 DIR="$HOME/.config/hypr/wallpapers"
 MONITORS=$(hyprctl monitors | grep "Monitor" | awk '{print $2}')
 
@@ -63,12 +60,10 @@ output="*"
 baseurl="https://www.bing.com/"
 
 # check the modification date of the wallpaper, if it is today, exit
-if [ -f $wlpath ]; then
+plotInfo "Checking if the wallpaper is from today"
+if [ "$(date -r $wlpath +%Y-%m-%d)" = "$(date +%Y-%m-%d)" ]; then
   start_config
-
-  if [ "$(date -r $wlpath +%Y-%m-%d)" = "$(date +%Y-%m-%d)" ]; then
-    exit
-  fi
+  exit
 fi
 
 # set locale for type of image (slightly different for each region)
@@ -82,12 +77,14 @@ if [ ! -d "$DIR" ]; then
 fi
 
 # Get URL and image name for Bing Image Of The Day for Canada
+plotInfo "Getting Bing Image Of The Day (before loop)"
 while [ -z "$wlurl" ]; do
   response=$(curl -s "${baseurl}HPImageArchive.aspx?format=js&idx=0&n=1&mkt=${REGION}")
   imageName=$(echo "$response" | jq -r '.images[].copyright')
   wlurl=$(echo "$response" | jq -r '.images[].url')
 done
 
+plotInfo "Getting Bing Image Of The Day (after loop)"
 # image name is of the form "xxx, yyy, zzz (© aaaa)"
 # we want to keep only "xxx, yyy, zzz"
 imageName=$(echo $imageName | sed 's/ (.*$//')
@@ -101,4 +98,5 @@ curl "$baseurl$wlurl" -s > $wlpath
 # Blur existing wallpaper to user later as a lock screen
 magick $wlpath -filter Gaussian -blur 0x8 $lswlpath
 
+plotInfo "Setting start config"
 start_config

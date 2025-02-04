@@ -15,6 +15,9 @@ THEME_DIR=$HOME/.themes
 
 # BETTER NOT TO USE rsync (it changes premissions)
 
+# activate sudo rights from the beginning
+sudo echo -e "${GREEN}Sudo rights activated.${RESET}"
+
 # first copy hyprpanel config form .config directory to my dotfiles just as a backup (when editing the settings from the GUI it will be saved in the .config directory)
 echo -e "${YELLOW}Copying hyprpanel config...${RESET}"
 rm -r $MYCONFIG_DIR/hyprpanel
