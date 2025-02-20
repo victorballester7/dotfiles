@@ -127,6 +127,7 @@ typeset -a other_packages=(
   spotify
   spotify-adblock
   sshfs
+  sshpass
   teams-for-linux
   teams-for-linux-wayland-hook
   texlive-full
