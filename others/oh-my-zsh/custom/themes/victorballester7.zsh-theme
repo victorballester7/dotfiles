@@ -32,12 +32,11 @@ ZSH_THEME_GIT_PROMPT_UNTRACKED="%F{4}…"
 ZSH_THEME_GIT_PROMPT_STASHED="%F{4}⚑"
 ZSH_THEME_GIT_PROMPT_CLEAN="%F{2}✓"
 
-
 function _pwd_short {
   if [[ $PWD == "$HOME" ]]; then
     echo -n "~"
   else
-    echo -n ${${${:-/${(j:/:)${(M)${(s:/:)${(D)PWD:h}}#(|.)[^.]##}}/${PWD:t}}//\/~/\~}/\/\//\/}
+    echo -n ${${${:-/${(j:/:)${(M)${(s:/:)${(D)PWD:h}}#(|.)[^.]}}/${PWD:t}}//\/~/\~}/\/\//\/}
   fi
 }
 

@@ -69,6 +69,7 @@ typeset -a hypr_req=(
   blueman
   brightnessctl
   gammastep
+  gitprompt
   gnome-power-manager
   gnome-system-monitor
   gvfs
