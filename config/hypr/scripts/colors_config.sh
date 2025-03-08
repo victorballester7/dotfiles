@@ -1,3 +1,7 @@
+#!/bin/sh
+
+echo "$(date +"%H:%M:%S.%N" | cut -c1-13) - COLORS CONFIG START"
+
 # get the colors
 color_primary=$(matugen --show-colors image ~/.config/hypr/wallpapers/wallpaper.jpg | grep " primary " | awk '{print $9}')
 
@@ -23,6 +27,8 @@ files=(hibernate lock logout reboot shutdown suspend)
 for file in ${files[@]}; do
   magick "${wloDIR}/${file}.png" -fuzz 10% -fill "${color_primary}" -opaque white "${wloDIR}/${file}_color.png"
 done
+
+echo "$(date +"%H:%M:%S.%N" | cut -c1-13) - COLORS CONFIG DONE"
 
 # dunst
 # cat <<EOF > $HOME/.config/dunst/dunstrc
