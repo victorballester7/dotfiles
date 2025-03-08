@@ -7,7 +7,6 @@ YELLOW="\e[33m"
 BLUE="\e[34m"
 RESET="\e[0m"
 
-
 CONFIG_DIR=$HOME/.config
 FILES_DIR=$(pwd)/others
 MYCONFIG_DIR=$(pwd)/config
@@ -18,30 +17,31 @@ THEME_DIR=$HOME/.themes
 # activate sudo rights from the beginning
 sudo echo -e "${GREEN}Sudo rights activated.${RESET}"
 
-# first copy hyprpanel config form .config directory to my dotfiles just as a backup (when editing the settings from the GUI it will be saved in the .config directory)
-echo -e "${YELLOW}Copying hyprpanel config...${RESET}"
-rm -r $MYCONFIG_DIR/hyprpanel
-cp -r $CONFIG_DIR/hyprpanel $MYCONFIG_DIR
-if [ $? -ne 0 ]; then
-    echo -e "${RED}Error copying hyprpanel config.${RESET}"
-    notify-send "Error copying hyprpanel config" "There was a problem copying hyprpanel config. Please check the installation process." --urgency=critical
-else
-    echo -e "${GREEN}Hyprpanel config copied successfully.${RESET}"
-fi
-
+function backupHyprpanel {
+    # first copy hyprpanel config form .config directory to my dotfiles just as a backup (when editing the settings from the GUI it will be saved in the .config directory)
+    echo -e "${YELLOW}Copying hyprpanel config...${RESET}"
+    rm -r $MYCONFIG_DIR/hyprpanel
+    cp -r $CONFIG_DIR/hyprpanel $MYCONFIG_DIR
+    if [ $? -ne 0 ]; then
+        echo -e "${RED}Error copying hyprpanel config.${RESET}"
+        notify-send "Error copying hyprpanel config" "There was a problem copying hyprpanel config. Please check the installation process." --urgency=critical
+    else
+        echo -e "${GREEN}Hyprpanel config copied successfully.${RESET}"
+    fi
+}
 
 # I put themes before config just in case.
 cd themes
 
 for f in *; do
-    rm -r $THEME_DIR/$f
+    # rm -r $THEME_DIR/$f
     cp -r $f $THEME_DIR
 done
 
 cd ../config
 
 for f in *; do
-    rm -r $CONFIG_DIR/$f
+    # rm -r $CONFIG_DIR/$f
     cp -r $f $CONFIG_DIR
 done
 
@@ -50,7 +50,7 @@ sudo mkdir -p $HOME/.oh-my-zsh/custom/ && sudo cp -r $FILES_DIR/oh-my-zsh/custom
 
 cp $FILES_DIR/.zshrc $HOME
 cp $FILES_DIR/.aliases $HOME
-cp $FILES_DIR/.path $HOME
+cp $FILES_DIR/.vars $HOME
 sudo cp $FILES_DIR/grub /etc/default/
 sudo grub-mkconfig -o /boot/grub/grub.cfg
 sudo cp $FILES_DIR/pacman.conf /etc/
@@ -114,7 +114,7 @@ sleep 1
 # reload hyprctl and gtk configs
 gsettings set org.gnome.desktop.interface gtk-theme victorballester7
 gsettings set org.gnome.desktop.interface icon-theme Papirus-Dark
-hyprctl reload
+# hyprctl reload # gives problems with win key and also inhabilitates the shortcuts
 
 echo 'Done!'
 

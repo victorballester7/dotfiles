@@ -78,6 +78,7 @@ typeset -a hypr_req=(
   nwg-wrapper
   pavucontrol
   python
+  ranger
   rofi-calc-git
   rofi-wayland
   sway-audio-idle-inhibit-git

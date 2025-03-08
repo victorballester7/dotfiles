@@ -19,7 +19,7 @@ function execute_hyprpanel {
 function execute_bingtext {
   killall nwg-wrapper || true
   # we wait for 1 sec, otherwise it loads this before the colors.css
-  sleep 1
+  # sleep 1
   for monitor in $MONITORS; do
     nwg-wrapper -t $DIR/bing_name.txt -c $HOME/.config/hypr/style/bing_name.css -p right -a end -mb 10 -mr 10 -o $monitor &
   done
@@ -60,9 +60,10 @@ output="*"
 baseurl="https://www.bing.com/"
 
 # check the modification date of the wallpaper, if it is today, exit
+# even if it is not from today we start hyprpanel (in order to prevent wifi slowdown download problems at startup)
 plotInfo "Checking if the wallpaper is from today"
+start_config
 if [ "$(date -r $wlpath +%Y-%m-%d)" = "$(date +%Y-%m-%d)" ]; then
-  start_config
   exit
 fi
 

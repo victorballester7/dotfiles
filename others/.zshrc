@@ -32,23 +32,14 @@ plugins=(
 
 source $ZSH/oh-my-zsh.sh
 
-# Use nvim for man pages
-export MANPAGER='nvim +Man!'
-
-# For fzf (fuzzy finding)
-export FZF_DEFAULT_OPTS_FILE="/home/victor/.config/fzf/config"
-
-# for gnome applications to work
-export GSK_RENDERER='ngl'
-
 # My custom keymaps
 bindkey '^[[A' history-substring-search-up
 bindkey '^[[B' history-substring-search-down
 bindkey "^[[1;3C" forward-word
 bindkey "^[[1;3D" backward-word
 
-# My custom PATH
-source $HOME/.path
+# My custom variables and PATH
+source $HOME/.vars
 
 # My custom aliases taken from a file
 source $HOME/.aliases
@@ -56,10 +47,12 @@ source $HOME/.aliases
 # Set up fzf key bindings and fuzzy completion
 eval "$(fzf --zsh)"
 
+####################################
+# For fastfetch configuration
 # add exported colors to the shell
-source $HOME/.config/hypr/wallpapers/colors.sh
+# source $HOME/.config/hypr/wallpapers/colors.sh
 
-colorASCII="38;2;$r;$g;$b"
+# colorASCII="38;2;$r;$g;$b"
 
-# neofetch
-fastfetch --logo-color-1 $colorASCII --logo-color-2 $colorASCII --color-keys $colorASCII --color-title $colorASCII
+# fastfetch --logo-color-1 $colorASCII --logo-color-2 $colorASCII --color-keys $colorASCII --color-title $colorASCII
+####################################
