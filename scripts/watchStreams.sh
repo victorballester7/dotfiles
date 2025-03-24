@@ -8,10 +8,11 @@
 # - acestream-engine (having the acestream-engine.service enabled and running)
 
 # Usage:
-# ./runStreams.sh content_id
+# ./watchStreams.sh content_id
 
 if [ $# -eq 0 ]; then
-  echo "Usage: ./runStreams.sh content_id"
+  echo "Usage: $0 content_id"
+  echo "Example: $0 1234567890abcdef1234567890abcdef12345678"
   exit 1
 fi
 
