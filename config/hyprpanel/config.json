@@ -7,7 +7,7 @@
   "menus.clock.weather.location": "London",
   "theme.bar.buttons.enableBorders": false,
   "theme.bar.outer_spacing": "0.5em",
-  "theme.bar.buttons.y_margins": "0.3em",
+  "theme.bar.buttons.y_margins": "0.02em",
   "theme.bar.buttons.spacing": "0.2em",
   "theme.bar.buttons.padding_x": "0.2rem",
   "theme.bar.layer": "top",
@@ -505,5 +505,6 @@
   "menus.dashboard.directories.enabled": true,
   "bar.launcher.icon": "",
   "menus.transitionTime": 200,
-  "theme.bar.buttons.radius": "0.1em"
+  "theme.bar.buttons.radius": "0.1em",
+  "theme.bar.scaling": 100
 }

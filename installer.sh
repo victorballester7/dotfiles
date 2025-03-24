@@ -15,6 +15,19 @@ function check_req {
   command -v "$@" >/dev/null 2>&1
 }
 
+function messagePresentation {
+  echo -e "${YELLOW}Installing and configuring $1...${RESET}"
+}
+
+function messageError {
+  if [ $? -ne 0 ]; then
+    echo -e "${RED}Error installing and configuring $1.${RESET}"
+    notify-send "Error installing and configuring $1" "There was a problem installing and configuring $1. Please check the installation process." --urgency=critical
+  else
+    echo -e "${GREEN}$1 installed and configured successfully.${RESET}"
+  fi
+}
+
 typeset -a needed_req=(
   curl
   git
@@ -140,44 +153,128 @@ typeset -a other_packages=(
   vimix-cursors
 )
 
-# Git + Github keys
-cd
-echo -e "${YELLOW}Installing and configuring git...${RESET}"
-sudo pacman -S --noconfirm --needed --quiet git
-echo -e "${BLUE}Press enter when promted to 'Enter a file in which to save the key', and in 'add passphrase'${RESET}"
-ssh-keygen -t ed25519 -C "victor.ballester.ribo@gmail.com"
-eval "$(ssh-agent -s)"
-ssh-add ~/.ssh/id_ed25519
-echo -e "${BLUE}Now copy the following key to your Github account in Settings/Access/Ssh keys...${RESET}"
-cat ~/.ssh/id_ed25519.pub
-echo -e "${BLUE}Press enter to continue once copied the key to Github${RESET}"
-read ans
-if [ $? -ne 0 ]; then
-    echo -e "${RED}Error installing and configuring git.${RESET}"
-    notify-send "Error installing and configuring git" "There was a problem installing and configuring git. Please check the installation process." --urgency=critical
-else
-    echo -e "${GREEN}Git installed and configured successfully.${RESET}"
-fi
+function configGit {
+  # Git + Github keys
+  cd
+  messagePresentation "git"
+  sudo pacman -S --noconfirm --needed --quiet git
+  echo -e "${BLUE}Press enter when promted to 'Enter a file in which to save the key', and in 'add passphrase'${RESET}"
+  ssh-keygen -t ed25519 -C "victor.ballester.ribo@gmail.com"
+  eval "$(ssh-agent -s)"
+  ssh-add ~/.ssh/id_ed25519
+  echo -e "${BLUE}Now copy the following key to your Github account in Settings/Access/Ssh keys...${RESET}"
+  cat ~/.ssh/id_ed25519.pub
+  echo -e "${BLUE}Press enter to continue once copied the key to Github${RESET}"
+  read ans
+  messageError "git"
 
-# Git config
-git config --global user.name "Victor Ballester Ribo"
-git config --global user.email "victor.ballester.ribo@gmail.com"
+  # Git config
+  git config --global user.name "Victor Ballester Ribo"
+  git config --global user.email "victor.ballester.ribo@gmail.com"
+}
 
-# yay (AUR helper)
-cd
-echo -e "${YELLOW}Installing yay...${RESET}"
-sudo pacman -S --noconfirm --needed --quiet base-devel
-git clone https://aur.archlinux.org/yay.git
-cd yay
-makepkg -si
-cd ..
-rm -rf yay
-if [ $? -ne 0 ]; then
-    echo -e "${RED}Error installing yay.${RESET}"
-    notify-send "Error installing yay" "There was a problem installing yay. Please check the installation process." --urgency=critical
-else
-    echo -e "${GREEN}Yay installed successfully.${RESET}"
-fi
+function configureYay {
+  # yay (AUR helper)
+  cd
+  messagePresentation "yay"
+  sudo pacman -S --noconfirm --needed --quiet base-devel
+  git clone https://aur.archlinux.org/yay.git
+  cd yay
+  makepkg -si
+  cd ..
+  rm -rf yay
+  messageError "yay"
+}
+
+
+function configureReflector {
+  cd
+  messagePresentation "reflector"
+  sudo cp dotfiles/others/reflector.conf /etc/xdg/reflector/
+  sudo systemctl enable reflector.timer # in order to run reflector weekly instead of at each boot
+  sudo systemctl start reflector.timer
+  sudo systemctl enable reflector.service
+  sudo systemctl start reflector.service
+  messageError "reflector"
+}
+
+# copy thunderbird profile
+# echo -e "${YELLOW}Copying Thunderbird profile...${RESET}"
+# cp -r 
+# mkdir -p .thunderbird
+# sudo cp -r dotfiles/others/*.default-release .thunderbird/
+# if [ $? -ne 0 ]; then
+#     echo -e "${RED}Error copying Thunderbird profile.${RESET}"
+#     notify-send "Error copying Thunderbird profile" "There was a problem copying Thunderbird profile. Please check the installation process." --urgency=critical
+# else
+#     echo -e "${GREEN}Thunderbird profile copied successfully.${RESET}"
+# fi
+
+function configureBluetooth {
+  # configure blueman
+  messagePresentation "bluetooth"
+  sudo systemctl enable bluetooth.service
+  sudo systemctl start bluetooth.service
+  messageError "bluetooth"
+}
+
+function configureRclone {
+  # rclone
+  cd
+  messagePresentation "rclone"
+  echo -e "${BLUE}Name the remote as 'OneDrive'${RESET}"
+  rclone config
+  mkdir -p ~/.config/systemd/user/
+  mkdir -p ~/OneDrive
+  sudo cp Desktop/dotfiles/others/rclone-onedrive.service ~/.config/systemd/user/
+  systemctl --user daemon-reload
+  systemctl --user enable --now rclone-onedrive
+  messageError "rclone"
+}
+
+function configureTLP {
+  # tlp
+  cd
+  messagePresentation "tlp"
+  sudo systemctl enable tlp.service
+  sudo systemctl start tlp.service
+  messageError "tlp"
+}
+
+function configureZsh {
+  # configure zsh
+  cd
+  messagePresentation "zsh"
+  sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+  git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
+  git clone https://github.com/zsh-users/zsh-history-substring-search ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-history-substring-search
+  sudo cp dotfiles/others/.zshrc ~/
+  # change to zsh default shell
+  if [[ ! $SHELL =~ zsh$ ]]; then
+    echo "Changing default shell"
+    chsh -s /bin/zsh
+  fi
+  messageError "zsh"
+}
+
+# Function to check if packages are installed and display status
+function check_packages() {
+  local group_name=$1
+  local packages=$2  # Use nameref to pass the array by reference
+
+  echo -e "\nChecking group: ${group_name}"
+  eval "local package_array=(\"\${${packages}[@]}\")"
+  for package in "${package_array[@]}"; do
+    if pacman -Qi $package &> /dev/null; then
+      echo -e "${GREEN}$package is installed${RESET}"
+    else
+      echo -e "${RED}$package is NOT installed${RESET}"
+    fi
+  done
+}
+
+configGit
+configureYay
 
 # needed stuff
 if ! check_req yay; then
@@ -203,6 +300,7 @@ yarn global add neovim
 # hyprland requirements
 # remove directories aquamarine, otherwise it will fail to install all the packages "hyprSomething-git"
 sudo rm -rf /usr/include/aquamarine/ /usr/lib/libaquamarine.so* /usr/lib/pkgconfig/aquamarine.pc /usr/share/licenses/aquamarine/
+
 yay -S --needed "${hypr_conf[@]}"
 yay -S --noconfirm --needed "${hypr_req[@]}"
 
@@ -214,104 +312,16 @@ yay -S --noconfirm --needed "${other_packages[@]}"
 
 echo "Installation completed!"
 
-# systemctl enable sddm.service
-
-systemctl enable tlp.service
-systemctl start tlp.service
-
-cd
-echo -e "${YELLOW}Configuring reflector...${RESET}"
-sudo cp dotfiles/others/reflector.conf /etc/xdg/reflector/
-sudo systemctl enable reflector.timer # in order to run reflector weekly instead of at each boot
-sudo systemctl start reflector.timer
-sudo systemctl enable reflector.service
-sudo systemctl start reflector.service
-if [ $? -ne 0 ]; then
-    echo -e "${RED}Error configuring reflector.${RESET}"
-    notify-send "Error configuring reflector" "There was a problem configuring reflector. Please check the installation process." --urgency=critical
-else
-    echo -e "${GREEN}Reflector configured successfully.${RESET}"
-fi
-
-# copy thunderbird profile
-# echo -e "${YELLOW}Copying Thunderbird profile...${RESET}"
-# cp -r 
-# mkdir -p .thunderbird
-# sudo cp -r dotfiles/others/*.default-release .thunderbird/
-# if [ $? -ne 0 ]; then
-#     echo -e "${RED}Error copying Thunderbird profile.${RESET}"
-#     notify-send "Error copying Thunderbird profile" "There was a problem copying Thunderbird profile. Please check the installation process." --urgency=critical
-# else
-#     echo -e "${GREEN}Thunderbird profile copied successfully.${RESET}"
-# fi
-
-# configure blueman
-echo -e "${YELLOW}Configuring blueman...${RESET}"
-sudo systemctl enable bluetooth.service
-sudo systemctl start bluetooth.service
-if [ $? -ne 0 ]; then
-    echo -e "${RED}Error configuring blueman.${RESET}"
-    notify-send "Error configuring blueman" "There was
-    a problem configuring blueman. Please check the installation process." --urgency=critical
-else
-    echo -e "${GREEN}Blueman configured successfully.${RESET}"
-fi
-
-cd
-echo -e "${YELLOW}Installing rclone...${RESET}"
-echo -e "${BLUE}Name the remote as 'OneDrive'${RESET}"
-rclone config
-mkdir -p ~/.config/systemd/user/
-mkdir -p ~/OneDrive
-sudo cp Desktop/dotfiles/others/rclone-onedrive.service ~/.config/systemd/user/
-systemctl --user daemon-reload
-systemctl --user enable --now rclone-onedrive
-if [ $? -ne 0 ]; then
-    echo -e "${RED}Error installing rclone.${RESET}"
-    notify-send "Error installing rclone" "There was a problem installing rclone. Please check the installation process." --urgency=critical
-else
-    echo -e "${GREEN}Rclone installed successfully.${RESET}"
-fi
-
-# configure zsh
-echo -e "${YELLOW}Configuring zsh...${RESET}"
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
-git clone https://github.com/zsh-users/zsh-history-substring-search ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-history-substring-search
-sudo cp dotfiles/others/.zshrc ~/
-# change to zsh default shell
-if [[ ! $SHELL =~ zsh$ ]]; then
-  echo "Changing default shell"
-  chsh -s /bin/zsh
-fi
-if [ $? -ne 0 ]; then
-    echo -e "${RED}Error configuring zsh.${RESET}"
-    notify-send "Error configuring zsh" "There was a problem configuring zsh. Please check the installation process." --urgency=critical
-else
-    echo -e "${GREEN}Zsh configured successfully.${RESET}"
-fi
+configureReflector
+configureBluetooth
+configureRclone
+configureTLP
 
 echo "Copying config files..."
 ./copyConfig.sh
 echo "You may want to reboot your computer!"
 
 echo "Checking installation..."
-
-# Function to check if packages are installed and display status
-check_packages() {
-  local group_name=$1
-  local packages=$2  # Use nameref to pass the array by reference
-
-  echo -e "\nChecking group: ${group_name}"
-  eval "local package_array=(\"\${${packages}[@]}\")"
-  for package in "${package_array[@]}"; do
-    if pacman -Qi $package &> /dev/null; then
-      echo -e "${GREEN}$package is installed${RESET}"
-    else
-      echo -e "${RED}$package is NOT installed${RESET}"
-    fi
-  done
-}
 
 # Check each group
 check_packages "needed_req" needed_req
@@ -320,3 +330,6 @@ check_packages "nvim_req" nvim_req
 check_packages "hypr_conf" hypr_conf
 check_packages "hypr_req" hypr_req
 check_packages "other_packages" other_packages
+
+configureZsh
+

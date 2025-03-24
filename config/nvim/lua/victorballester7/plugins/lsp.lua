@@ -114,11 +114,33 @@ return {
 					},
 				},
 			}))
+			-- lsp.pyright.setup(config({
+			-- 	before_init = function(_, conf)
+			-- 		conf.settings.python.pythonPath = get_python_path(conf.root_dir)
+			-- 	end,
+			-- }))
 			lsp.pyright.setup(config({
 				before_init = function(_, conf)
-					conf.settings.python.pythonPath = get_python_path(conf.root_dir)
+					local function find_main_py_dir(start_dir)
+						local path = vim.fn.fnamemodify(start_dir, ":p") -- Get absolute path
+						while path and path ~= "/" do
+							if vim.fn.filereadable(path .. "/main.py") == 1 then
+								return path
+							end
+							path = vim.fn.fnamemodify(path, ":h") -- Move up a directory
+						end
+						return nil
+					end
+
+					local main_py_dir = find_main_py_dir(conf.root_dir)
+					if main_py_dir then
+						conf.settings.python.pythonPath = get_python_path(main_py_dir)
+						conf.settings.python.analysis = conf.settings.python.analysis or {}
+						conf.settings.python.analysis.extraPaths = { main_py_dir }
+					end
 				end,
 			}))
+
 			lsp.texlab.setup(config({
 				settings = { texlab = { chktex = { onEdit = true, onOpenAndSave = true } } },
 			}))
