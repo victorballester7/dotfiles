@@ -57,7 +57,7 @@ function copyRandomFiles {
     sudo mkdir -p $HOME/.oh-my-zsh/custom/ && sudo cp -r $FILES_DIR/oh-my-zsh/custom/* $HOME/.oh-my-zsh/custom/
 
     cp $FILES_DIR/.zshrc $HOME
-    cp $FILES_DIR/.p10k.zsh $HOME
+    # cp $FILES_DIR/.p10k.zsh $HOME
     cp $FILES_DIR/.aliases $HOME
     cp $FILES_DIR/.vars $HOME
     sudo cp $FILES_DIR/grub /etc/default/

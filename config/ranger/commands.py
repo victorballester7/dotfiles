@@ -60,3 +60,12 @@ class my_edit(Command):
         # This is a generic tab-completion function that iterates through the
         # content of the current directory.
         return self._tab_directory_content()
+
+class smart_rename(Command):
+    def execute(self):
+        fm = self.fm
+        if len(fm.thistab.get_selection()) > 1:
+            fm.execute_console("bulkrename")
+        else:
+            fm.execute_console("rename_append")
+
