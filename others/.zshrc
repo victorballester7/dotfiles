@@ -45,6 +45,8 @@ bindkey '^[[A' history-substring-search-up
 bindkey '^[[B' history-substring-search-down
 bindkey "^[[1;3C" forward-word
 bindkey "^[[1;3D" backward-word
+bindkey "^[^?" backward-kill-word
+bindkey "^[[3;3~" kill-word
 
 # My custom variables and PATH
 source $HOME/.vars
