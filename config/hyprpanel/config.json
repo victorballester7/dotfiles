@@ -375,7 +375,8 @@
   "bar.layouts": {
     "*": {
       "left": [
-        "workspaces"
+        "workspaces",
+        "kbinput"
       ],
       "middle": [
         "clock",
