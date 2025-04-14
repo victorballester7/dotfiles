@@ -33,8 +33,8 @@ function messageError {
 function backupHyprpanel {
     # first copy hyprpanel config form .config directory to my dotfiles just as a backup (when editing the settings from the GUI it will be saved in the .config directory)
     messagePresentation "hyprpanel"
-    rm -r $MYCONFIG_DIR/hyprpanel
-    cp -r $CONFIG_DIR/hyprpanel $MYCONFIG_DIR
+    rm -r $MYCONFIG_DIR/hyprpanel/config.json
+    cp -r $CONFIG_DIR/hyprpanel/config.json $MYCONFIG_DIR/hyprpanel
     messageError "hyprpanel"
 }
 

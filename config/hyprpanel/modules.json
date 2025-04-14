@@ -1,0 +1,20 @@
+{
+    "custom/settingsHyprPanel": {
+        "icon": "",
+        "label": "",
+        "tooltip": "Settings for HyprPanel",
+        "truncationSize": -1,
+        "execute": "",
+        "executeOnAction": "",
+        "interval": 1000,
+        "hideOnEmpty": false,
+        "scrollThreshold": 1,
+        "actions": {
+            "onLeftClick": "hyprpanel toggleWindow settings-dialog",
+            "onRightClick": "",
+            "onMiddleClick": "",
+            "onScrollUp": "",
+            "onScrollDown": ""
+        }
+    }
+}
