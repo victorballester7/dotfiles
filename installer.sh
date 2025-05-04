@@ -95,6 +95,7 @@ typeset -a hypr_req=(
   ranger
   rofi-calc-git
   rofi-wayland
+  socat
   sway-audio-idle-inhibit-git
   thunar
   thunar-archive-plugin

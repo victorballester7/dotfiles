@@ -7,7 +7,7 @@
   "menus.clock.weather.location": "London",
   "theme.bar.buttons.enableBorders": false,
   "theme.bar.outer_spacing": "0.5em",
-  "theme.bar.buttons.y_margins": "0.02em",
+  "theme.bar.buttons.y_margins": "0em",
   "theme.bar.buttons.spacing": "0.2em",
   "theme.bar.buttons.padding_x": "0.2rem",
   "theme.bar.layer": "top",
@@ -371,10 +371,11 @@
   "theme.bar.buttons.windowtitle.border": "#f5c2e7",
   "theme.bar.buttons.workspaces.border": "#f5c2e7",
   "theme.bar.buttons.dashboard.border": "#f9e2af",
-  "theme.bar.floating": true,
+  "theme.bar.floating": false,
   "bar.layouts": {
     "*": {
       "left": [
+        "custom/volume",
         "workspaces",
         "kbinput"
       ],
@@ -388,7 +389,6 @@
         "hypridle",
         "storage",
         "ram",
-        "cpu",
         "cputemp",
         "volume",
         "network",
@@ -493,7 +493,7 @@
   "theme.bar.buttons.modules.cpuTemp.spacing": "0.3em",
   "theme.bar.buttons.modules.hypridle.spacing": "0.25em",
   "theme.bar.menus.menu.dashboard.confirmation_scaling": 95,
-  "menus.volume.raiseMaximumVolume": false,
+  "menus.volume.raiseMaximumVolume": true,
   "bar.autoHide": "never",
   "menus.power.lowBatteryNotification": true,
   "bar.customModules.hyprsunset.offLabel": "",
@@ -507,5 +507,6 @@
   "bar.launcher.icon": "",
   "menus.transitionTime": 200,
   "theme.bar.buttons.radius": "0.1em",
-  "theme.bar.scaling": 100
+  "theme.bar.scaling": 100,
+  "bar.customModules.kbLayout.leftClick": "hyprctl switchxkblayout all next"
 }

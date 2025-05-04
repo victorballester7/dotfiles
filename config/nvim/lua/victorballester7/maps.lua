@@ -87,5 +87,8 @@ map("n", "<Leader>fb", "<Cmd>Telescope buffers<CR>", silent)
 map("n", "<LocalLeader>lc", "<Cmd>VimtexClean!<CR>", silent)
 map("n", "<LocalLeader>le", "<Cmd>VimtexErrors<CR>", silent)
 
+-- markdown
+map("n", "<LocalLeader>mp", "<Cmd>MarkdownPreviewToggle<CR>", silent)
+
 -- spell
 map("n", "<Leader>s", "1z=", silent)

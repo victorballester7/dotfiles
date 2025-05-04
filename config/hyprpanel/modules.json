@@ -1,7 +1,7 @@
 {
     "custom/settingsHyprPanel": {
         "icon": "",
-        "label": "",
+        "label": "Hoooola",
         "tooltip": "Settings for HyprPanel",
         "truncationSize": -1,
         "execute": "",
