@@ -1,38 +1,38 @@
 {
-    "custom/prova": {
-        "icon": "",
-        "label": "Hoooola",
-        "tooltip": "Settings for HyprPanel",
-        "truncationSize": -1,
-        "execute": "",
-        "executeOnAction": "",
-        "interval": 1000,
-        "hideOnEmpty": false,
-        "scrollThreshold": 1,
-        "actions": {
-            "onLeftClick": "hyprpanel toggleWindow settings-dialog",
-            "onRightClick": "",
-            "onMiddleClick": "",
-            "onScrollUp": "",
-            "onScrollDown": ""
-        }
-    },
-    "custom/volume": {
-        "icon": ["󰕿", "󰖀", "󰕾"],
-        "label": "{percentage}%",
-        "tooltip": "Current Volume: {percentage}%",
-        "truncationSize": -1,
-        "execute": "pactl get-sink-volume @DEFAULT_SINK@ | awk '{print $5}' | sed 's/[^0-9]*//g' | xargs -I{} echo '{\\\"percentage\\\": {}}'",
-        "executeOnAction": "",
-        "interval": 1000,
-        "hideOnEmpty": true,
-        "scrollThreshold": 1,
-        "actions": {
-            "onLeftClick": "menu:audio",
-            "onRightClick": "",
-            "onMiddleClick": "",
-            "onScrollUp": "hyprpanel vol +5",
-            "onScrollDown": "hyprpanel vol -5"
-        }
+  "custom/prova": {
+    "icon": "",
+    "label": "Hoooola",
+    "tooltip": "Settings for HyprPanel",
+    "truncationSize": -1,
+    "execute": "",
+    "executeOnAction": "",
+    "interval": 1000,
+    "hideOnEmpty": false,
+    "scrollThreshold": 1,
+    "actions": {
+      "onLeftClick": "hyprpanel toggleWindow settings-dialog",
+      "onRightClick": "",
+      "onMiddleClick": "",
+      "onScrollUp": "",
+      "onScrollDown": ""
     }
+  },
+  "custom/volume": {
+    "icon": ["󰕿", "󰖀", "󰕾"],
+    "label": "{percentage}%",
+    "tooltip": "Current Volume: {percentage}%",
+    "truncationSize": -1,
+    "execute": "pactl get-sink-volume @DEFAULT_SINK@ | awk '{print $5}' | sed 's/[^0-9]*//g' | xargs -I{} echo '{\"percentage\": {}}'",
+    "executeOnAction": "",
+    "interval": 1000,
+    "hideOnEmpty": true,
+    "scrollThreshold": 1,
+    "actions": {
+      "onLeftClick": "menu:audio",
+      "onRightClick": "",
+      "onMiddleClick": "",
+      "onScrollUp": "hyprpanel vol +5",
+      "onScrollDown": "hyprpanel vol -5"
+    }
+  }
 }

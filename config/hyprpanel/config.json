@@ -376,6 +376,7 @@
     "*": {
       "left": [
         "custom/volume",
+        "custom/prova",
         "workspaces",
         "kbinput"
       ],
