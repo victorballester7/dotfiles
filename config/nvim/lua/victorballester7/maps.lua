@@ -62,6 +62,7 @@ map("n", "<C-A-l>", "<Cmd>vertical resize +5<CR>", silent)
 map("n", "<Leader>e", vim.diagnostic.open_float, silent)
 map("n", "[d", vim.diagnostic.goto_prev, silent)
 map("n", "]d", vim.diagnostic.goto_next, silent)
+map("n", "<Leader>k", vim.lsp.buf.hover, silent)
 
 -- plugins
 map("n", "<Leader>n", "<Cmd>NvimTreeFindFileToggle<CR>", silent)

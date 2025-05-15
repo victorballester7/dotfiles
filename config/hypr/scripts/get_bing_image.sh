@@ -59,18 +59,22 @@ lswlpath="$DIR/lockscreen_wallpaper.jpg"
 output="*"
 baseurl="https://www.bing.com/"
 
-# check the modification date of the wallpaper, if it is today, exit
-# even if it is not from today we start hyprpanel (in order to prevent wifi slowdown download problems at startup)
-plotInfo "Checking if the wallpaper is from today"
-start_config
-if [ "$(date -r $wlpath +%Y-%m-%d)" = "$(date +%Y-%m-%d)" ]; then
-  exit
+# check if file wallpaper.jpg exists
+if [ -f "$wlpath" ]; then
+  plotInfo "Wallpaper file exists"
+  # check the modification date of the wallpaper, if it is today, exit
+  # even if it is not from today we start hyprpanel (in order to prevent wifi slowdown download problems at startup)
+  start_config
+  plotInfo "Checking if the wallpaper is from today"
+  if [ "$(date -r $wlpath +%Y-%m-%d)" = "$(date +%Y-%m-%d)" ]; then
+    exit
+  fi
 fi
 
 # set locale for type of image (slightly different for each region)
 # Available regions: "de-DE", "en-CA", "en-US", "en-GB", "es-ES"
 # "fr-CA", "fr-FR", "it-IT", "ja-JP", "zh-CN"
-REGION="en-GB"
+REGION="es-ES"
 
 # Check if the directory exists, if not create it.
 if [ ! -d "$DIR" ]; then
