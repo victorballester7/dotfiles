@@ -57,6 +57,8 @@ source $HOME/.aliases
 # Set up fzf key bindings and fuzzy completion
 eval "$(fzf --zsh)"
 
+# Set up zoxide for directory navigation
+eval "$(zoxide init zsh)"
 ####################################
 # For fastfetch configuration
 # add exported colors to the shell

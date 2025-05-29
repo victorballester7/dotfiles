@@ -135,6 +135,7 @@ typeset -a other_packages=(
   man-pages
   mpv
   fastfetch
+  pass
   python-pandas
   python-matplotlib
   python-pyquery
@@ -152,6 +153,7 @@ typeset -a other_packages=(
   unrar
   unzip
   vimix-cursors
+  zoxide
 )
 
 function configGit {
