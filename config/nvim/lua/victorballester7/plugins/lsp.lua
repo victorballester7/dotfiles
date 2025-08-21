@@ -114,6 +114,7 @@ return {
 					},
 				},
 			}))
+			lsp.qmlls.setup(config())
 			-- lsp.pyright.setup(config({
 			-- 	before_init = function(_, conf)
 			-- 		conf.settings.python.pythonPath = get_python_path(conf.root_dir)
@@ -170,5 +171,11 @@ return {
 			vim.g.copilot_filetypes = { ["*"] = true }
 			vim.g.copilot_assume_mapped = true
 		end,
+	},
+	{
+		"benomahony/uv.nvim",
+		opts = {
+			picker_integration = true,
+		},
 	},
 }

@@ -32,4 +32,3 @@ case "$1" in
 esac
 
 mpv "http://127.0.0.1:6878/ace/getstream?id=$content_id"
-.1:6878/ace/getstream\?id\=${content_id}\&pid\=8087
