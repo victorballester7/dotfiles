@@ -1,5 +1,5 @@
 # kitty
-alias icat="kitten ict"
+alias icat="kitten icat"
 alias kssh="kitten ssh"
 
 # nvim
