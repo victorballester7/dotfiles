@@ -57,6 +57,7 @@ function copyRandomFiles {
     sudo mkdir -p $HOME/.oh-my-zsh/custom/ && sudo cp -r $FILES_DIR/oh-my-zsh/custom/* $HOME/.oh-my-zsh/custom/
 
     cp $FILES_DIR/.zshrc $HOME
+    cp $FILES_DIR/.zprofile $HOME
     # cp $FILES_DIR/.p10k.zsh $HOME
     cp $FILES_DIR/.aliases $HOME
     cp $FILES_DIR/.vars $HOME
@@ -90,6 +91,12 @@ function copyRules {
     messageError "rules"
 }
 
+function copyAutoLogin {
+    messagePresentation "autologin"
+    sudo mkdir -p /etc/systemd/system/getty@tty1.service.d
+    sudo cp $FILES_DIR/override.conf /etc/systemd/system/getty@tty1.service.d/
+    messageError "autologin"
+}
 
 backupHyprpanel
 
@@ -103,6 +110,7 @@ copyPath
 
 copyRules
 
+copyAutoLogin
 # tlp (battery management)
 # echo -e "${YELLOW}Configuring tlp...${RESET}"
 # systemctl mask systemd-rfkill.service
