@@ -74,7 +74,6 @@ typeset -a hypr_conf=(
   hyprswitch
   hyprutils-git
   xdg-desktop-portal-hyprland
-  sddm-git
 )
 
 typeset -a hypr_req=(
@@ -262,6 +261,11 @@ function configureZsh {
   messageError "zsh"
 }
 
+function configureLoginTTY {
+  sudo systemctl set-default multi-user.target
+  sudo systemctl daemon-reexec
+}
+
 # Function to check if packages are installed and display status
 function check_packages() {
   local group_name=$1
@@ -278,52 +282,53 @@ function check_packages() {
   done
 }
 
-# configGit
-# configureYay
+configGit
+configureYay
 
-# # needed stuff
-# if ! check_req yay; then
-#   echo "Make sure you have yay installed!"
-#   return 1
-# fi
+# needed stuff
+if ! check_req yay; then
+  echo "Make sure you have yay installed!"
+  return 1
+fi
 
-# # setup yay and upgrade all packages
-# yay -Syyuu
+# setup yay and upgrade all packages
+yay -Syyuu
 
-# # important stuff
-# yay -S --noconfirm --needed "${needed_req[@]}"
+# important stuff
+yay -S --noconfirm --needed "${needed_req[@]}"
 
-# # shell requirements
-# yay -S --noconfirm --needed "${shell_req[@]}"
+# shell requirements
+yay -S --noconfirm --needed "${shell_req[@]}"
 
-# rustup default stable # in order to install properly spotify-adblock
+rustup default stable # in order to install properly spotify-adblock
 
-# # neovim requirements
-# yay -S --noconfirm --needed "${nvim_req[@]}"
-# yarn global add neovim
+# neovim requirements
+yay -S --noconfirm --needed "${nvim_req[@]}"
+yarn global add neovim
 
-# # hyprland requirements
-# # remove directories aquamarine, otherwise it will fail to install all the packages "hyprSomething-git"
-# sudo rm -rf /usr/include/aquamarine/ /usr/lib/libaquamarine.so* /usr/lib/pkgconfig/aquamarine.pc /usr/share/licenses/aquamarine/
+# hyprland requirements
+# remove directories aquamarine, otherwise it will fail to install all the packages "hyprSomething-git"
+sudo rm -rf /usr/include/aquamarine/ /usr/lib/libaquamarine.so* /usr/lib/pkgconfig/aquamarine.pc /usr/share/licenses/aquamarine/
 
-# yay -S --needed "${hypr_conf[@]}"
-# yay -S --noconfirm --needed "${hypr_req[@]}"
+yay -S --needed "${hypr_conf[@]}"
+yay -S --noconfirm --needed "${hypr_req[@]}"
 
-# # other packages
-# yay -S --noconfirm --needed "${other_packages[@]}"
+# other packages
+yay -S --noconfirm --needed "${other_packages[@]}"
 
-# # # install ohmyzsh
-# # sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended --keep-zshrc
+# # install ohmyzsh
+# sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended --keep-zshrc
 
 echo "Installation completed!"
 
-# configureReflector
-# configureBluetooth
-# configureRclone
-# configureTLP
+configureReflector
+configureBluetooth
+configureRclone
+configureTLP
 
 echo "Copying config files..."
-# ./copyConfig.sh
+./copyConfig.sh
+configureLoginTTY
 echo "You may want to reboot your computer!"
 
 echo "Checking installation..."
