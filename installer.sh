@@ -94,7 +94,7 @@ typeset -a hypr_req=(
   python
   ranger
   rofi-calc-git
-  rofi-wayland
+  rofi
   socat
   sway-audio-idle-inhibit-git
   thunar
