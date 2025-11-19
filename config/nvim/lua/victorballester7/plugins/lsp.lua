@@ -8,9 +8,7 @@ return {
 			"williamboman/mason-lspconfig.nvim",
 			"whoissethdaniel/mason-tool-installer.nvim",
 			"folke/neodev.nvim",
-			"simrat39/rust-tools.nvim",
 			"b0o/schemastore.nvim",
-			"pmizio/typescript-tools.nvim",
 		},
 		config = function()
 			require("mason").setup()
@@ -38,7 +36,6 @@ return {
 				vim.fn.sign_define(name, { text = icon, texthl = name, numhl = "" })
 			end
 
-			local lsp = require("lspconfig")
 			local default_capabilities = vim.tbl_deep_extend(
 				"force",
 				vim.lsp.protocol.make_client_capabilities(),
@@ -97,16 +94,16 @@ return {
 				return nil
 			end
 
-			require("rust-tools").setup({ server = config() })
-			require("typescript-tools").setup(config())
+			-- require("typescript-tools").setup(config())
 
-			lsp.clangd.setup(config())
-			lsp.eslint.setup(config())
-			lsp.lua_ls.setup(config())
-			lsp.matlab_ls.setup(config())
-			lsp.r_language_server.setup(config())
-			lsp.vimls.setup(config())
-			lsp.jsonls.setup(config({
+			vim.lsp.config('clangd', config())
+			vim.lsp.config('eslint', config())
+			vim.lsp.config('lua_ls', config())
+			vim.lsp.config('matlab_ls', config())
+			vim.lsp.config('r_language_server', config())
+			vim.lsp.config('rust_analyzer', config())
+			vim.lsp.config('vimls', config())
+			vim.lsp.config('jsonls', config({
 				settings = {
 					json = {
 						schemas = require("schemastore").json.schemas(),
@@ -114,13 +111,8 @@ return {
 					},
 				},
 			}))
-			lsp.qmlls.setup(config())
-			-- lsp.pyright.setup(config({
-			-- 	before_init = function(_, conf)
-			-- 		conf.settings.python.pythonPath = get_python_path(conf.root_dir)
-			-- 	end,
-			-- }))
-			lsp.pyright.setup(config({
+			vim.lsp.config('qmlls', config())
+			vim.lsp.config('pyright', config({
 				before_init = function(_, conf)
 					local function find_main_py_dir(start_dir)
 						local path = vim.fn.fnamemodify(start_dir, ":p") -- Get absolute path
@@ -141,11 +133,10 @@ return {
 					end
 				end,
 			}))
-
-			lsp.texlab.setup(config({
+			vim.lsp.config('texlab', config({
 				settings = { texlab = { chktex = { onEdit = true, onOpenAndSave = true } } },
 			}))
-			lsp.yamlls.setup(config({
+			vim.lsp.config('yamlls', config({
 				settings = {
 					yaml = {
 						schemaStore = { enable = false, url = "" },
@@ -153,6 +144,21 @@ return {
 					},
 				},
 			}))
+
+			
+			vim.lsp.enable('clangd')
+			vim.lsp.enable('eslint')
+			vim.lsp.enable('lua_ls')
+			vim.lsp.enable('matlab_ls')
+			vim.lsp.enable('r_language_server')
+			vim.lsp.enable('rust_analyzer')
+			vim.lsp.enable('vimls')
+			vim.lsp.enable('jsonls')
+			vim.lsp.enable('qmlls')
+			vim.lsp.enable('pyright')
+			vim.lsp.enable('texlab')
+			vim.lsp.enable('yamlls')
+
 		end,
 	},
 	{
