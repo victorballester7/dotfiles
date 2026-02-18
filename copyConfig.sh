@@ -98,7 +98,7 @@ function copyAutoLogin {
     messageError "autologin"
 }
 
-backupHyprpanel
+# backupHyprpanel
 
 copyThemesConfigsFolders
 
