@@ -8,7 +8,7 @@ if [ "$NUM_MONITORS" -eq 1 ]; then
   # Suspend the system if no external monitor is connected
   systemctl suspend
 else
-  source $HOME/.config/hypr/scripts/moveWorkspacesToMonitors.sh  
+  # source $HOME/.config/hypr/scripts/moveWorkspacesToMonitors.sh  
   # Disable the internal display
   hyprctl keyword monitor "eDP-1, disable"
 fi

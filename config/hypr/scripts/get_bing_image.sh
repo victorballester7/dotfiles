@@ -8,12 +8,11 @@ function execute_hyprpaper {
   hyprpaper &
 }
 
-function execute_hyprpanel {
-  # Ensure no instances of hyprpanel are already running
-  killall gjs || true
+function execute_bar {
+  # Ensure no instances of the bar are already running
+  killall ashell || true
 
-  # Execute hyprpanel
-  hyprpanel &
+  ashell &
 }
 
 function execute_bingtext {
@@ -41,8 +40,8 @@ function start_config {
   plotInfo "Setting BINGTEXT CONFIG"
   execute_bingtext
 
-  plotInfo "Setting HYPRPANEL CONFIG"
-  execute_hyprpanel
+  plotInfo "Setting BAR CONFIG"
+  execute_bar
 
   plotInfo "Setting GNOME THEME"
   gsettings set org.gnome.desktop.interface gtk-theme victorballester7

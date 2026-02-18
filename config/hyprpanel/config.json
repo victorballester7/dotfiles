@@ -449,7 +449,7 @@
   "theme.notification.opacity": 100,
   "theme.bar.menus.monochrome": false,
   "theme.matugen_settings.contrast": 0,
-  "bar.customModules.ram.labelType": "percentage",
+  "bar.customModules.ram.labelType": "free",
   "bar.customModules.storage.icon": "󰋊",
   "bar.customModules.cpu.pollingInterval": 2000,
   "bar.customModules.weather.unit": "metric",
@@ -508,5 +508,6 @@
   "menus.transitionTime": 200,
   "theme.bar.buttons.radius": "0.1em",
   "theme.bar.scaling": 100,
-  "bar.customModules.kbLayout.leftClick": "hyprctl switchxkblayout all next"
+  "bar.customModules.kbLayout.leftClick": "hyprctl switchxkblayout all next",
+  "bar.customModules.storage.labelType": "used"
 }
