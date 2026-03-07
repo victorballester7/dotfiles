@@ -9,7 +9,8 @@ center = ["Tempo"]
 right = [["Tray", "DisableLaptopScreen", "SystemInfo", "Settings"]]
 
 [workspaces]
-visibility_mode = "MonitorSpecific"
+# visibility_mode = "MonitorSpecific"
+visibility_mode = "All"
 enable_workspace_filling = false
 
 [system_info]
