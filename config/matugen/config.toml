@@ -8,7 +8,7 @@ swww_options = ["--transition-type", "center"]
 [config.reload_apps_list]
 # kitty = true
 # gtk_theme = true
-# dunst = true
+dunst = true
 
 [templates.bing]
 input_path = "~/.config/matugen/templates/bingname-colors.css"
