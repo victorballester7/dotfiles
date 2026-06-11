@@ -1,0 +1,8 @@
+hl.monitor({ output = "eDP-1", mode = "preferred", position = "0x300", scale = 1.3333, bitdepth = 8 })
+hl.monitor({ output = "HDMI-A-1", mode = "preferred", position = "1920x0", scale = 1, bitdepth = 8 })
+hl.monitor({ output = "DP-1", mode = "preferred", position = "1920x0", scale = 1, bitdepth = 8 })
+hl.monitor({ output = "DP-2", mode = "preferred", position = "1920x0", scale = 1, bitdepth = 8 })
+hl.monitor({ output = "desc:Dell Inc. DELL P2423D DHV4W14", mode = "preferred", position = "3840x0", scale = 1.25, bitdepth = 8 })
+hl.monitor({ output = "desc:Hewlett Packard HP E241i CN4432078W", mode = "preferred", position = "1920x0", scale = 1, bitdepth = 8 })
+hl.monitor({ output = "desc:Dell Inc. OptiPlex AIO 0x35C99DF2", mode = "preferred", position = "1920x0", scale = 1, bitdepth = 8 })
+hl.monitor({ output = "desc:Hewlett Packard HP E201 CNC5370VFV", mode = "preferred", position = "-1600x0", scale = 1, bitdepth = 8 })

@@ -44,7 +44,8 @@ vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
 
 -- spell check
-vim.opt.spelllang = "en_us"
+-- vim.opt.spelllang = "en_us"
+vim.opt.spelllang = "en_gb"
 vim.api.nvim_create_autocmd("FileType", {
 	pattern = { "tex", "markdown" },
 	callback = function()

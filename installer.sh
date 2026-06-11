@@ -43,9 +43,6 @@ typeset -a shell_req=(
   ripgrep
   ttf-cascadia-mono-nerd
   ttf-nerd-fonts-symbols
-  zathura
-  zathura-djvu
-  zathura-pdf-mupdf
 )
 
 typeset -a nvim_req=(
@@ -61,7 +58,6 @@ typeset -a nvim_req=(
 )
 
 typeset -a hypr_conf=(
-  ags-hyprpanel-git
   hyprcursor-git
   hypridle
   hyprland
@@ -77,9 +73,14 @@ typeset -a hypr_conf=(
 )
 
 typeset -a hypr_req=(
+  ashell-git
   baobab
   blueman
   brightnessctl
+  elephant
+  elephant-calc
+  elephant-desktopapplications
+  elephant-files
   gammastep
   gitprompt
   gnome-power-manager
@@ -105,11 +106,12 @@ typeset -a hypr_req=(
   waybar
   wl-clipboard
   wlr-randr
-  wlogout
+  walker
   xarchiver
 )
 
 typeset -a other_packages=(
+  7zip
   acestream-engine
   acestream-launcher
   android-sdk-platform-tools
@@ -118,7 +120,9 @@ typeset -a other_packages=(
   biber
   chromium
   clang
+  cmake
   dbus-python
+  evince
   firefox
   fzf
   gcc
@@ -154,6 +158,11 @@ typeset -a other_packages=(
   unzip
   uv
   vimix-cursors
+  xdotool # for forward search in vimtex-zathura
+  yazi
+  zathura
+  zathura-djvu
+  zathura-pdf-mupdf
   zoxide
 )
 

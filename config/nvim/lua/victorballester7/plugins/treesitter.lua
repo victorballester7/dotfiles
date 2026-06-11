@@ -23,10 +23,13 @@ return {
         "vimdoc",
       }
       require("nvim-treesitter.configs").setup({
-        auto_install = true,
+        auto_install = false,
         autotag = { enable = true },
         ensure_installed = ensure_installed,
-        highlight = { enable = true },
+        highlight = {
+          enable = true,
+          additional_vim_regex_highlighting = { "latex" },
+        },
         incremental_selection = { enable = true },
         indent = { enable = true },
       })

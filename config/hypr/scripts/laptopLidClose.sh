@@ -10,6 +10,6 @@ if [ "$NUM_MONITORS" -eq 1 ]; then
 else
   # source $HOME/.config/hypr/scripts/moveWorkspacesToMonitors.sh  
   # Disable the internal display
-  hyprctl keyword monitor "eDP-1, disable"
+  hyprctl eval 'hl.monitor({output="eDP-1", disabled = true})'
 fi
 

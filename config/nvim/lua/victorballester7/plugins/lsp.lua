@@ -13,10 +13,11 @@ return {
 		config = function()
 			require("mason").setup()
 			require("mason-lspconfig").setup({
+				ensure_installed = { "eslint", "jsonls", "lua_ls", "pyright", "rust_analyzer", "texlab", "vimls", "yamlls" },
 				automatic_installation = { exclude = { "clangd", "r_language_server" } },
 			})
 			require("mason-tool-installer").setup({
-				ensure_installed = { "latexindent", "luacheck", "ruff", "prettier", "stylua", "taplo" },
+				ensure_installed = { "latexindent", "luacheck", "prettier", "ruff", "stylua", "taplo" },
 			})
 			require("mason-tool-installer").check_install(false) -- false stands for not updating, only installing
 
@@ -79,14 +80,14 @@ return {
 			local function get_python_path(root_dir)
 				-- use active venv
 				if vim.env.VIRTUAL_ENV then
-					return lsp.util.path.join(vim.env.VIRTUAL_ENV, "bin", "python")
+					return vim.fs.joinpath(vim.env.VIRTUAL_ENV, "bin", "python")
 				end
 
 				-- find venv in current dir
 				for _, pattern in ipairs({ "*", ".*" }) do
-					local match = vim.fn.glob(lsp.util.path.join(root_dir, pattern, "pyvenv.cfg"))
+					local match = vim.fn.glob(vim.fs.joinpath(root_dir, pattern, "pyvenv.cfg"))
 					if match ~= "" then
-						return lsp.util.path.join(lsp.util.path.dirname(match), "bin", "python")
+						return vim.fs.joinpath(vim.fs.dirname(match), "bin", "python")
 					end
 				end
 
@@ -115,6 +116,9 @@ return {
 			vim.lsp.config('pyright', config({
 				before_init = function(_, conf)
 					local function find_main_py_dir(start_dir)
+						if not start_dir or start_dir == "" then
+							return nil
+						end
 						local path = vim.fn.fnamemodify(start_dir, ":p") -- Get absolute path
 						while path and path ~= "/" do
 							if vim.fn.filereadable(path .. "/main.py") == 1 then
@@ -127,9 +131,17 @@ return {
 
 					local main_py_dir = find_main_py_dir(conf.root_dir)
 					if main_py_dir then
-						conf.settings.python.pythonPath = get_python_path(main_py_dir)
+						conf.settings = conf.settings or {}
+						conf.settings.python = conf.settings.python or {}
+						local python_path = get_python_path(main_py_dir)
+						if python_path then
+							conf.settings.python.pythonPath = python_path
+						end
 						conf.settings.python.analysis = conf.settings.python.analysis or {}
-						conf.settings.python.analysis.extraPaths = { main_py_dir }
+						conf.settings.python.analysis.extraPaths = conf.settings.python.analysis.extraPaths or {}
+						if not vim.tbl_contains(conf.settings.python.analysis.extraPaths, main_py_dir) then
+							table.insert(conf.settings.python.analysis.extraPaths, main_py_dir)
+						end
 					end
 				end,
 			}))

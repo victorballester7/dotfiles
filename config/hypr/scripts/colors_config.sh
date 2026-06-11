@@ -5,16 +5,18 @@ echo "$(date +"%H:%M:%S.%N" | cut -c1-13) - COLORS CONFIG START"
 # get the colors
 colors_output=$(matugen --source-color-index 0 --show-colors image ~/.config/hypr/wallpapers/wallpaper.jpg)
 
-color_primary=$(printf "%s\n" "$colors_output" | grep " primary " | awk '{print $9}')
+color_primary=$(printf "%s\n" "$colors_output" | grep " primary " | awk '{print $7}')
 
 echo "color_primary: $color_primary"
 
+hyprctl eval "hl.config({general = {col = {active_border = \"$color_primary\"}}})"
+
 # echo colors to ashell config file (find the line that starts with primary_color and text_color and replace the color values with the new ones)
 # only echo if color_primary is not empty
-if [ -n "$color_primary" ]; then
-    sed -i "s/primary_color = .*/primary_color = \"$color_primary\"/g" $HOME/.config/ashell/config.toml
-    sed -i "s/workspace_colors = .*/workspace_colors = [\"$color_primary\"]/g" $HOME/.config/ashell/config.toml
-fi
+# if [ -n "$color_primary" ]; then
+#     sed -i "s/primary_color = .*/primary_color = \"$color_primary\"/g" $HOME/.config/ashell/config.toml
+#     sed -i "s/workspace_colors = .*/workspace_colors = [\"$color_primary\"]/g" $HOME/.config/ashell/config.toml
+# fi
 
 
 ###### I need this for fastfetch to work ######

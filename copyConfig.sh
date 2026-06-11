@@ -48,7 +48,7 @@ function copyThemesConfigsFolders {
 
     cd ../config
     for f in *; do
-        # rm -r $CONFIG_DIR/$f
+        # sudo rm -r $CONFIG_DIR/$f # provokes crashes in hyprland system 
         cp -r $f $CONFIG_DIR
     done
 }
