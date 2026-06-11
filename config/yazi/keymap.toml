@@ -1,29 +1,33 @@
-[[mgr.prepend_keymap]]
-on   = [ "c", "a", "a" ]
-run  = "plugin compress"
-desc = "Archive selected files"
+[mgr]
+prepend_keymap = [
+    # Compress, extract
+    { on = [ "c", "a", "a" ], run = "plugin compress", desc = "Compress" },
+    { on = [ "c", "a", "p" ], run = "plugin compress -p", desc = "Compress (password)" },
+    { on = [ "c", "a", "h" ], run = "plugin compress -ph", desc = "Compress (password+header)" },
+    { on = [ "c", "a", "l" ], run = "plugin compress -l", desc = "Compress (compression level)" },
+    { on = [ "c", "a", "u" ], run = "plugin compress -phl", desc = "Compress (password+header+level)" },
+    { on = [ "e" ], run = 'shell -- ~/Desktop/dotfiles/scripts/compress.sh -x "$1" .', desc = "Extract archive" },
 
-[[mgr.prepend_keymap]]
-on   = [ "c", "a", "p" ]
-run  = "plugin compress -p"
-desc = "Archive selected files (password)"
 
-[[mgr.prepend_keymap]]
-on   = [ "c", "a", "h" ]
-run  = "plugin compress -ph"
-desc = "Archive selected files (password+header)"
+    # Open terminal
+    { on = [ "T" ], run = "shell --orphan --confirm kitty", desc = "Open terminal at current dir" },
 
-[[mgr.prepend_keymap]]
-on   = [ "c", "a", "l" ]
-run  = "plugin compress -l"
-desc = "Archive selected files (compression level)"
 
-[[mgr.prepend_keymap]]
-on   = [ "c", "a", "u" ]
-run  = "plugin compress -phl"
-desc = "Archive selected files (password+header+level)"
+    # Undo delete
+    { on = [ "u" ], run = "plugin restore", desc = "Restore last deleted files/folders" },
+    { on = [ "U" ], run = "plugin restore -- --interactive --interactive-overwrite", desc = "Restore deleted files/folders (Interactive overwrite)" },
 
-[[mgr.prepend_keymap]]  
-on   = [ "e" ]  
-run  = 'shell -- ~/Desktop/dotfiles/scripts/compress.sh -x "$1" .'  
-desc = "Extract archive"
+
+    # Go to specific directories
+    { on = [ "g", "t" ], run = "cd ~/.local/share/Trash/files", desc = "Go to Trash" },
+    { on = [ "g", "m" ], run = "cd /mnt", desc = "Go to /mnt" },
+    { on = [ "g", "e" ], run = "cd ~/Desktop", desc = "Go to Desktop" },
+    { on = [ "g", "p" ], run = "cd ~/Pictures", desc = "Go to Pictures" },
+
+
+    # Move faster
+    { on = "K", run = "arrow -50%", desc = "Move cursor up half page" },
+    { on = "J", run = "arrow 50%",  desc = "Move cursor down half page" },
+]
+
+
