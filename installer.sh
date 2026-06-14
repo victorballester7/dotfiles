@@ -58,25 +58,19 @@ typeset -a nvim_req=(
 )
 
 typeset -a hypr_conf=(
-  hyprcursor-git
-  hypridle
+  hyprcursor
   hyprland
   hyprland-monitor-attached
   hyprland-protocols
-  hyprlock
   hyprpaper
   hyprshot
-  hyprsunset-git
-  hyprswitch
-  hyprutils-git
+  hyprutils
   xdg-desktop-portal-hyprland
 )
 
 typeset -a hypr_req=(
-  ashell-git
   baobab
   blueman
-  brightnessctl
   elephant
   elephant-calc
   elephant-desktopapplications
@@ -88,14 +82,12 @@ typeset -a hypr_req=(
   gvfs
   gvfs-mtp
   gvfs-gphoto2
-  light
+  noctalia-git
   nwg-wrapper
   pavucontrol
   playerctl
   python
   ranger
-  rofi-calc-git
-  rofi
   socat
   sway-audio-idle-inhibit-git
   thunar
@@ -103,7 +95,6 @@ typeset -a hypr_req=(
   thunar-volman
   tlp
   tzupdate
-  waybar
   wl-clipboard
   wlr-randr
   walker
@@ -200,16 +191,16 @@ function configureYay {
 }
 
 
-function configureReflector {
-  cd
-  messagePresentation "reflector"
-  sudo cp dotfiles/others/reflector.conf /etc/xdg/reflector/
-  sudo systemctl enable reflector.timer # in order to run reflector weekly instead of at each boot
-  sudo systemctl start reflector.timer
-  sudo systemctl enable reflector.service
-  sudo systemctl start reflector.service
-  messageError "reflector"
-}
+# function configureReflector {
+#   cd
+#   messagePresentation "reflector"
+#   sudo cp dotfiles/others/reflector.conf /etc/xdg/reflector/
+#   sudo systemctl enable reflector.timer # in order to run reflector weekly instead of at each boot
+#   sudo systemctl start reflector.timer
+#   sudo systemctl enable reflector.service
+#   sudo systemctl start reflector.service
+#   messageError "reflector"
+# }
 
 # copy thunderbird profile
 # echo -e "${YELLOW}Copying Thunderbird profile...${RESET}"
