@@ -1,11 +1,12 @@
-#!/bin/sh
+#!/bin/zsh
 
 echo "$(date +"%H:%M:%S.%N" | cut -c1-13) - COLORS CONFIG START"
 
 # get the colors
 colors_output=$(matugen --source-color-index 0 --show-colors image ~/.config/hypr/wallpapers/wallpaper.jpg)
+colors_output=$(noctalia theme /home/victor/.config/hypr/wallpapers/wallpaper.jpg)
 
-color_primary=$(printf "%s\n" "$colors_output" | grep " primary " | awk '{print $7}')
+color_primary=$(echo "$colors_output" | jq -r '.primary')
 
 echo "color_primary: $color_primary"
 

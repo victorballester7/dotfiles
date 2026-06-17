@@ -1,4 +1,6 @@
 --theme="gruvbox-dark"
 --paging=never
+--number
+--italic-text always
 
 # vim: ft=conf

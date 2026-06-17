@@ -1,0 +1,24 @@
+Host hpc
+    User vb824
+    HostName login.cx3.hpc.imperial.ac.uk
+    ControlMaster auto
+    ControlPersist 8h
+    ControlPath ~/.ssh/sockets/%r@%h:%p
+    ServerAliveInterval 60
+    ServerAliveCountMax 3
+
+Host typhoon blackfriars spitfire
+    User vb824
+    IdentityFile ~/.ssh/id_ed25519
+    IdentitiesOnly yes
+    ServerAliveInterval 60
+    ServerAliveCountMax 3
+
+Host typhoon
+    HostName typhoon.ae.ic.ac.uk
+
+Host blackfriars
+    HostName blackfriars.ae.ic.ac.uk
+
+Host spitfire
+    HostName spitfire.ae.ic.ac.uk

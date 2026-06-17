@@ -1,18 +1,7 @@
 #!/bin/sh
 
-function execute_hyprpaper {
-  # Ensure no instances of hyprpaper are already running
-  killall hyprpaper || true
-
-  # Execute hyprpaper
-  hyprpaper &
-}
-
-function execute_bar {
-  # Ensure no instances of the bar are already running
-  killall ashell || true
-
-  ashell &
+function execute_wallpaper {
+  noctalia msg wallpaper-random
 }
 
 function execute_bingtext {
@@ -34,14 +23,11 @@ function start_config {
   plotInfo "Setting COLORS CONFIG"
   $HOME/.config/hypr/scripts/colors_config.sh
 
-  plotInfo "Setting HYPRPAPER CONFIG"
-  execute_hyprpaper
+  plotInfo "Setting WALLPAPER"
+  execute_wallpaper
 
   plotInfo "Setting BINGTEXT CONFIG"
   execute_bingtext
-
-  # plotInfo "Setting BAR CONFIG"
-  # execute_bar
 
   plotInfo "Setting GNOME THEME"
   gsettings set org.gnome.desktop.interface gtk-theme victorballester7
@@ -54,7 +40,6 @@ MONITORS=$(hyprctl monitors | grep "Monitor" | awk '{print $2}')
 # Wallpaper path
 wlpath="$DIR/wallpaper.jpg"
 # Lockscreen wallpaper path
-lswlpath="$DIR/lockscreen_wallpaper.jpg"
 output="*"
 baseurl="https://www.bing.com/"
 
@@ -98,9 +83,6 @@ echo $imageName > $DIR/bing_name.txt
 
 # Download and save Bing Image of the Day
 curl "$baseurl$wlurl" -s > $wlpath
-
-# Blur existing wallpaper to user later as a lock screen
-magick $wlpath -filter Gaussian -blur 0x8 $lswlpath
 
 plotInfo "Setting start config"
 start_config
