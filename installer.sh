@@ -63,7 +63,7 @@ typeset -a hypr_conf=(
   hyprland-monitor-attached
   hyprland-protocols
   hyprpaper
-  hyprshot
+  hyprpicker
   hyprutils
   xdg-desktop-portal-hyprland
 )
@@ -82,6 +82,7 @@ typeset -a hypr_req=(
   gvfs
   gvfs-mtp
   gvfs-gphoto2
+  jq # to parse json files, used in color selection
   noctalia-git
   nwg-wrapper
   pavucontrol
@@ -95,10 +96,24 @@ typeset -a hypr_req=(
   thunar-volman
   tlp
   tzupdate
-  wl-clipboard
+  wl-clipboard # for nvim yank to system clipboard
   wlr-randr
   walker
   xarchiver
+)
+
+typeset -a nektar=(
+  lapack
+  blas
+  boost
+  tinyxml
+  scotch
+  hdf5
+  openmpi
+  gcc-fortran
+  openblas 
+  paraview
+  gmsh-bin
 )
 
 typeset -a other_packages=(
@@ -109,8 +124,10 @@ typeset -a other_packages=(
   bc
   bibclean
   biber
+  btop
   chromium
   clang
+  cpx-copy # faster copy tool
   cmake
   dbus-python
   evince
@@ -141,7 +158,7 @@ typeset -a other_packages=(
   sshfs
   sshpass
   teams-for-linux
-  teams-for-linux-wayland-hook
+  telegram-desktop
   texlive-full
   thunderbird
   trash-cli
@@ -188,6 +205,11 @@ function configureYay {
   cd ..
   rm -rf yay
   messageError "yay"
+}
+
+function mimeApps {
+  xdg-settings set default-web-browser firefox.desktop
+  xdg-mime default org.pwmt.zathura.desktop application/pdf
 }
 
 
@@ -250,8 +272,9 @@ function configureZsh {
   cd
   messagePresentation "zsh"
   sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-  git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
-  git clone https://github.com/zsh-users/zsh-history-substring-search ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-history-substring-search
+  sudo git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
+  sudo git clone https://github.com/zsh-users/zsh-history-substring-search ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-history-substring-search
+  sudo git clone --depth=1 https://github.com/romkatv/powerlevel10k.git "${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k"
   sudo cp dotfiles/others/.zshrc ~/
   # change to zsh default shell
   if [[ ! $SHELL =~ zsh$ ]]; then

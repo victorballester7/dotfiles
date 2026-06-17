@@ -30,13 +30,6 @@ function messageError {
     echo -e "${GREEN}$1 configs copied successfully.${RESET}"
   fi
 }
-function backupHyprpanel {
-    # first copy hyprpanel config form .config directory to my dotfiles just as a backup (when editing the settings from the GUI it will be saved in the .config directory)
-    messagePresentation "hyprpanel"
-    rm -r $MYCONFIG_DIR/hyprpanel/config.json
-    cp -r $CONFIG_DIR/hyprpanel/config.json $MYCONFIG_DIR/hyprpanel
-    messageError "hyprpanel"
-}
 
 function copyThemesConfigsFolders {
     # I put themes before config just in case.
@@ -58,9 +51,10 @@ function copyRandomFiles {
 
     cp $FILES_DIR/.zshrc $HOME
     cp $FILES_DIR/.zprofile $HOME
-    # cp $FILES_DIR/.p10k.zsh $HOME
     cp $FILES_DIR/.aliases $HOME
     cp $FILES_DIR/.vars $HOME
+    cp $FILES_DIR/.p10k.zsh $HOME
+    cp $FILES_DIR/config $HOME/.ssh/
     sudo cp $FILES_DIR/grub /etc/default/
     sudo grub-mkconfig -o /boot/grub/grub.cfg
     sudo cp $FILES_DIR/pacman.conf /etc/

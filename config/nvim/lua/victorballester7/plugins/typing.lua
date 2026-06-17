@@ -1,23 +1,23 @@
 ---@type LazySpec
 return {
-	-- {
-	--   "numtostr/comment.nvim",
-	--   event = "VeryLazy",
-	--   opts = { ignore = "^$" },
-	-- },
-	-- In typing.lua:
 	{
-		"numtostr/Comment.nvim",
-		event = "VeryLazy",
-		opts = {
-			ignore = "^$",
-			pre_hook = function()
-				if vim.bo.filetype == "tex" then
-					return "% %s"
-				end
-			end,
-		},
+	  "numtostr/comment.nvim",
+	  -- event = "VeryLazy",
+	  -- opts = { ignore = "^$" },
 	},
+	-- In typing.lua:
+	-- {
+	-- 	"numtostr/Comment.nvim",
+	-- 	event = "VeryLazy",
+	-- 	opts = {
+	-- 		ignore = "^$",
+	-- 		pre_hook = function()
+	-- 			if vim.bo.filetype == "tex" then
+	-- 				return "% %s"
+	-- 			end
+	-- 		end,
+	-- 	},
+	-- },
 	{
 		"windwp/nvim-autopairs",
 		event = "VeryLazy",
