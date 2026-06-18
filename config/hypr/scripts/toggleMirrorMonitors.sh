@@ -15,7 +15,7 @@ fi
 if [[ $(hyprctl monitors all | grep -c "mirrorOf: none") -gt 1 ]]; then
   # mirror is not detected, we need to set it to mirror
   for monitor in $EXTERNAL_MONITORS; do
-    hyprctl keyword monitor "$monitor, preferred, auto, 1, mirror, $INTERNAL_MONITOR, bitdepth, 8"
+    hyprctl eval 'hl.monitor({output="'$monitor'", mirror = "'$INTERNAL_MONITOR'"})'
   done
 else
   # mirror is detected, we reload the config file.
