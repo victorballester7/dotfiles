@@ -123,8 +123,8 @@ ${CONFIG_DIR}/hypr/scripts/get_bing_image.sh
 
 sleep 1
 # reload hyprctl and gtk configs
-gsettings set org.gnome.desktop.interface gtk-theme victorballester7
-gsettings set org.gnome.desktop.interface icon-theme Papirus-Dark
+# gsettings set org.gnome.desktop.interface gtk-theme victorballester7
+# gsettings set org.gnome.desktop.interface icon-theme Papirus-Dark
 # hyprctl reload # gives problems with win key and also inhabilitates the shortcuts
 
 echo -e "${GREEN}All configurations copied successfully.${RESET}"

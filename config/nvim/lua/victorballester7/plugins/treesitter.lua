@@ -26,6 +26,7 @@ return {
         "lua",
         "markdown",
         "python",
+        "py",
         "sh",
         "toml",
         "typescript",
@@ -75,6 +76,7 @@ return {
 
       require("nvim-ts-autotag").setup()
       vim.treesitter.language.register("jsonc", "json")
+      vim.treesitter.language.register("zsh", "sh")
       require("treesitter-context").setup({ max_lines = 10, multiline_threshold = 4 })
 
       vim.opt.foldmethod = "expr"

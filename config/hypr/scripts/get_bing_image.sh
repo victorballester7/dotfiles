@@ -29,8 +29,8 @@ function start_config {
   plotInfo "Setting BINGTEXT CONFIG"
   execute_bingtext
 
-  plotInfo "Setting GNOME THEME"
-  gsettings set org.gnome.desktop.interface gtk-theme victorballester7
+  # plotInfo "Setting GNOME THEME"
+  # gsettings set org.gnome.desktop.interface gtk-theme victorballester7
 }
 
 plotInfo "Setting variables"

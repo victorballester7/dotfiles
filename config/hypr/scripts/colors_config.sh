@@ -3,12 +3,14 @@
 echo "$(date +"%H:%M:%S.%N" | cut -c1-13) - COLORS CONFIG START"
 
 # get the colors
-colors_output=$(matugen --source-color-index 0 --show-colors image ~/.config/hypr/wallpapers/wallpaper.jpg)
 colors_output=$(noctalia theme /home/victor/.config/hypr/wallpapers/wallpaper.jpg)
 
 color_primary=$(echo "$colors_output" | jq -r '.primary')
 
 echo "color_primary: $color_primary"
+# change the color in bing_name.css to the new color_primary
+sed -i "s/@define-color primary .*/@define-color primary $color_primary;/g" $HOME/.config/hypr/style/bing_name.css
+# echo "@define-color primary $color_primary" > $HOME/.config/hypr/style/colors.css
 
 hyprctl eval "hl.config({general = {col = {active_border = \"$color_primary\"}}})"
 
@@ -23,15 +25,15 @@ hyprctl eval "hl.config({general = {col = {active_border = \"$color_primary\"}}}
 ###### I need this for fastfetch to work ######
 
 # convert color to r, g, b
-color_rgb=$(echo $color_primary | sed 's/#//')
-r=$(echo $((16#${color_rgb:0:2})))
-g=$(echo $((16#${color_rgb:2:2})))
-b=$(echo $((16#${color_rgb:4:2})))
+# color_rgb=$(echo $color_primary | sed 's/#//')
+# r=$(echo $((16#${color_rgb:0:2})))
+# g=$(echo $((16#${color_rgb:2:2})))
+# b=$(echo $((16#${color_rgb:4:2})))
 
 # store variables r, g, b for future shell sessions
-echo "export r='$r'" > $HOME/.config/hypr/wallpapers/colors.sh
-echo "export g='$g'" >> $HOME/.config/hypr/wallpapers/colors.sh
-echo "export b='$b'" >> $HOME/.config/hypr/wallpapers/colors.sh
+# echo "export r='$r'" > $HOME/.config/hypr/wallpapers/colors.sh
+# echo "export g='$g'" >> $HOME/.config/hypr/wallpapers/colors.sh
+# echo "export b='$b'" >> $HOME/.config/hypr/wallpapers/colors.sh
 ###############################################
 
 # wlogout
