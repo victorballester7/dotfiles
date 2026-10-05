@@ -23,10 +23,6 @@ input_path = "~/.config/matugen/templates/hyprland-colors.conf"
 output_path = "~/.config/hypr/hypr.d/10_colors.conf"
 post_hook = "hyprctl reload"
 
-[templates.hyprlock]
-input_path = "~/.config/matugen/templates/hyprlock-colors.conf"
-output_path = "~/.config/hypr/hyprlock.d/00-colors.conf"
-
 [templates.kitty]
 input_path = "~/.config/matugen/templates/kitty-colors.conf"
 output_path = "~/.config/kitty/colors.conf"

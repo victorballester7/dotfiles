@@ -271,7 +271,9 @@ do_check() {
       dest="/${src#"$root"/}"
       dest="${dest%.in}"
       [[ $src == *.in ]] && continue # templates: compared by ./install.sh system
-      if [[ ! -r $dest ]]; then
+      if [[ ! -x $(dirname "$dest") ]]; then
+        continue # root-only directory (e.g. polkit rules): compared by ./install.sh system
+      elif [[ ! -r $dest ]]; then
         [[ -e $dest ]] || warn "$dest is missing (run ./install.sh system)"
       elif ! cmp -s "$src" "$dest"; then
         warn "$dest differs from the repo"
