@@ -1,0 +1,17 @@
+id = "victor/laptop-screen"
+name = "Laptop Screen"
+version = "1.0.0"
+plugin_api = 24
+author = "victor"
+icon = "device-laptop"
+description = "Bar toggle that turns the internal laptop display on and off (Hyprland)."
+
+[[setting]]
+key = "output"
+type = "string"
+label_key = "settings.output.label"
+default = "eDP-1"
+
+[[widget]]
+id = "toggle"
+entry = "toggle.luau"

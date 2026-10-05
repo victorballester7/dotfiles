@@ -6,3 +6,7 @@ hl.monitor({ output = "desc:Dell Inc. DELL P2423D DHV4W14", mode = "preferred", 
 hl.monitor({ output = "desc:Hewlett Packard HP E241i CN4432078W", mode = "preferred", position = "1920x0", scale = 1, bitdepth = 8 })
 hl.monitor({ output = "desc:Dell Inc. OptiPlex AIO 0x35C99DF2", mode = "preferred", position = "1920x0", scale = 1, bitdepth = 8 })
 hl.monitor({ output = "desc:Hewlett Packard HP E201 CNC5370VFV", mode = "preferred", position = "-1600x0", scale = 1, bitdepth = 8 })
+
+hl.on("monitor.added", function(monitor)
+  hl.exec_cmd("/home/victor/.config/hypr/scripts/get_bing_image.sh")
+end)

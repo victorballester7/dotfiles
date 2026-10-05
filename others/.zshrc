@@ -28,15 +28,18 @@ zstyle ':omz:update' mode auto # update automatically without asking
 # Uncomment the following line to change how often to auto-update (in days).
 zstyle ':omz:update' frequency 5
 
+# order is important, do not change it unless you know what you are doing
 plugins=(
   git
   history
   sudo
   ssh
+  fzf
   zsh-autosuggestions
   zsh-history-substring-search
-  fzf
+  zbell
 )
+
 
 source $ZSH/oh-my-zsh.sh
 

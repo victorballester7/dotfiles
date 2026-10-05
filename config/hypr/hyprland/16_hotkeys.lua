@@ -72,18 +72,26 @@ hl.bind(m .. " + mouse_up", hl.dsp.focus({ workspace = "e-1" }))
 
 -- Screenshots
 hl.bind("Print", hl.dsp.exec_cmd("noctalia msg screenshot-region"))
+hl.bind("XF86LaunchA", hl.dsp.exec_cmd("noctalia msg screenshot-region"))
 
 -- Volume control
 hl.bind("XF86AudioRaiseVolume", hl.dsp.exec_cmd("noctalia msg volume-up"), { repeating = true })
 hl.bind("XF86AudioLowerVolume", hl.dsp.exec_cmd("noctalia msg volume-down"), { repeating = true })
 hl.bind("XF86AudioMute", hl.dsp.exec_cmd("noctalia msg volume-mute"))
-hl.bind(m .. " + Next", hl.dsp.exec_cmd("noctalia msg media next"))
-hl.bind(m .. " + Prior", hl.dsp.exec_cmd("noctalia msg media previous"))
-hl.bind("Pause", hl.dsp.exec_cmd("noctalia msg media toggle"))
+hl.bind("XF86AudioPlay", hl.dsp.exec_cmd("noctalia msg media toggle"))
+hl.bind("XF86AudioNext", hl.dsp.exec_cmd("noctalia msg media next"))
+hl.bind("XF86AudioPrev", hl.dsp.exec_cmd("noctalia msg media previous"))
+-- hl.bind(m .. " + Next", hl.dsp.exec_cmd("noctalia msg media next"))
+-- hl.bind(m .. " + Prior", hl.dsp.exec_cmd("noctalia msg media previous"))
+-- hl.bind("Pause", hl.dsp.exec_cmd("noctalia msg media toggle"))
 
 -- Brightness control
 hl.bind("XF86MonBrightnessUp", hl.dsp.exec_cmd("noctalia msg brightness-up all"))
 hl.bind("XF86MonBrightnessDown", hl.dsp.exec_cmd("noctalia msg brightness-down all"))
+-- brightness for my keyboard
+hl.bind("XF86Launch6", hl.dsp.exec_cmd("noctalia msg brightness-up all"))
+hl.bind("XF86Launch5", hl.dsp.exec_cmd("noctalia msg brightness-down all"))
+
 
 -- Move/resize with mouse
 hl.bind(m .. " + mouse:272", hl.dsp.window.drag(), { mouse = true })
@@ -129,3 +137,7 @@ hl.bind(m .. " + KP_End", hl.dsp.exec_cmd("noctalia msg session lock"))
 hl.bind(m .. " + KP_Down", hl.dsp.exec_cmd("noctalia msg session lock-and-suspend"))
 hl.bind(m .. " + KP_Next", hl.dsp.exec_cmd("noctalia msg session reboot"))
 hl.bind(m .. " + KP_Left", hl.dsp.exec_cmd("noctalia msg session shutdown"))
+hl.bind(m .. " + Next", hl.dsp.exec_cmd("noctalia msg session lock"))
+hl.bind(m .. " + Prior", hl.dsp.exec_cmd("noctalia msg session lock-and-suspend"))
+hl.bind(m .. " + Home", hl.dsp.exec_cmd("noctalia msg session reboot"))
+hl.bind(m .. " + Delete", hl.dsp.exec_cmd("noctalia msg session shutdown"))

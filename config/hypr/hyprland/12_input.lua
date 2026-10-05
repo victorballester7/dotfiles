@@ -27,6 +27,35 @@ hl.device({
     kb_options = "",
 })
 
+-- nuphy-kick75 keyboard (both cable (io) and 2.4GHz (io-dongle))
+hl.device({
+    name = "nuphy-kick75-io",
+    kb_layout = "us",
+    kb_variant = "intl",
+    kb_options = "grp:alt_shift_toggle,altwin:swap_alt_win",
+})
+
+hl.device({
+    name = "nuphy-kick75-io-1",
+    kb_layout = "us",
+    kb_variant = "intl",
+    kb_options = "grp:alt_shift_toggle,altwin:swap_alt_win",
+})
+
+hl.device({
+    name = "nuphy-kick75-io-dongle",
+    kb_layout = "us",
+    kb_variant = "intl",
+    kb_options = "grp:alt_shift_toggle,altwin:swap_alt_win",
+})
+
+hl.device({
+    name = "nuphy-kick75-io-dongle-1",
+    kb_layout = "us",
+    kb_variant = "intl",
+    kb_options = "grp:alt_shift_toggle,altwin:swap_alt_win",
+})
+
 hl.device({
     name = "semico---usb-gaming-keyboard-",
     kb_layout = "us",

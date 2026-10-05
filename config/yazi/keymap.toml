@@ -28,6 +28,25 @@ prepend_keymap = [
     # Move faster
     { on = "K", run = "arrow -50%", desc = "Move cursor up half page" },
     { on = "J", run = "arrow 50%",  desc = "Move cursor down half page" },
+
+    # Mount
+    # { on = [ "M", "m" ], run = "plugin gvfs -- select-then-mount", desc = "Select device then mount" },
+    # or this if you want to jump to mountpoint after mounted
+    { on = [ "M", "m" ], run = "plugin gvfs -- select-then-mount --jump", desc = "Select device to mount and jump to its mount point" },
+
+    # { on = [ "M", "u" ], run = "plugin gvfs -- select-then-unmount", desc = "Select device then unmount" },
+    # Or this if you want to unmount and eject device.
+    #   -> Ejected device can safely be removed.
+    #   -> Ejecting a device will unmount all paritions/volumes under it.
+    #   -> Fallback to normal unmount if not supported by device.
+    { on = [ "M", "u" ], run = "plugin gvfs -- select-then-unmount --eject", desc = "Select device then eject" },
+
+    # Also support force unmount/eject.
+    #   -> Ignore outstanding file operations when unmounting or ejecting
+    { on = [ "M", "U" ], run = "plugin gvfs -- select-then-unmount --eject --force", desc = "Select device then force to eject/unmount" },
+
+    # Jump
+    { on = [ "g", "m" ], run = "plugin gvfs -- jump-to-device", desc = "Select device then jump to its mount point" },
 ]
 
 

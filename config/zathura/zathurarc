@@ -2,3 +2,6 @@ set double-click-follow false
 set selection-clipboard clipboard
 
 set zoom-max 2000
+
+map h scroll left
+map l scroll right

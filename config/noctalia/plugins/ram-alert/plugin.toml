@@ -1,0 +1,39 @@
+id = "victor/ram-alert"
+name = "RAM Alert"
+version = "1.0.0"
+plugin_api = 3
+author = "victor"
+icon = "alert-triangle"
+description = "Sends a notification when RAM usage exceeds a threshold."
+
+[[setting]]
+key = "threshold"
+label_key = "settings.threshold.label"
+description_key = "settings.threshold.description"
+type = "int"
+default = 85
+min = 50
+max = 99
+
+[[setting]]
+key = "rearm_margin"
+label_key = "settings.rearm_margin.label"
+description_key = "settings.rearm_margin.description"
+type = "int"
+default = 5
+min = 1
+max = 30
+advanced = true
+
+[[setting]]
+key = "poll_seconds"
+label_key = "settings.poll_seconds.label"
+type = "int"
+default = 5
+min = 1
+max = 60
+advanced = true
+
+[[service]]
+id = "monitor"
+entry = "monitor.luau"

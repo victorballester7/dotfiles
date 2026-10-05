@@ -1,7 +1,8 @@
 #!/bin/sh
 
 function execute_wallpaper {
-  noctalia msg wallpaper-random
+  # noctalia msg config-reload
+  noctalia msg wallpaper-set $wlpath
 }
 
 function execute_bingtext {
@@ -21,7 +22,7 @@ function plotInfo {
 
 function start_config {
   plotInfo "Setting COLORS CONFIG"
-  $HOME/.config/hypr/scripts/colors_config.sh
+  $HOME/.config/hypr/scripts/colors_config.sh $wlpath
 
   plotInfo "Setting WALLPAPER"
   execute_wallpaper
@@ -38,7 +39,8 @@ DIR="$HOME/.config/hypr/wallpapers"
 MONITORS=$(hyprctl monitors | grep "Monitor" | awk '{print $2}')
 
 # Wallpaper path
-wlpath="$DIR/wallpaper.jpg"
+date=$(date +%Y%m%d)
+wlpath="$DIR/wallpaper$date.jpg"
 # Lockscreen wallpaper path
 output="*"
 baseurl="https://www.bing.com/"

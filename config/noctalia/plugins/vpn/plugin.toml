@@ -1,0 +1,38 @@
+# Tailscale + Zscaler bar toggles. Both live in one plugin so they can refuse to start
+# while the other VPN is up. Units are started/stopped through systemctl; the polkit rule
+# in dotfiles/others/50-vpn-toggle.rules makes that passwordless.
+
+id = "victor/vpn"
+name = "VPN Toggles"
+version = "1.0.0"
+plugin_api = 24
+author = "victor"
+icon = "shield-lock"
+description = "Bar toggles for Tailscale and Zscaler that never run both at once."
+
+[[setting]]
+key = "poll_seconds"
+type = "int"
+label_key = "settings.poll_seconds.label"
+default = 3
+min = 1
+max = 60
+advanced = true
+
+# Left click: start/stop tailscaled.
+[[widget]]
+id = "tailscale"
+entry = "tailscale.luau"
+
+# Left click: start/stop zstunnel. Right click: menu (Open Zscaler / Export Logs).
+[[widget]]
+id = "zscaler"
+entry = "zscaler.luau"
+
+[[panel]]
+id = "zscaler-menu"
+entry = "zscaler_menu.luau"
+width = 220
+height = 104
+placement = "attached"
+open_near_click = true

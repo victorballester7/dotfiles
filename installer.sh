@@ -60,7 +60,6 @@ typeset -a nvim_req=(
 typeset -a hypr_conf=(
   hyprcursor
   hyprland
-  hyprland-monitor-attached
   hyprland-protocols
   hyprpaper
   hyprpicker
@@ -70,12 +69,10 @@ typeset -a hypr_conf=(
 
 typeset -a hypr_req=(
   baobab
-  blueman
-  elephant
+  elephant # the engine of walker
   elephant-calc
   elephant-desktopapplications
   elephant-files
-  gammastep
   gitprompt
   gnome-power-manager
   gnome-system-monitor
@@ -88,9 +85,7 @@ typeset -a hypr_req=(
   pavucontrol
   playerctl
   python
-  ranger
-  socat
-  sway-audio-idle-inhibit-git
+  # socat
   thunar
   thunar-archive-plugin
   thunar-volman
@@ -98,7 +93,7 @@ typeset -a hypr_req=(
   tzupdate
   wl-clipboard # for nvim yank to system clipboard
   wlr-randr
-  walker
+  walker # launcher
   xarchiver
 )
 
@@ -272,9 +267,9 @@ function configureZsh {
   cd
   messagePresentation "zsh"
   sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-  sudo git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
-  sudo git clone https://github.com/zsh-users/zsh-history-substring-search ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-history-substring-search
-  sudo git clone --depth=1 https://github.com/romkatv/powerlevel10k.git "${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k"
+  # sudo git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
+  # sudo git clone https://github.com/zsh-users/zsh-history-substring-search ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-history-substring-search
+  # sudo git clone --depth=1 https://github.com/romkatv/powerlevel10k.git "${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k"
   sudo cp dotfiles/others/.zshrc ~/
   # change to zsh default shell
   if [[ ! $SHELL =~ zsh$ ]]; then

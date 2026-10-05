@@ -1,9 +1,7 @@
 [audio]
 enable_overdrive = true
 enable_sounds = false
-notification_sound = ""
 sound_volume = 0.5
-volume_change_sound = ""
 
 [backdrop]
 blur_intensity = 0.5
@@ -27,7 +25,7 @@ order = [ "workspaces", "topbar" ]
     center = [ "weather", "clock", "date" ]
     contact_shadow = false
     enabled = true
-    end = [ "tray", "caffeine", "laptopScreenToggle", "network", "bluetooth", "volume", "battery", "session" ]
+    end = [ "tray", "caffeine", "laptopScreenToggle", "tailscale", "zscaler", "network", "bluetooth", "volume", "battery", "session" ]
     font_weight = 500
     layer = "overlay"
     margin_edge = 10
@@ -136,7 +134,6 @@ magnification_scale = 1.4500000476837158
 main_axis_padding = 16
 margin_edge = 8
 margin_ends = 0
-monitors = []
 pinned = []
 position = "bottom"
 radius = 16
@@ -324,17 +321,15 @@ scale = 1.25
     wifi = true
 
 [plugins]
-enabled = []
+enabled = [ "victor/ram-alert", "victor/laptop-screen", "victor/vpn" ]
 
     [[plugins.source]]
-    auto_update = false
     enabled = true
     kind = "path"
     location = "/home/victor/.config/noctalia/plugins/"
     name = "legacy-v4"
 
     [[plugins.source]]
-    auto_update = false
     enabled = true
     kind = "git"
     location = "https://github.com/noctalia-dev/official-plugins"
@@ -353,7 +348,6 @@ date_format = "%A, %x"
 disable_mipmaps = false
 font_family = "sans-serif"
 launch_apps_as_systemd_services = false
-middle_click_opens_widget_settings = true
 niri_overview_type_to_launch_enabled = false
 offline_mode = false
 password_style = "random"
@@ -365,25 +359,27 @@ shared_gl_context = true
 show_location = true
 telemetry_enabled = true
 time_format = "{:%H:%M}"
-ui_scale = 1.0
 
     [shell.animation]
     enabled = true
     speed = 1.0
+
+    [shell.launcher]
+    categories = true
+    compact = false
+    show_icons = true
+    sort_by_usage = true
 
     [shell.mpris]
     blacklist = []
 
     [shell.panel]
     borders = true
-    clipboard_placement = "centered"
+    clipboard_placement = "floating"
+    clipboard_position = "center"
     control_center_placement = "attached"
-    launcher_categories = true
-    launcher_compact = false
-    launcher_placement = "centered"
-    launcher_session_search = false
-    launcher_show_icons = true
-    launcher_sort_by_usage = true
+    launcher_placement = "floating"
+    launcher_position = "center"
     open_near_click_clipboard = false
     open_near_click_control_center = false
     open_near_click_launcher = false
@@ -454,8 +450,8 @@ cpu_temp_critical_threshold = 85.0
 cpu_temp_sensor_path = ""
 cpu_usage_activity_threshold = 50.0
 cpu_usage_critical_threshold = 90.0
-disk_pct_activity_threshold = 80.0
-disk_pct_critical_threshold = 95.0
+disk_used_pct_activity_threshold = 80.0
+disk_used_pct_critical_threshold = 95.0
 disk_poll_seconds = 10.0
 enabled = true
 gpu_poll_seconds = 0.0
@@ -526,12 +522,6 @@ type = "active_window"
 display_mode = "graphic"
 type = "battery"
 
-[widget.cat]
-audio_spectrum = true
-rave_mode = true
-tappy_mode = true
-type = "noctalia/bongocat:cat"
-
 [widget.clock]
 format = "{:%H:%M:%S}"
 type = "clock"
@@ -549,14 +539,22 @@ device = "input"
 type = "volume"
 
 [widget.keyboard_layout]
-cycle_command = ""
 hide_when_single_layout = false
 type = "keyboard_layout"
 
 [widget.laptopScreenToggle]
-command = "/home/victor/.config/hypr/scripts/laptopLidClose.sh"
-glyph = "device-laptop"
-type = "custom_button"
+type = "victor/laptop-screen:toggle"
+
+[widget.tailscale]
+type = "victor/vpn:tailscale"
+
+[widget.tray]
+# ZSTray stays running (the vpn plugin drives its menu) but is replaced by victor/vpn:zscaler.
+hidden = [ "ZSTray" ]
+type = "tray"
+
+[widget.zscaler]
+type = "victor/vpn:zscaler"
 
 [widget.lock_keys]
 display = "short"
@@ -598,7 +596,7 @@ type = "sysmon"
 type = "spacer"
 
 [widget.sysmon]
-stat = "disk_pct"
+stat = "disk_used_pct"
 type = "sysmon"
 
 [widget.temp]

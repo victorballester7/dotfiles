@@ -1,0 +1,15 @@
+{
+  "settings": {
+    "threshold": {
+      "label": "Threshold (%)",
+      "description": "Notify when RAM usage goes above this percentage."
+    },
+    "rearm_margin": {
+      "label": "Re-arm margin (%)",
+      "description": "Usage must drop this far below the threshold before you can be notified again."
+    },
+    "poll_seconds": {
+      "label": "Check interval (s)"
+    }
+  }
+}

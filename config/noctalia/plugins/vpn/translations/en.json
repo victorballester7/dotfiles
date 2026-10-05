@@ -1,0 +1,7 @@
+{
+  "settings": {
+    "poll_seconds": {
+      "label": "Status check interval (s)"
+    }
+  }
+}

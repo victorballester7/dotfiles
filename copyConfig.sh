@@ -8,10 +8,15 @@ BLUE="\e[34m"
 RESET="\e[0m"
 
 CONFIG_DIR=$HOME/.config
+HYPR_SCRIPTS_DIR=$CONFIG_DIR/hypr/scripts
 FILES_DIR=$(pwd)/others
 RULES_DIR=$(pwd)/rules
 MYCONFIG_DIR=$(pwd)/config
 THEME_DIR=$HOME/.themes
+
+# check if current laptop monitor is disabled or not
+laptopMonitorActive=$(hyprctl -j monitors | jq -r 'any(.[]; .name=="eDP-1" and .disabled == false and .dpmsStatus == true)')
+echo -e "${BLUE}Laptop screen status: $laptopMonitorActive${RESET}"
 
 # BETTER NOT TO USE rsync (it changes premissions)
 
@@ -119,9 +124,15 @@ copyAutoLogin
 #     echo -e "${GREEN}Tlp configured successfully.${RESET}"
 # fi
 
-${CONFIG_DIR}/hypr/scripts/get_bing_image.sh
+${HYPR_SCRIPTS_DIR}/get_bing_image.sh
 
-sleep 1
+if [ "$laptopMonitorActive" = "false" ]; then
+    echo -e "${YELLOW}Laptop screen was disabled but it was reenabled. Executing laptopLidClose.sh script...${RESET}"
+    ${HYPR_SCRIPTS_DIR}/laptopLidClose.sh
+fi
+
+
+# sleep 1
 # reload hyprctl and gtk configs
 # gsettings set org.gnome.desktop.interface gtk-theme victorballester7
 # gsettings set org.gnome.desktop.interface icon-theme Papirus-Dark

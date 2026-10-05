@@ -2,8 +2,14 @@
 
 echo "$(date +"%H:%M:%S.%N" | cut -c1-13) - COLORS CONFIG START"
 
+# check if there is one argument, if not exit
+if [ "$#" -ne 1 ]; then
+    echo "Usage: $0 <wallpaper_path>"
+    exit 1
+fi
+
 # get the colors
-colors_output=$(noctalia theme /home/victor/.config/hypr/wallpapers/wallpaper.jpg)
+colors_output=$(noctalia theme $1)
 
 color_primary=$(echo "$colors_output" | jq -r '.primary')
 
