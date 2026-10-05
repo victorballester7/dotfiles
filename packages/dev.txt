@@ -1,0 +1,26 @@
+# Development: editor + toolchains
+neovim
+python-pynvim
+luarocks
+tree-sitter
+tree-sitter-cli
+npm
+yarn
+fswatch
+gitprompt
+clang
+cmake
+gcc-fortran
+uv
+python-dbus
+python-pandas
+python-matplotlib
+python-pyquery
+gnuplot
+sagemath
+android-sdk-platform-tools
+scrcpy
+claude-code
+github-copilot-cli
+openai-codex
+antigravity-cli

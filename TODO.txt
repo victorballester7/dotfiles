@@ -1,2 +1,0 @@
-- copy viduo which is in the folder 'etc/sudoers'
-- to install tzupdate, do it with pipx

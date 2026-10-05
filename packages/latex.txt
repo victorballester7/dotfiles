@@ -1,0 +1,4 @@
+# LaTeX (large!)
+texlive-full
+biber
+bibclean

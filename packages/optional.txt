@@ -1,0 +1,20 @@
+# Not installed by default (was PACKAGES_PENDING.txt). Install with: ./install.sh packages optional
+autopep8
+cheese
+cpanminus
+docker
+docker-compose
+ethtool
+fuse2
+jdk-openjdk
+jekyll
+jupyter-notebook
+kdenlive
+mkinitcpio-firmware
+ntfs-3g
+partitionmanager
+perl
+ruby
+tlp-rdw
+vlc
+xorg-xrandr

@@ -1,0 +1,13 @@
+# Build dependencies for Nektar++ (PhD)
+lapack
+blas
+openblas
+boost
+tinyxml
+scotch
+hdf5-openmpi
+openmpi
+paraview
+gmsh-bin
+fast_float
+stb

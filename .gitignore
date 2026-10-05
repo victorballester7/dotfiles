@@ -1,3 +1,14 @@
 .vscode/**
 *.knsv
 *.zip
+
+# Private, machine-local files (ssh config, ...). Stowed by install.sh if present, never committed.
+/private/
+
+# Generated at runtime inside stowed (symlinked) config dirs
+home/.config/hypr/wallpapers/
+home/.config/hypr/style/colors.css
+home/.config/hypr/noctalia.lua
+home/.config/btop/themes/
+home/.config/btop/*.log
+home/.config/systemd/user/*.wants/

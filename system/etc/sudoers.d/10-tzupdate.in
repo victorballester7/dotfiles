@@ -1,0 +1,3 @@
+# Let the desktop update the timezone without a password prompt.
+# Installed by install.sh (validated with visudo -cf). @USER@ is replaced with your username.
+@USER@ ALL=(ALL) NOPASSWD: /usr/bin/tzupdate

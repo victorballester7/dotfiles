@@ -1,0 +1,25 @@
+# Desktop applications
+zen-browser-bin
+chromium
+thunderbird
+telegram-desktop
+teams-for-linux
+spotify
+spotify-adblock
+libreoffice-fresh
+gimp
+imagemagick
+mpv
+evince
+zathura
+zathura-djvu
+zathura-pdf-mupdf
+xdotool
+qbittorrent
+acestream-engine
+acestream-launcher
+v4l2loopback-dkms
+v4l2loopback-utils
+python-pywalfox
+qt6-webengine
+libical
