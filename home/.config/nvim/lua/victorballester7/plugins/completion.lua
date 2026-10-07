@@ -1,34 +1,89 @@
 ---@type LazySpec
 return {
   {
-    "l3mon4d3/luasnip",
+    "saghen/blink.cmp",
+    version = "1.*",
+    event = { "InsertEnter", "CmdlineEnter" },
+    dependencies = {
+      "L3MON4D3/LuaSnip",
+      "moyiz/blink-emoji.nvim",
+    },
+    ---@module "blink.cmp"
+    ---@type blink.cmp.Config
+    opts = {
+      enabled = function()
+        return vim.b.completion ~= false
+      end,
+      keymap = {
+        preset = "none",
+        ["<C-Space>"] = { "show", "hide" },
+        ["<CR>"] = { "accept", "fallback" },
+        ["<Tab>"] = { "select_next", "fallback" },
+        ["<S-Tab>"] = { "select_prev", "fallback" },
+        ["<C-n>"] = { "select_next", "fallback" },
+        ["<C-p>"] = { "select_prev", "fallback" },
+        ["<C-e>"] = { "hide", "fallback" },
+        ["<C-b>"] = { "scroll_documentation_up", "fallback" },
+        ["<C-f>"] = { "scroll_documentation_down", "fallback" },
+        ["<C-k>"] = { "show_signature", "hide_signature", "fallback" },
+      },
+      completion = {
+        list = { selection = { preselect = false, auto_insert = true } },
+        accept = { auto_brackets = { enabled = true } },
+        documentation = { auto_show = true, auto_show_delay_ms = 200, window = { border = "rounded" } },
+        menu = { border = "rounded", draw = { treesitter = { "lsp" } } },
+      },
+      signature = { enabled = true, window = { border = "rounded" } },
+      appearance = {
+        kind_icons = vim.tbl_map(vim.trim, require("victorballester7.icons").kinds),
+      },
+      snippets = { preset = "luasnip" },
+      sources = {
+        default = { "lsp", "path", "snippets", "buffer", "emoji" },
+        per_filetype = {
+          tex = { "omni", "snippets", "path", "buffer" }, -- vimtex completion through its omnifunc
+          lua = { inherit_defaults = true, "lazydev" },
+        },
+        providers = {
+          emoji = { module = "blink-emoji", name = "Emoji", score_offset = -5 },
+          lazydev = { module = "lazydev.integrations.blink", name = "LazyDev", score_offset = 100 },
+        },
+      },
+      cmdline = {
+        keymap = { preset = "cmdline" },
+        completion = { menu = { auto_show = true } },
+      },
+    },
+  },
+  {
+    "L3MON4D3/LuaSnip",
+    version = "v2.*",
     build = "make install_jsregexp",
-    event = { "InsertEnter", "VeryLazy" },
+    lazy = true,
     config = function()
       local ls = require("luasnip")
       local node_util = require("luasnip.nodes.util")
-      local map = vim.keymap.set
 
       ls.filetype_extend("typescript", { "javascript" })
       ls.filetype_extend("javascriptreact", { "javascript" })
       ls.filetype_extend("typescriptreact", { "javascript" })
 
-      map({ "i", "v" }, "<C-l>", function()
+      vim.keymap.set({ "i", "s" }, "<C-l>", function()
         if ls.expand_or_jumpable() then
           ls.expand_or_jump()
         end
-      end, { silent = true })
-
-      map({ "i", "v" }, "<C-h>", function()
+      end, { silent = true, desc = "Expand snippet / next placeholder" })
+      vim.keymap.set({ "i", "s" }, "<C-h>", function()
         if ls.jumpable(-1) then
           ls.jump(-1)
         end
-      end, { silent = true })
+      end, { silent = true, desc = "Previous snippet placeholder" })
 
       ls.setup({
         enable_autosnippets = true,
         history = true,
         update_events = "TextChanged,TextChangedI",
+        -- select the whole placeholder text when jumping into a nested placeholder
         parser_nested_assembler = function(_, snippetNode)
           local select = function(snip, no_move, dry_run)
             if dry_run then
@@ -107,6 +162,24 @@ return {
         end,
       })
       require("luasnip.loaders.from_snipmate").lazy_load()
+    end,
+  },
+  {
+    "github/copilot.vim",
+    event = "InsertEnter",
+    cmd = "Copilot",
+    init = function()
+      vim.g.copilot_no_tab_map = true
+      vim.g.copilot_assume_mapped = true
+      vim.g.copilot_filetypes = { ["*"] = true, bigfile = false }
+    end,
+    config = function()
+      vim.keymap.set("i", "<C-j>", 'copilot#Accept("<CR>")', {
+        expr = true,
+        replace_keycodes = false,
+        silent = true,
+        desc = "Accept Copilot suggestion",
+      })
     end,
   },
 }
