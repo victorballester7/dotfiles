@@ -2,16 +2,38 @@
 return {
   {
     "lewis6991/gitsigns.nvim",
-    event = { "BufReadPre", "BufNewFile", "VeryLazy" },
+    event = { "BufReadPre", "BufNewFile" },
     opts = {
       current_line_blame = true,
       current_line_blame_formatter = "<author>, <author_time:%R> - <summary> (<abbrev_sha>)",
       current_line_blame_opts = { delay = 500 },
+      on_attach = function(buf)
+        local gs = require("gitsigns")
+        local function map(mode, lhs, rhs, desc)
+          vim.keymap.set(mode, lhs, rhs, { buffer = buf, silent = true, desc = desc })
+        end
+        map("n", "]h", function()
+          gs.nav_hunk("next")
+        end, "Next hunk")
+        map("n", "[h", function()
+          gs.nav_hunk("prev")
+        end, "Previous hunk")
+        map("n", "<Leader>gp", gs.preview_hunk_inline, "Preview hunk")
+        map({ "n", "x" }, "<Leader>gs", "<Cmd>Gitsigns stage_hunk<CR>", "Stage/unstage hunk")
+        map({ "n", "x" }, "<Leader>gr", "<Cmd>Gitsigns reset_hunk<CR>", "Reset hunk")
+        map("n", "<Leader>gb", function()
+          gs.blame_line({ full = true })
+        end, "Blame line")
+      end,
     },
   },
   {
     "tpope/vim-fugitive",
-    event = "VeryLazy",
+    cmd = { "G", "Git", "Gvdiffsplit", "Gdiffsplit", "Gread", "Gwrite", "GBrowse" },
+    keys = {
+      { "<Leader>vd", "<Cmd>Gvdiffsplit!<CR>", desc = "Git diff split" },
+      { "<Leader>gg", "<Cmd>Git<CR>", desc = "Git status" },
+    },
   },
   {
     "sindrets/diffview.nvim",
@@ -22,6 +44,10 @@ return {
       "DiffviewFocusFiles",
       "DiffviewRefresh",
       "DiffviewFileHistory",
+    },
+    keys = {
+      { "<Leader>gd", "<Cmd>DiffviewOpen<CR>", desc = "Diff view" },
+      { "<Leader>gh", "<Cmd>DiffviewFileHistory %<CR>", desc = "File history" },
     },
     opts = function()
       local actions = require("diffview.actions")
