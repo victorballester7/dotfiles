@@ -2,126 +2,126 @@
 return {
   {
     "nvim-treesitter/nvim-treesitter",
-    lazy = false,
-    build = ":TSUpdate",
     branch = "main",
-    dependencies = {
-      "nvim-treesitter/nvim-treesitter-context",
-      "windwp/nvim-ts-autotag",
-    },
+    lazy = false, -- the main branch does not support lazy-loading
+    build = ":TSUpdate",
     config = function()
-      -- a list of filetypes to install treesitter parsers and queries
-      local nvim_treesitter = require("nvim-treesitter")
+      local ts = require("nvim-treesitter")
 
-      local ensure_installed = {
+      -- parsers installed up front; any other parser available for a filetype is installed on first use
+      ts.install({
         "bash",
         "c",
         "cpp",
+        "css",
         "diff",
         "go",
         "gomod",
         "gosum",
+        "html",
         "javascript",
         "json",
         "lua",
         "markdown",
+        "markdown_inline",
         "python",
-        "py",
-        "sh",
+        "query",
+        "regex",
+        "rust",
         "toml",
+        "tsx",
         "typescript",
         "vim",
+        "vimdoc",
         "yaml",
         "zsh",
-      }
+      })
+      vim.treesitter.language.register("bash", "sh")
+
+      -- vimtex provides better highlighting for LaTeX than treesitter
+      local skip = { tex = true, bigfile = true }
+      local available ---@type string[]?
 
       vim.api.nvim_create_autocmd("FileType", {
-        pattern = ensure_installed,
+        group = vim.api.nvim_create_augroup("victorballester7-treesitter", { clear = true }),
         callback = function(args)
-          local ft = vim.bo[args.buf].filetype
+          local buf, ft = args.buf, args.match
           local lang = vim.treesitter.language.get_lang(ft)
-          if lang == nil then
+          if skip[ft] or not lang then
             return
           end
 
-          -- check if parser is available
-          local is_parser_available = vim.treesitter.language.add(lang)
-          if not is_parser_available then
-            local available_langs = vim.g.ts_available or nvim_treesitter.get_available()
-            if not vim.g.ts_available then
-              vim.g.ts_available = available_langs
+          if not vim.treesitter.language.add(lang) then
+            available = available or ts.get_available()
+            if not vim.tbl_contains(available, lang) then
+              return
             end
-
-            if vim.tbl_contains(available_langs, lang) then
-              -- install treesitter parsers and queries
-              local install_msg = string.format("Installing parsers and queries for %s", lang)
-              vim.print(install_msg)
-              require("nvim-treesitter").install(lang)
-            end
+            -- install in the background and start highlighting once it is ready
+            ts.install(lang):await(function()
+              if vim.api.nvim_buf_is_valid(buf) then
+                vim.api.nvim_exec_autocmds("FileType", { buffer = buf, group = args.group })
+              end
+            end)
+            return
           end
 
-          if vim.treesitter.language.add(lang) then
-            -- start treesitter highlighting
-            vim.treesitter.start(args.buf, lang)
-
-            -- the following two statements will enable treesitter folding
-            -- vim.wo[0][0].foldexpr = "v:lua.vim.treesitter.foldexpr()"
-            -- vim.wo[0][0].foldmethod = "expr"
-
-            -- enable treesitter-based indentation
-            -- vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
-          end
+          vim.treesitter.start(buf, lang)
+          vim.wo[0][0].foldmethod = "expr"
+          vim.wo[0][0].foldexpr = "v:lua.vim.treesitter.foldexpr()"
         end,
       })
-
-      require("nvim-ts-autotag").setup()
-      vim.treesitter.language.register("jsonc", "json")
-      vim.treesitter.language.register("zsh", "sh")
-      require("treesitter-context").setup({ max_lines = 10, multiline_threshold = 4 })
-
-      vim.opt.foldmethod = "expr"
-      vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
-      vim.opt.foldenable = false
     end,
   },
   {
+    "nvim-treesitter/nvim-treesitter-context",
+    event = { "BufReadPost", "BufNewFile" },
+    opts = { max_lines = 10, multiline_threshold = 4 },
+  },
+  {
+    "windwp/nvim-ts-autotag",
+    event = { "BufReadPost", "BufNewFile" },
+    opts = {},
+  },
+  {
     "nvim-treesitter/nvim-treesitter-textobjects",
-    event = "VeryLazy",
     branch = "main",
+    event = "VeryLazy",
     init = function()
-      -- Disable entire built-in ftplugin mappings to avoid conflicts.
+      -- disable the built-in ftplugin mappings to avoid conflicts
       vim.g.no_plugin_maps = true
     end,
     config = function()
-      require("nvim-treesitter-textobjects").setup {
+      require("nvim-treesitter-textobjects").setup({
         select = {
           lookahead = true,
           selection_modes = {
-            ["@function.inner"] = "V", -- linewise
-            ["@function.outer"] = "V", -- linewise
-            ["@class.outer"] = "V", -- linewise
-            ["@class.inner"] = "V", -- linewise
-            ["@parameter.outer"] = "v", -- charwise
+            ["@function.inner"] = "V",
+            ["@function.outer"] = "V",
+            ["@class.outer"] = "V",
+            ["@class.inner"] = "V",
+            ["@parameter.outer"] = "v",
           },
           include_surrounding_whitespace = false,
         },
-      }
+      })
 
-      vim.keymap.set({ "x", "o" }, "af", function()
-        require("nvim-treesitter-textobjects.select").select_textobject("@function.outer", "textobjects")
-      end)
-      vim.keymap.set({ "x", "o" }, "if", function()
-        require("nvim-treesitter-textobjects.select").select_textobject("@function.inner", "textobjects")
-      end)
-      vim.keymap.set({ "x", "o" }, "ac", function()
-        require("nvim-treesitter-textobjects.select").select_textobject("@class.outer", "textobjects")
-      end)
-      vim.keymap.set({ "x", "o" }, "ic", function()
-        require("nvim-treesitter-textobjects.select").select_textobject("@class.inner", "textobjects")
-      end)
+      local select = require("nvim-treesitter-textobjects.select").select_textobject
+      local textobjects = {
+        af = { "@function.outer", "Around function" },
+        ["if"] = { "@function.inner", "Inside function" },
+        ac = { "@class.outer", "Around class" },
+        ic = { "@class.inner", "Inside class" },
+        aa = { "@parameter.outer", "Around argument" },
+        ia = { "@parameter.inner", "Inside argument" },
+      }
+      for lhs, obj in pairs(textobjects) do
+        vim.keymap.set({ "x", "o" }, lhs, function()
+          select(obj[1], "textobjects")
+        end, { desc = obj[2] })
+      end
       vim.keymap.set({ "x", "o" }, "as", function()
-        require("nvim-treesitter-textobjects.select").select_textobject("@local.scope", "locals")
-      end)
+        select("@local.scope", "locals")
+      end, { desc = "Around scope" })
     end,
   },
 }
