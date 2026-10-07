@@ -1,4 +1,6 @@
 require("victorballester7.options")
+require("victorballester7.autocmds")
+require("victorballester7.bigfile")
 require("victorballester7.lazy")
+require("victorballester7.keymaps")
 require("victorballester7.commands")
-require("victorballester7.maps")

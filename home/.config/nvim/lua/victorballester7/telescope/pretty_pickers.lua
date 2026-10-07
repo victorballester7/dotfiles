@@ -2,9 +2,9 @@
 
 local M = {}
 
-local telescope_utils = require('telescope.utils')
-local make_entry = require('telescope.make_entry')
-local entry_display = require('telescope.pickers.entry_display')
+local telescope_utils = require("telescope.utils")
+local make_entry = require("telescope.make_entry")
+local entry_display = require("telescope.pickers.entry_display")
 
 ---- Helper functions ----
 
@@ -14,10 +14,10 @@ local entry_display = require('telescope.pickers.entry_display')
 function M.get_path_and_tail(file_name)
   local buffer_name_tail = telescope_utils.path_tail(file_name)
 
-  local path_without_tail = require('plenary.strings').truncate(file_name, #file_name - #buffer_name_tail, '')
+  local path_without_tail = require("plenary.strings").truncate(file_name, #file_name - #buffer_name_tail, "")
 
   local path_to_display = telescope_utils.transform_path({
-    path_display = { 'truncate' },
+    path_display = { "truncate" },
   }, path_without_tail)
 
   return buffer_name_tail, path_to_display
@@ -37,8 +37,8 @@ end
 --                                      (optional) options = { ... }
 --                                   }
 function M.pretty_grep_picker(picker_and_options)
-  if type(picker_and_options) ~= 'table' or picker_and_options.picker == nil then
-    print "Incorrect argument format. Correct format is: { picker = 'desiredPicker', (optional) options = { ... } }"
+  if type(picker_and_options) ~= "table" or picker_and_options.picker == nil then
+    print("Incorrect argument format. Correct format is: { picker = 'desiredPicker', (optional) options = { ... } }")
     return
   end
 
@@ -64,14 +64,14 @@ function M.pretty_grep_picker(picker_and_options)
     -- INSIGHT: An "entry display" is an abstract concept that defines the "container" within which data
     --          will be displayed inside the picker, this means that we must define options that define
     --          its dimensions, like, for example, its width.
-    local displayer = entry_display.create {
-      separator = ' ', -- Telescope will use this separator between each entry item
+    local displayer = entry_display.create({
+      separator = " ", -- Telescope will use this separator between each entry item
       items = {
         { width = nil },
         { width = nil }, -- Maximum path size, keep it short
         { remaining = true },
       },
-    }
+    })
 
     -- LIFECYCLE: At this point the "displayer" has been created by the create() method, which has in turn
     --            returned a function. This means that we can now call said function by using the
@@ -95,44 +95,44 @@ function M.pretty_grep_picker(picker_and_options)
       ---------------------------------
 
       -- Add coordinates if required by 'options'
-      local coordinates = ''
+      local coordinates = ""
 
       if not options.disable_coordinates then
         if entry.lnum then
           if entry.col then
-            coordinates = string.format('%s:%s', entry.lnum, entry.col)
+            coordinates = string.format("%s:%s", entry.lnum, entry.col)
           else
-            coordinates = string.format('%s', entry.lnum)
+            coordinates = string.format("%s", entry.lnum)
           end
         end
       end
 
       -- Encode text if necessary
-      local text = options.file_encoding and vim.iconv(entry.text, options.file_encoding, 'utf8') or entry.text
+      local text = options.file_encoding and vim.iconv(entry.text, options.file_encoding, "utf8") or entry.text
 
       -- INSIGHT: This return value should be a tuple of 2, where the first value is the actual value
       --          and the second one is the highlight information, this will be done by the displayer
       --          internally and return in the correct format.
-      return displayer {
+      return displayer({
         tail,
-        { coordinates, 'TelescopeResultsComment' },
-        { path_to_display, 'TelescopeResultsComment' },
+        { coordinates, "TelescopeResultsComment" },
+        { path_to_display, "TelescopeResultsComment" },
         text,
-      }
+      })
     end
 
     return original_entry_table
   end
 
   -- Finally, check which file picker was requested and open it with its associated options
-  if picker_and_options.picker == 'live_grep' then
-    require('telescope.builtin').live_grep(options)
-  elseif picker_and_options.picker == 'grep_string' then
-    require('telescope.builtin').grep_string(options)
-  elseif picker_and_options.picker == '' then
-    print 'Picker was not specified'
+  if picker_and_options.picker == "live_grep" then
+    require("telescope.builtin").live_grep(options)
+  elseif picker_and_options.picker == "grep_string" then
+    require("telescope.builtin").grep_string(options)
+  elseif picker_and_options.picker == "" then
+    print("Picker was not specified")
   else
-    print 'Picker is not supported by Pretty Grep Picker'
+    print("Picker is not supported by Pretty Grep Picker")
   end
 end
 

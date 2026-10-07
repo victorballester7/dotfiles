@@ -1,54 +1,58 @@
-vim.opt.title = true
-vim.opt.number = true
-vim.opt.relativenumber = true
-vim.opt.numberwidth = 1
-vim.opt.mouse = "a"
-vim.opt.clipboard = "unnamed"
-vim.opt.shortmess:append("A")
-vim.opt.expandtab = true
-vim.opt.tabstop = 2
-vim.opt.shiftwidth = 2
-vim.opt.breakindent = true
-vim.opt.showmode = false
-vim.opt.ignorecase = true
-vim.opt.smartcase = true
-vim.opt.termguicolors = true
-vim.opt.signcolumn = "yes"
-vim.opt.updatetime = 250
-vim.opt.timeoutlen = 300
-vim.opt.writebackup = false
-vim.opt.completeopt = "menu,menuone,noselect"
-vim.opt.mousetime = 0
-vim.opt.cursorline = true
-vim.opt.hlsearch = false
-vim.opt.scrolloff = 6
-vim.opt.cmdheight = 0
-vim.opt.undofile = true
-vim.opt.undodir = vim.fn.stdpath("data") .. "/undo"
-
--- Disable inserting comments on new lines (do not try to change it in a simple way, I had to do this to avoid a bug)
-vim.api.nvim_create_autocmd("FileType", {
-	pattern = "*",
-	callback = function()
-		vim.opt_local.formatoptions:remove({ "r", "o" })
-	end,
-})
-
-vim.g.mapleader = " " -- space as leader
-vim.g.maplocalleader = " " -- space as local leader
+vim.g.mapleader = " "
+vim.g.maplocalleader = " "
 
 vim.g.python3_host_prog = "/usr/bin/python3"
 vim.g.tex_flavor = "latex"
 
+-- nvim-tree replaces netrw
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
 
--- spell check
--- vim.opt.spelllang = "en_us"
-vim.opt.spelllang = "en_gb"
-vim.api.nvim_create_autocmd("FileType", {
-	pattern = { "tex", "markdown" },
-	callback = function()
-		vim.opt_local.spell = true
-	end,
-})
+local opt = vim.opt
+
+-- ui
+opt.title = true
+opt.number = true
+opt.relativenumber = true
+opt.numberwidth = 1
+opt.signcolumn = "yes"
+opt.cursorline = true
+opt.termguicolors = true
+opt.showmode = false -- shown by lualine
+opt.cmdheight = 0 -- noice draws the cmdline
+opt.scrolloff = 6
+opt.smoothscroll = true
+opt.splitright = true
+opt.splitbelow = true
+opt.breakindent = true
+opt.linebreak = true
+
+-- editing
+opt.expandtab = true
+opt.tabstop = 2
+opt.shiftwidth = 2
+opt.shiftround = true
+opt.clipboard = "unnamed"
+opt.mouse = "a"
+opt.mousetime = 0
+opt.undofile = true
+opt.writebackup = false
+opt.completeopt = "menu,menuone,noselect"
+
+-- search
+opt.ignorecase = true
+opt.smartcase = true
+opt.hlsearch = false
+opt.inccommand = "split"
+
+-- timing
+opt.updatetime = 250
+opt.timeoutlen = 300
+
+-- folding (treesitter sets 'foldexpr' per buffer); start with everything open
+opt.foldlevel = 99
+opt.foldlevelstart = 99
+opt.foldtext = ""
+
+opt.shortmess:append("A") -- no swap file warnings
+opt.spelllang = "en_gb"

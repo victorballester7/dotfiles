@@ -1,14 +1,14 @@
-local Path = require('plenary.path')
-local action_set = require('telescope.actions.set')
-local action_state = require('telescope.actions.state')
-local transform_mod = require('telescope.actions.mt').transform_mod
-local actions = require('telescope.actions')
-local conf = require('telescope.config').values
-local finders = require('telescope.finders')
-local make_entry = require('telescope.make_entry')
+local Path = require("plenary.path")
+local action_set = require("telescope.actions.set")
+local action_state = require("telescope.actions.state")
+local transform_mod = require("telescope.actions.mt").transform_mod
+local actions = require("telescope.actions")
+local conf = require("telescope.config").values
+local finders = require("telescope.finders")
+local make_entry = require("telescope.make_entry")
 local os_sep = Path.path.sep
-local pickers = require('telescope.pickers')
-local scan = require('plenary.scandir')
+local pickers = require("telescope.pickers")
+local scan = require("plenary.scandir")
 
 local M = {}
 
@@ -25,24 +25,24 @@ local live_grep_filters = {
 local function run_live_grep(current_input)
   -- TODO: Resume old one with same options somehow
   -- TODO: Use path_display with default live_grep if possible here
-  require('victorballester7.telescope_pretty_pickers').pretty_grep_picker {
-    picker = 'live_grep',
+  require("victorballester7.telescope.pretty_pickers").pretty_grep_picker({
+    picker = "live_grep",
     options = {
       additional_args = live_grep_filters.extension and function()
-        return { '-g', '*.' .. live_grep_filters.extension }
+        return { "-g", "*." .. live_grep_filters.extension }
       end,
       search_dirs = live_grep_filters.directories,
       default_text = current_input,
     },
-  }
+  })
 end
 
-M.actions = transform_mod {
+M.actions = transform_mod({
   ---Ask for a file extension and open a new `live_grep` filtering by it
   set_extension = function(prompt_bufnr)
     local current_input = action_state.get_current_line()
 
-    vim.ui.input({ prompt = '*.' }, function(input)
+    vim.ui.input({ prompt = "*." }, function(input)
       if input == nil then
         return
       end
@@ -66,15 +66,15 @@ M.actions = transform_mod {
         table.insert(data, entry .. os_sep)
       end,
     })
-    table.insert(data, 1, '.' .. os_sep)
+    table.insert(data, 1, "." .. os_sep)
 
     actions.close(prompt_bufnr)
     pickers
       .new({}, {
-        prompt_title = 'Folders for Live Grep',
-        finder = finders.new_table { results = data, entry_maker = make_entry.gen_from_file {} },
-        previewer = conf.file_previewer {},
-        sorter = conf.file_sorter {},
+        prompt_title = "Folders for Live Grep",
+        finder = finders.new_table({ results = data, entry_maker = make_entry.gen_from_file({}) }),
+        previewer = conf.file_previewer({}),
+        sorter = conf.file_sorter({}),
         attach_mappings = function(prompt_bufnr)
           action_set.select:replace(function()
             local current_picker = action_state.get_current_picker(prompt_bufnr)
@@ -98,7 +98,7 @@ M.actions = transform_mod {
       })
       :find()
   end,
-}
+})
 
 ---Small wrapper over `live_grep` to first reset our active filters
 M.live_grep = function()
