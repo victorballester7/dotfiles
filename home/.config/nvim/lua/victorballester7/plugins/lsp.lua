@@ -1,199 +1,171 @@
+-- Servers to enable. Those not installed (cmd not executable) are skipped, so the list can hold servers
+-- that only exist on some machines.
+local servers = {
+  "clangd",
+  "eslint",
+  "jsonls",
+  "lua_ls",
+  "matlab_ls",
+  "pyright",
+  "qmlls",
+  "r_language_server",
+  "rust_analyzer",
+  "texlab",
+  "vimls",
+  "yamlls",
+}
+
+-- installed with mason (servers use their lspconfig names)
+local mason_packages = {
+  "eslint",
+  "jsonls",
+  "lua_ls",
+  "pyright",
+  "rust_analyzer",
+  "texlab",
+  "vimls",
+  "yamlls",
+  "latexindent",
+  "luacheck",
+  "prettier",
+  "ruff",
+  "stylua",
+  "taplo",
+}
+
+local function on_attach(args)
+  local client = assert(vim.lsp.get_client_by_id(args.data.client_id))
+  local function map(mode, lhs, rhs, desc)
+    vim.keymap.set(mode, lhs, rhs, { buffer = args.buf, silent = true, nowait = true, desc = desc })
+  end
+
+  map("n", "gd", "<Cmd>Telescope lsp_definitions<CR>", "Go to definition")
+  map("n", "gD", vim.lsp.buf.declaration, "Go to declaration")
+  map("n", "gi", "<Cmd>Telescope lsp_implementations<CR>", "Go to implementation")
+  map("n", "gy", "<Cmd>Telescope lsp_type_definitions<CR>", "Go to type definition")
+  map("n", "gr", "<Cmd>Telescope lsp_references<CR>", "References")
+  map("i", "<C-k>", vim.lsp.buf.signature_help, "Signature help")
+  map("n", "<Leader>rn", vim.lsp.buf.rename, "Rename symbol")
+  map({ "n", "x" }, "<Leader>ca", vim.lsp.buf.code_action, "Code action")
+  map("n", "<Leader>sd", "<Cmd>Telescope lsp_document_symbols<CR>", "Document symbols")
+  map("n", "<Leader>sw", "<Cmd>Telescope lsp_dynamic_workspace_symbols<CR>", "Workspace symbols")
+  map("n", "<Leader>ih", function()
+    vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled({ bufnr = args.buf }), { bufnr = args.buf })
+  end, "Toggle inlay hints")
+
+  if client.name == "texlab" then
+    client.server_capabilities.completionProvider = nil -- vimtex provides completion
+    map("n", "<LocalLeader>lw", "<Cmd>w<CR><Cmd>TexWordCount<CR>", "Word count")
+  elseif client.name == "clangd" then
+    map("n", "<LocalLeader>ls", "<Cmd>LspClangdSwitchSourceHeader<CR>", "Switch source/header")
+  end
+end
+
 ---@type LazySpec
 return {
-	{
-		"neovim/nvim-lspconfig",
-		event = { "BufReadPre", "BufNewFile", "VeryLazy" },
-		dependencies = {
-			"williamboman/mason.nvim",
-			"williamboman/mason-lspconfig.nvim",
-			"whoissethdaniel/mason-tool-installer.nvim",
-			"folke/neodev.nvim",
-			"b0o/schemastore.nvim",
-		},
-		config = function()
-			require("mason").setup()
-			require("mason-lspconfig").setup({
-				ensure_installed = { "eslint", "jsonls", "lua_ls", "pyright", "rust_analyzer", "texlab", "vimls", "yamlls" },
-				automatic_installation = { exclude = { "clangd", "r_language_server" } },
-			})
-			require("mason-tool-installer").setup({
-				ensure_installed = { "latexindent", "luacheck", "prettier", "ruff", "stylua", "taplo" },
-			})
-			require("mason-tool-installer").check_install(false) -- false stands for not updating, only installing
+  {
+    "neovim/nvim-lspconfig",
+    event = { "BufReadPre", "BufNewFile" },
+    dependencies = {
+      "mason-org/mason.nvim",
+      "b0o/schemastore.nvim",
+      "saghen/blink.cmp",
+    },
+    config = function()
+      local icons = require("victorballester7.icons").diagnostics
+      vim.diagnostic.config({
+        severity_sort = true,
+        update_in_insert = false,
+        virtual_text = { spacing = 2, prefix = "●" },
+        float = { border = "rounded", source = "if_many" },
+        signs = {
+          text = {
+            [vim.diagnostic.severity.ERROR] = icons.Error,
+            [vim.diagnostic.severity.WARN] = icons.Warn,
+            [vim.diagnostic.severity.INFO] = icons.Info,
+            [vim.diagnostic.severity.HINT] = icons.Hint,
+          },
+        },
+      })
 
-			require("neodev").setup({
-				override = function(_, library)
-					library.enabled = true
-					library.plugins = true
-				end,
-			})
+      vim.api.nvim_create_autocmd("LspAttach", {
+        group = vim.api.nvim_create_augroup("victorballester7-lsp", { clear = true }),
+        callback = on_attach,
+      })
 
-			vim.diagnostic.config({
-				severity_sort = true,
-				update_in_insert = false,
-			})
-			for name, icon in pairs(require("victorballester7.icons").diagnostics) do
-				name = "DiagnosticSign" .. name
-				vim.fn.sign_define(name, { text = icon, texthl = name, numhl = "" })
-			end
+      vim.lsp.config("*", { capabilities = require("blink.cmp").get_lsp_capabilities() })
 
-			local default_capabilities = vim.tbl_deep_extend(
-				"force",
-				vim.lsp.protocol.make_client_capabilities(),
-				require("cmp_nvim_lsp").default_capabilities()
-			)
+      vim.lsp.config("jsonls", {
+        settings = {
+          json = { schemas = require("schemastore").json.schemas(), validate = { enable = true } },
+        },
+      })
+      vim.lsp.config("yamlls", {
+        settings = {
+          yaml = { schemaStore = { enable = false, url = "" }, schemas = require("schemastore").yaml.schemas() },
+        },
+      })
+      vim.lsp.config("texlab", {
+        settings = { texlab = { chktex = { onEdit = true, onOpenAndSave = true } } },
+      })
+      vim.lsp.config("qmlls", { cmd = { vim.fn.executable("qmlls6") == 1 and "qmlls6" or "qmlls" } })
+      vim.lsp.config("pyright", {
+        -- for projects with a main.py in a parent directory, add that directory to the import paths and
+        -- use the virtual environment next to it
+        before_init = function(_, config)
+          local main_dir = config.root_dir and vim.fs.root(config.root_dir, "main.py")
+          if not main_dir then
+            return
+          end
+          config.settings = config.settings or {}
+          local python = config.settings.python or {}
+          local venv = vim.env.VIRTUAL_ENV
+          if not venv then
+            -- e.g. main_dir/.venv/pyvenv.cfg
+            local cfg = vim.fn.glob(main_dir .. "/{*,.*}/pyvenv.cfg", false, true)[1]
+            venv = cfg and vim.fs.dirname(cfg)
+          end
+          if venv then
+            python.pythonPath = vim.fs.joinpath(venv, "bin", "python")
+          end
+          python.analysis = python.analysis or {}
+          python.analysis.extraPaths = python.analysis.extraPaths or {}
+          if not vim.list_contains(python.analysis.extraPaths, main_dir) then
+            table.insert(python.analysis.extraPaths, main_dir)
+          end
+          config.settings.python = python
+        end,
+      })
 
-			--- @param custom_config? lspconfig.Config
-			--- @return lspconfig.Config
-			local function config(custom_config)
-				return vim.tbl_deep_extend("force", {
-					capabilities = vim.deepcopy(default_capabilities),
-					--- @type vim.lsp.client.on_attach_cb
-					on_attach = function(client, bufnr)
-						local bufopts = { noremap = true, silent = true, buffer = bufnr }
-						local map = vim.keymap.set
-						map("n", "gd", "<Cmd>Telescope lsp_definitions<CR>", bufopts)
-						map("n", "gD", vim.lsp.buf.declaration, bufopts)
-						map("n", "gi", "<Cmd>Telescope lsp_implementations<CR>", bufopts)
-						map("n", "gy", "<Cmd>Telescope lsp_type_definitions<CR>", bufopts)
-						map("n", "gr", "<Cmd>Telescope lsp_references<CR>", bufopts)
-						-- map("n", "K", vim.lsp.buf.hover, bufopts)
-						map("i", "<C-k>", vim.lsp.buf.signature_help, bufopts)
-						map("n", "<Leader>rn", vim.lsp.buf.rename, bufopts)
-						map("n", "<Leader>ca", function()
-							vim.lsp.buf.code_action({ apply = true })
-						end, bufopts)
-						map("n", "<Leader>sd", "<Cmd>Telescope lsp_document_symbols<CR>", bufopts)
-						map("n", "<Leader>sw", "<Cmd>Telescope lsp_dynamic_workspace_symbols<CR>", bufopts)
-						if client.name == "texlab" then
-							---@diagnostic disable-next-line: assign-type-mismatch
-							client.server_capabilities.completionProvider = false -- we use `vimtex` completion!
-							map("n", "<LocalLeader>lw", "<Cmd>w<CR><Cmd>TexWordCount<CR>", bufopts)
-						end
-						if client.name == "clangd" then
-							map("n", "<LocalLeader>ls", "<Cmd>ClangdSwitchSourceHeader<CR>", bufopts)
-						end
-					end,
-				}, custom_config or {})
-			end
-
-			local function get_python_path(root_dir)
-				-- use active venv
-				if vim.env.VIRTUAL_ENV then
-					return vim.fs.joinpath(vim.env.VIRTUAL_ENV, "bin", "python")
-				end
-
-				-- find venv in current dir
-				for _, pattern in ipairs({ "*", ".*" }) do
-					local match = vim.fn.glob(vim.fs.joinpath(root_dir, pattern, "pyvenv.cfg"))
-					if match ~= "" then
-						return vim.fs.joinpath(vim.fs.dirname(match), "bin", "python")
-					end
-				end
-
-				-- fallback to system installation
-				return nil
-			end
-
-			-- require("typescript-tools").setup(config())
-
-			vim.lsp.config('clangd', config())
-			vim.lsp.config('eslint', config())
-			vim.lsp.config('lua_ls', config())
-			vim.lsp.config('matlab_ls', config())
-			vim.lsp.config('r_language_server', config())
-			vim.lsp.config('rust_analyzer', config())
-			vim.lsp.config('vimls', config())
-			vim.lsp.config('jsonls', config({
-				settings = {
-					json = {
-						schemas = require("schemastore").json.schemas(),
-						validate = { enable = true },
-					},
-				},
-			}))
-			vim.lsp.config('qmlls', config())
-			vim.lsp.config('pyright', config({
-				before_init = function(_, conf)
-					local function find_main_py_dir(start_dir)
-						if not start_dir or start_dir == "" then
-							return nil
-						end
-						local path = vim.fn.fnamemodify(start_dir, ":p") -- Get absolute path
-						while path and path ~= "/" do
-							if vim.fn.filereadable(path .. "/main.py") == 1 then
-								return path
-							end
-							path = vim.fn.fnamemodify(path, ":h") -- Move up a directory
-						end
-						return nil
-					end
-
-					local main_py_dir = find_main_py_dir(conf.root_dir)
-					if main_py_dir then
-						conf.settings = conf.settings or {}
-						conf.settings.python = conf.settings.python or {}
-						local python_path = get_python_path(main_py_dir)
-						if python_path then
-							conf.settings.python.pythonPath = python_path
-						end
-						conf.settings.python.analysis = conf.settings.python.analysis or {}
-						conf.settings.python.analysis.extraPaths = conf.settings.python.analysis.extraPaths or {}
-						if not vim.tbl_contains(conf.settings.python.analysis.extraPaths, main_py_dir) then
-							table.insert(conf.settings.python.analysis.extraPaths, main_py_dir)
-						end
-					end
-				end,
-			}))
-			vim.lsp.config('texlab', config({
-				settings = { texlab = { chktex = { onEdit = true, onOpenAndSave = true } } },
-			}))
-			vim.lsp.config('yamlls', config({
-				settings = {
-					yaml = {
-						schemaStore = { enable = false, url = "" },
-						schemas = require("schemastore").yaml.schemas(),
-					},
-				},
-			}))
-
-			
-			vim.lsp.enable('clangd')
-			vim.lsp.enable('eslint')
-			vim.lsp.enable('lua_ls')
-			vim.lsp.enable('matlab_ls')
-			vim.lsp.enable('r_language_server')
-			vim.lsp.enable('rust_analyzer')
-			vim.lsp.enable('vimls')
-			vim.lsp.enable('jsonls')
-			vim.lsp.enable('qmlls')
-			vim.lsp.enable('pyright')
-			vim.lsp.enable('texlab')
-			vim.lsp.enable('yamlls')
-
-		end,
-	},
-	{
-		"github/copilot.vim",
-		config = false,
-		event = { "BufReadPre", "BufNewFile", "VeryLazy" },
-		init = function()
-			vim.keymap.set("i", "<C-j>", 'copilot#Accept("<CR>")', {
-				noremap = true,
-				silent = true,
-				expr = true,
-				replace_keycodes = false,
-			})
-
-			vim.g.copilot_no_tab_map = true
-			vim.g.copilot_filetypes = { ["*"] = true }
-			vim.g.copilot_assume_mapped = true
-		end,
-	},
-	{
-		"benomahony/uv.nvim",
-		opts = {
-			picker_integration = true,
-		},
-	},
+      for _, server in ipairs(servers) do
+        local cmd = vim.lsp.config[server] and vim.lsp.config[server].cmd
+        if type(cmd) ~= "table" or vim.fn.executable(cmd[1]) == 1 then
+          vim.lsp.enable(server)
+        end
+      end
+    end,
+  },
+  {
+    "mason-org/mason.nvim",
+    cmd = "Mason",
+    opts = {},
+  },
+  {
+    "WhoIsSethDaniel/mason-tool-installer.nvim",
+    event = "VeryLazy",
+    dependencies = {
+      "mason-org/mason.nvim",
+      { "mason-org/mason-lspconfig.nvim", opts = { automatic_enable = false } },
+    },
+    opts = { ensure_installed = mason_packages, run_on_start = true },
+  },
+  {
+    "folke/lazydev.nvim",
+    ft = "lua",
+    opts = {
+      library = {
+        { path = "${3rd}/luv/library", words = { "vim%.uv" } },
+      },
+    },
+  },
 }
