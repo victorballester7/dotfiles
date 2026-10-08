@@ -1,3 +1,40 @@
+-- Shell-like <Tab> for the cmdline: extend the word under the cursor to the longest prefix
+-- shared by every candidate that starts with it. Returns nil when there is nothing to add.
+---@param cmp blink.cmp.API
+---@param force? boolean skip the visibility check (the menu was just requested)
+local function cmdline_complete_common(cmp, force)
+  if not force and not cmp.is_menu_visible() then
+    return
+  end
+  local line, cursor = vim.fn.getcmdline(), vim.fn.getcmdpos() - 1
+  local start, common
+  for _, item in ipairs(cmp.get_items()) do
+    local edit = item.textEdit
+    local range = edit and (edit.insert or edit.range)
+    if range then
+      start = start or range.start.character
+      local typed = line:sub(start + 1, cursor)
+      local text = edit.newText
+      if range.start.character == start and vim.startswith(text, typed) then
+        if not common then
+          common = text
+        else
+          local i = 0
+          while i < #common and common:byte(i + 1) == text:byte(i + 1) do
+            i = i + 1
+          end
+          common = common:sub(1, i)
+        end
+      end
+    end
+  end
+  if not common or #common <= cursor - start then
+    return
+  end
+  vim.fn.setcmdline(line:sub(1, start) .. common .. line:sub(cursor + 1), start + #common + 1)
+  return true
+end
+
 ---@type LazySpec
 return {
   {
@@ -50,8 +87,29 @@ return {
         },
       },
       cmdline = {
-        keymap = { preset = "cmdline" },
-        completion = { menu = { auto_show = true } },
+        keymap = {
+          preset = "none",
+          -- Tab accepts an item picked with the arrows, otherwise completes like a shell
+          -- (up to the longest common prefix of the matches)
+          ["<Tab>"] = {
+            "accept",
+            cmdline_complete_common,
+            function(cmp)
+              return cmp.show({ callback = function() cmdline_complete_common(cmp, true) end })
+            end,
+          },
+          -- arrows move through the menu when it is open, otherwise browse history
+          ["<Down>"] = { "select_next", "fallback" },
+          ["<Up>"] = { "select_prev", "fallback" },
+          ["<C-n>"] = { "select_next", "fallback" },
+          ["<C-p>"] = { "select_prev", "fallback" },
+          ["<C-Space>"] = { "show", "fallback" },
+          ["<C-e>"] = { "cancel", "fallback" },
+        },
+        completion = {
+          menu = { auto_show = true },
+          list = { selection = { preselect = false, auto_insert = true } },
+        },
       },
     },
   },
@@ -179,6 +237,13 @@ return {
         replace_keycodes = false,
         silent = true,
         desc = "Accept Copilot suggestion",
+      })
+      -- overrides the plain word motion from keymaps.lua, which it falls back to
+      vim.keymap.set("i", "<M-Right>", 'copilot#AcceptWord("\\<C-Right>")', {
+        expr = true,
+        replace_keycodes = false,
+        silent = true,
+        desc = "Accept Copilot word / word forwards",
       })
     end,
   },

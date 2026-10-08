@@ -321,7 +321,7 @@ scale = 1.25
     wifi = true
 
 [plugins]
-enabled = [ "victor/ram-alert", "victor/laptop-screen", "victor/vpn" ]
+enabled = [ "victor/ram-alert", "victor/laptop-screen", "victor/vpn", "weinguyen/procmon" ]
 
     [[plugins.source]]
     enabled = true
@@ -530,6 +530,9 @@ type = "clock"
 stat = "cpu_usage"
 type = "sysmon"
 
+    [widget.cpu.actions]
+    left = "panel-toggle weinguyen/procmon:panel"
+
 [widget.date]
 format = "{:%a %d %b}"
 type = "clock"
@@ -592,6 +595,10 @@ type = "volume"
 stat = "ram_pct"
 type = "sysmon"
 
+    # Left click: btop-style process list (community plugin weinguyen/procmon).
+    [widget.ram.actions]
+    left = "panel-toggle weinguyen/procmon:panel"
+
 [widget.spacer]
 type = "spacer"
 
@@ -603,6 +610,16 @@ type = "sysmon"
 stat = "cpu_temp"
 type = "sysmon"
 
+    [widget.temp.actions]
+    left = "panel-toggle weinguyen/procmon:panel"
+
 [widget.weather]
 show_condition = false
 type = "weather"
+
+[plugin_settings."nightwatch75/file-search"]
+# hosts/ and OneDrive/ are sshfs/rclone mounts: walking them over the network blows the 3 min index timeout.
+exclude_dirs = ".git, node_modules, .cache, .venv, hosts, OneDrive, nektar"
+
+[plugin_settings."weinguyen/procmon"]
+sort_by = "mem"

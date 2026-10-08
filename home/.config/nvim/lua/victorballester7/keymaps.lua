@@ -24,6 +24,18 @@ map("n", "<C-a>", "ggVG", "Select all")
 map("i", "<C-BS>", "<C-w>", "Delete word backwards")
 map("i", "<C-Del>", "<C-o>dw", "Delete word forwards")
 
+-- word motions / deletions with Alt, in insert and command-line mode
+map({ "i", "c" }, "<M-Left>", "<C-Left>", "Word backwards", { silent = false })
+map({ "i", "c" }, "<M-Right>", "<C-Right>", "Word forwards", { silent = false })
+map({ "i", "c" }, "<M-BS>", "<C-w>", "Delete word backwards", { silent = false })
+map("i", "<M-Del>", "<C-o>dw", "Delete word forwards")
+map("c", "<M-Del>", function()
+  local line, pos = vim.fn.getcmdline(), vim.fn.getcmdpos()
+  local rest = line:sub(pos)
+  local word = rest:match("^%s*[%w_]+") or rest:match("^%s*[^%w_%s]+") or rest:match("^%s+") or ""
+  vim.fn.setcmdline(line:sub(1, pos - 1) .. rest:sub(#word + 1), pos)
+end, "Delete word forwards")
+
 -- scrolling
 map("n", "J", "<C-d>", "Scroll down")
 map("n", "K", "<C-u>", "Scroll up")

@@ -1,0 +1,10 @@
+polkit.addRule(function(action, subject) {
+  if (action.id == "org.freedesktop.systemd1.manage-units" &&
+      subject.user == "victor" && subject.local && subject.active) {
+    var unit = action.lookup("unit"), verb = action.lookup("verb");
+    if ((unit == "tailscaled.service" || unit == "zstunnel.service" || unit == "zsaservice.service") &&
+        (verb == "start" || verb == "stop" || verb == "restart")) {
+      return polkit.Result.YES;
+    }
+  }
+});

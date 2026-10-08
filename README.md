@@ -17,7 +17,7 @@ This runs every step below in order, then reboot. Every step is safe to re-run.
 ## Day to day
 
 Configs are **symlinked**, not copied: editing `~/.config/hypr/...` edits the repo directly, so
-`git status` always shows what changed. There is no "copy config" step anymore.
+`git status` always shows what changed. 
 
 | Command | What it does |
 | --- | --- |

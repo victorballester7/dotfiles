@@ -1,7 +1,7 @@
 _G.mainMod = "SUPER"
 _G.terminal = "kitty"
 _G.fileManager = "kitty -e yazi"
-_G.menu = "walker"
+_G.menu = "noctalia msg panel-toggle launcher"
 
 hl.config({
     general = {
