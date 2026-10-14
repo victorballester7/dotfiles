@@ -13,6 +13,25 @@ function Linemode:size_and_mtime()
 	return string.format("%s %s", size and ya.readable_size(size) or "-", time)
 end
 
+-- Sort ~/Downloads by modification time (newest first); default sort elsewhere
+local downloads = os.getenv("HOME") .. "/Downloads"
+ps.sub("cd", function()
+	local pref = cx.active.pref
+	local in_downloads = tostring(cx.active.current.cwd) == downloads
+	local is_mtime = pref.sort_by == "mtime" and pref.sort_reverse
+	if in_downloads and not is_mtime then
+		ya.emit("sort", { "mtime", reverse = true, dir_first = false })
+	elseif not in_downloads and is_mtime then
+		ya.emit("sort", {
+			rt.mgr.sort_by,
+			reverse = rt.mgr.sort_reverse,
+			dir_first = rt.mgr.sort_dir_first,
+			translit = rt.mgr.sort_translit,
+			sensitive = rt.mgr.sort_sensitive,
+		})
+	end
+end)
+
 -- Plugin Configurations
 local function setup_pref_by_location()
 	local pref_by_location = require("pref-by-location")
@@ -90,52 +109,28 @@ local function setup_pref_by_location()
 	})
 end
 
-require("gvfs"):setup({
-  -- (Optional) Allowed keys to select device.
-  which_keys = "1234567890qwertyuiopasdfghjklzxcvbnm-=[]\\;',./!@#$%^&*()_+{}|:\"<>?",
-
-  -- (Optional) Table of blacklisted devices. These devices will be ignored in any actions
-  -- List of device properties to match, or a string to match the device name:
-  -- https://github.com/boydaihungst/gvfs.yazi/blob/master/main.lua#L144
-	blacklist_devices = { { name = "Wireless Device", scheme = "mtp" }, { scheme = "file" }, "Device Name"},
-
-  -- (Optional) Save file.
-  -- Default: ~/.config/yazi/gvfs.private
-  save_path = os.getenv("HOME") .. "/.config/yazi/gvfs.private",
-
-  -- (Optional) Save file for automount devices. Use with `automount-when-cd` action.
-  -- Default: ~/.config/yazi/gvfs_automounts.private
-  save_path_automounts = os.getenv("HOME") .. "/.config/yazi/gvfs_automounts.private",
-
-  -- (Optional) Input box position.
-  -- Default: { "top-center", y = 3, w = 60 },
-  -- Position, which is a table:
-  -- 	`1`: Origin position, available values: "top-left", "top-center", "top-right",
-  -- 	     "bottom-left", "bottom-center", "bottom-right", "center", and "hovered".
-  --         "hovered" is the position of hovered file/folder
-  -- 	`x`: X offset from the origin position.
-  -- 	`y`: Y offset from the origin position.
-  -- 	`w`: Width of the input.
-  -- 	`h`: Height of the input.
-  input_position = { "center", y = 0, w = 60 },
-
-  -- (Optional) Select where to save passwords.
-  -- Default: nil
-  -- Available options: "keyring", "pass", or nil
-  password_vault = "pass",
-
-  -- (Optional) Only need if you set password_vault = "pass"
-  -- Read the guide at SECURE_SAVED_PASSWORD.md to get your key_grip
-  key_grip = "E55FBCFDA0690ADF65DB1F5D05021500793D3360",
-
-  -- (Optional) Auto-save password after mount.
-  -- Default: false
-  save_password_autoconfirm = true,
-  -- (Optional) mountpoint of gvfs. Default: /run/user/USER_ID/gvfs
-  -- On some system it could be ~/.gvfs
-  -- You can't decide this path, it will be created automatically. Only changed if you know where gvfs mountpoint is.
-  -- Use command `ps aux | grep gvfs` to search for gvfs process and get the mountpoint path.
-  -- root_mountpoint = (os.getenv("XDG_RUNTIME_DIR") or ("/run/user/" .. ya.uid())) .. "/gvfs"
+-- Mount manager (gm): drives, USB, phones, network shares, sshfs hosts, rclone.
+-- Every Host in ~/.ssh/config is also listed and mounted at ~/hosts/<host>.
+require("mounts"):setup({
+	hosts_dir = "~/hosts",
+	sshfs_opts = {
+		"allow_other", "kernel_cache", "auto_cache", "reconnect", "compression=no",
+		"cache_timeout=600", "ServerAliveInterval=15",
+	},
+	remotes = {
+		{ name = "hpc", sshfs = "vb824@hpc:/rds/general/user/vb824/home/Desktop/", path = "~/hosts/hpc" },
+		{ name = "nodes", sshfs = "vb824@typhoon:/home/vb824/Desktop/", path = "~/hosts/nodes" },
+		{
+			name = "OneDrive",
+			kind = "cloud",
+			source = "rclone OneDrive:",
+			path = "~/OneDrive",
+			mount = { "systemctl", "--user", "start", "rclone-onedrive" },
+			unmount = { "systemctl", "--user", "stop", "rclone-onedrive" },
+		},
+		-- gvfs URIs work too, e.g.:
+		-- { name = "NAS", uri = "smb://nas.local/share" },
+	},
 })
 
 return {
