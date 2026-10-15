@@ -6,7 +6,8 @@ prepend_keymap = [
     { on = [ "c", "a", "h" ], run = "plugin compress -ph", desc = "Compress (password+header)" },
     { on = [ "c", "a", "l" ], run = "plugin compress -l", desc = "Compress (compression level)" },
     { on = [ "c", "a", "u" ], run = "plugin compress -phl", desc = "Compress (password+header+level)" },
-    { on = [ "e" ], run = 'shell -- ~/.local/bin/compress.sh -x "$1" .', desc = "Extract archive" },
+    { on = [ "e" ], run = "plugin unarchive", desc = "Extract archive(s) in background" },
+    { on = [ "E" ], run = 'shell --block -- ~/.local/bin/compress.sh -x %s .', desc = "Extract archive(s) in terminal" },
 
 
     # Open terminal
